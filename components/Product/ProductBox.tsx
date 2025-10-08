@@ -27,9 +27,12 @@ const ProductBox = ({ data }: any) => {
             >
               View product
             </Link>
-            <button className="px-5 py-2 bg-white text-black hover:text-white font-semibold rounded-full hover:bg-primary">
+            <Link
+              href="/sample-product"
+              className="px-5 py-2 bg-white text-black hover:text-white font-semibold rounded-full hover:bg-primary"
+            >
               Get Free Sample
-            </button>
+            </Link>
           </div>
         </div>
         {/* Rating */}
@@ -39,7 +42,10 @@ const ProductBox = ({ data }: any) => {
         </div>
 
         {/* Title */}
-        <Link  href={`/product/${data.slug}`} className="text-lg font-bold mt-2 text-black">
+        <Link
+          href={`/product/${data.slug}`}
+          className="text-lg font-bold mt-2 text-black"
+        >
           {data.name}
         </Link>
         <div

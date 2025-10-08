@@ -114,7 +114,7 @@ const Shop = () => {
 
         {/* Buttons */}
         <div className="w-fit mx-auto flex md:flex-row flex-col gap-5 mt-10">
-          <Link href="#" className="primary_btn">
+          <Link href="/sample-product" className="primary_btn">
             Request a Free Sample
           </Link>
           <Link href="/contact" className="secondary_btn !bg-black !text-white ">

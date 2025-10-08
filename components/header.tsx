@@ -16,7 +16,7 @@ const menuItems: MenuItem[] = [
   { label: "Decking", href: "/category/plastic-decking" },
   { label: "Fencing", href: "/category/composite-fencing" },
   { label: "Cladding", href: "/category/cladding-pvc-panels-uk" },
-  { label: "Free Samples", href: "/free-samples" },
+  { label: "Free Samples", href: "/sample-product" },
   { label: "Customer Reviews", href: "#" },
   { label: "Advice Centre", href: "#" },
   { label: "Contact Us", href: "/contact" },
@@ -79,7 +79,7 @@ const Header = () => {
             <FaPhoneVolume />
           </Link>
           <Link
-            href="#"
+            href="/sample-product"
             className={`${pathname === "/" ? "bg-white hover:text-white text-title" : "bg-secondary text-white"} hover:bg-primary text-lg font-bold  inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out`}
           >
             Request a Free Sample

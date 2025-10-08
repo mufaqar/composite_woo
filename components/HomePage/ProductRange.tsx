@@ -59,7 +59,7 @@ const ProductRange = () => {
                                     View Decking Range
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href="/sample-product"
                                     className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-transparent rounded-4xl hover:bg-white border border-white hover:text-title transition-all duration-300 ease-in-out"
                                 >
                                     Order Free Sample

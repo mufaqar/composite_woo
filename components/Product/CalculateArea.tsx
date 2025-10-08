@@ -100,7 +100,7 @@ const CalculateArea = () => {
                         <button className="bg-secondary text-white hover:bg-primary md:text-lg text-sm font-bold inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out">
                             Add to basket
                         </button>
-                        <Link href="#" className="md:text-lg text-sm font-bold text-secondary underline inline-flex">
+                        <Link href="/sample-product" className="md:text-lg text-sm font-bold text-secondary underline inline-flex">
                             Request A Free Sample
                         </Link>
                     </div>
