@@ -7,11 +7,30 @@ import SingleBanner from '@/components/Product/SingleBanner'
 import Testimonials from '@/components/Product/Testimonails'
 import Image from 'next/image'
 import React from 'react'
+import { getProductBySlug, getRelatedProducts } from "@/lib/woocommerce-api";
 
-function Product() {
+export default async function ProductDetail({ params }: { params: { slug: string } }) {
+  const product = await getProductBySlug(params.slug);
+  if (!product) {
+    return <div className="p-10">Product not found.</div>;
+  }
+
+   // ✅ Fetch related products using category IDs
+  const categoryIds = product.categories?.map((cat: any) => cat.id) || [];
+  const relatedProducts = await getRelatedProducts(categoryIds, product.id);
+
+
+
+
+
+
+
+
+
+
     return (
         <main>
-            <SingleBanner />
+            <SingleBanner data={product}/>
             <FeaturedIcons />
             <ProductTabs />
             <section className='bg-[#F0FAF7] relative'>
@@ -24,11 +43,10 @@ function Product() {
                 />
                 <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
             </section>
-            <TrendingProducts />
+            <TrendingProducts data={relatedProducts} /> 
             <NewsLetter />
             <FaqsSection title="Composite Fencing FAQ" />
         </main>
     )
 }
 
-export default Product

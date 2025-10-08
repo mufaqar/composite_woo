@@ -10,7 +10,7 @@ const BreadCrumb = ({title}:any) => {
             </li>
             <li><FaChevronRight className='text-secondary' /></li>
             <li>
-                <Link href="/" className={`md:text-xl text-sm font-normal text-description hover:text-secondary opacity-60`}>Shop</Link>
+                <Link href="/shop" className={`md:text-xl text-sm font-normal text-description hover:text-secondary opacity-60`}>Shop</Link>
             </li>
             <li><FaChevronRight className='text-secondary' /></li>
             <li>

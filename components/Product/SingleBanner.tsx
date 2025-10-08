@@ -5,14 +5,19 @@ import BreadCrumb from './BreadCrumb'
 import FenceConfigurator from './FenceConfigurator'
 import CalculateArea from './CalculateArea'
 import { usePathname } from 'next/navigation'
+import { WooProduct } from '@/lib/woocommerce-types';
 
-const SingleBanner = () => {
+interface SingleBannerProps {
+  data: WooProduct;
+}
+
+const SingleBanner = ({ data }: SingleBannerProps) => {
     const pathname = usePathname()
 
     return (
         <section className='pt-16 pb-20'>
             <div className='container mx-auto px-4'>
-                <BreadCrumb title="vertical composite fencing panel" />
+                <BreadCrumb title={data.name} />
             </div>
             <div className='container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center'>
                 <div className='md:w-1/2 w-full'>
@@ -21,14 +26,14 @@ const SingleBanner = () => {
                 <div className='md:w-1/2 w-full'>
                     <div className='pb-6 border-b border-[#D2D2D2] mb-10'>
                         <h1 className='md:text-[50px] leading-none text-[32px] font-medium text-title font-DM_Sans'>
-                            Vertical Composite Fencing Panel
+                            {data.name}
                         </h1>
                         <div className="flex items-center gap-1 text-yellow-500 text-lg mt-5">
                             {"★".repeat(5)}
                             <span className="md:text-lg text-sm font-bold text-title ml-1 ">371 Reviews</span>
                         </div>
                         <h4 className='md:text-5xl text-[28px] font-bold text-secondary font-DM_Sans my-8'>
-                            €129.99
+                            {data.price}
                         </h4>
                         <p className='md:text-xl text-sm font-normal text-description'>
                             Availability: <span className='text-primary'>In Stock</span>
@@ -38,7 +43,7 @@ const SingleBanner = () => {
             </div>
 
             {pathname === "/demo-pro" && <CalculateArea />}
-            {pathname === "/products/single" && <FenceConfigurator />}
+           <FenceConfigurator />
         </section>
     )
 }

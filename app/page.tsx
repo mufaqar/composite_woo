@@ -10,16 +10,19 @@ import ProductRange from "@/components/HomePage/ProductRange";
 import Testimonials from "@/components/HomePage/Testimonails";
 import TrendingProducts from "@/components/HomePage/TrendingProducts";
 import WhyChooseus from "@/components/HomePage/WhyChooseus";
+import { getFeaturedProducts } from "@/lib/woocommerce-api";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const featuredsProducts = await getFeaturedProducts();
   return (
     <main>
       <Hero />
       <FeaturedIcons />
       <WhyChooseus />
       <ProductRange />
-      <TrendingProducts />
+      <TrendingProducts data={featuredsProducts} />
       <Advanteges />
       <ClientLogos />
       <CustomerInnovate />

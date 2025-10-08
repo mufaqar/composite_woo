@@ -5,53 +5,17 @@ import ProductBox from "../Product/ProductBox";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import AnimateOnScroll, { useAutoDelay } from "../Animation";
+import { getAllProducts } from "@/lib/woocommerce-api";
+import { WooProduct } from "@/lib/woocommerce-types";
 
-const productsarr = [
-  {
-    id: 1,
-    title: "Capped Composite Fencing Panel ",
-    description: "A short description goes in here",
-    price: "€299.99",
-    discountPrice: "€249.99",
-    rating: 4.5,
-    image: "/images/Products-1.png", // replace with real image path
-    buttons: true,
-  },
-  {
-    id: 2,
-    title: "Capped Composite Fencing Panel",
-    description: "A short description goes in here",
-    price: "€299.99",
-    discountPrice: "€249.99",
-    rating: 4.5,
-    image: "/images/Products-2.png",
-    buttons: true,
-  },
-  {
-    id: 3,
-    title: "Composite Fencing Panel For Concrete Post",
-    description: "A short description goes in here",
-    price: "€299.99",
-    discountPrice: "€249.99",
-    rating: 4.5,
-    image: "/images/Products-3.png",
-    buttons: true,
-  },
-  {
-    id: 4,
-    title: "Capped Composite Fencing Panel ",
-    description: "A short description goes in here",
-    price: "€299.99",
-    discountPrice: "€249.99",
-    rating: 4.5,
-    image: "/images/Products-1.png", // replace with real image path
-    buttons: true,
-  },
-];
+interface TrendingProductsProps {
+  data: WooProduct[];
+}
 
-export default function TrendingProducts() {
+export default  function TrendingProducts({data}:TrendingProductsProps) {
   const getDelay = useAutoDelay();
   const sliderRef = useRef<any>(null);
+   
 
   const settings = {
     dots: false,
@@ -99,7 +63,7 @@ export default function TrendingProducts() {
       <div className="container mx-auto px-4 mt-12 relative">
         <AnimateOnScroll type="fade-up" delay={getDelay()}>
           <Slider ref={sliderRef} {...settings}>
-            {productsarr.map((product) => (
+            {data.map((product) => (
               <div key={product.id} className="px-2">
                 <ProductBox data={product} />
               </div>
