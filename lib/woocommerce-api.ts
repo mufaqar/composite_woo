@@ -54,6 +54,20 @@ export async function getAllCategories(): Promise<any[]> {
   }
 }
 
+
+/**
+ * Fetch category by slug
+ */
+export async function getCategoryBySlug(slug: string): Promise<any | null> {
+  try {
+    const { data } = await wooApi.get("products/categories", { slug });
+    return data?.[0] || null;
+  } catch (error: any) {
+    console.error("Error fetching category by slug:", error.response?.data || error.message);
+    return null;
+  }
+}
+
 /**
  * Fetch products by category ID
  */

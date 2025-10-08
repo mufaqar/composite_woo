@@ -13,9 +13,9 @@ type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { label: "Decking", href: "/category/decking" },
-  { label: "Fencing", href: "/category/fencing" },
-  { label: "Cladding", href: "/category/cladding" },
+  { label: "Decking", href: "/category/plastic-decking" },
+  { label: "Fencing", href: "/category/composite-fencing" },
+  { label: "Cladding", href: "/category/cladding-pvc-panels-uk" },
   { label: "Free Samples", href: "/free-samples" },
   { label: "Customer Reviews", href: "#" },
   { label: "Advice Centre", href: "#" },
