@@ -11,7 +11,7 @@ import React from 'react'
 function Page() {
     return (
         <main>
-            <SingleBanner />
+            {/* <SingleBanner /> */}
             <FeaturedIcons />
             <ProductTabs />
             <section className='bg-[#F0FAF7] relative'>
@@ -24,7 +24,7 @@ function Page() {
                 />
                 <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
             </section>
-            <TrendingProducts />
+            {/* <TrendingProducts /> */}
             <NewsLetter />
             <FaqsSection title="Composite Fencing FAQ" />
         </main>
