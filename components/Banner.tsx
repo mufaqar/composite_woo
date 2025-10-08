@@ -8,7 +8,7 @@ const Banner = ({ title, img, desc }: any) => {
                 <div className='md:w-1/2 w-full'>
                     <Image src={img} alt='blog' width={720} height={426} className='w-full h-full' />
                 </div>
-                <div className='md:w-1/2 w-full md:px-16 px-4 py-16'>
+                <div className='md:w-1/2 w-full md:px-16 px-4 py-16 flex flex-col justify-center'>
                     <h1 className='md:text-7xl text-[38px] leading-none font-medium text-white font-DM_Sans capitalize'>
                         {title}
                     </h1>

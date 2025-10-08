@@ -22,8 +22,6 @@ export default async function CategoryPage({
 }) {
   const category = await getCategoryBySlug(params.slug);
 
-  console.log("Category Data:", category); // Debugging line
-
   if (!category) {
     return (
       <div className="p-10 text-center text-gray-600">Category not found.</div>
@@ -57,11 +55,11 @@ export default async function CategoryPage({
       <ClientLogos />
       <section className="bg-background">
         <ProductSection
-                 data={mappedProducts}
-                    readMore
-                    categoryTitle={category.title}
-                    categoryDescription={category.description}
-                />
+          data={mappedProducts}
+          readMore
+          categoryTitle={category.title}
+          categoryDescription={category.description}
+        />
       </section>
       <Testimonials title="Lorem ipsum dolor sit amet." />
       <CompositPanel />
