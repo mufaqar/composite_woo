@@ -89,11 +89,38 @@ export default function SampleRequestForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ formData, selectedSamples });
-    alert("Your sample request has been submitted successfully!");
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const selectedSampleNames = selectedSamples.map((id) => {
+      const found = accordionData
+        .flatMap((s) => s.products)
+        .find((p) => p.name === id);
+      return found ? found.name : "";
+    });
+
+    const response = await fetch("/api/send-sample", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        formData,
+        selectedSamples: selectedSampleNames.map((name) => ({ name })),
+      }),
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      alert("✅ Your sample request has been sent!");
+      setSelectedSamples([]);
+    } else {
+      alert("❌ Failed to send email. Please try again.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong!");
+  }
+};
 
   return (
     <section className="py-16">
