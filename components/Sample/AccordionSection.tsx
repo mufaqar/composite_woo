@@ -16,8 +16,8 @@ interface AccordionSectionProps {
   products: Product[];
   expanded: boolean;
   onToggle: () => void;
-  selectedSamples: number[];
-  onSampleSelect: (id: number) => void;
+  selectedSamples: string[];
+  onSampleSelect: (id: string) => void;
 }
 
 export default function AccordionSection({
@@ -50,8 +50,8 @@ export default function AccordionSection({
               name={product.name}
               image={product.image}
               category={product.category}
-              isSelected={selectedSamples.includes(product.id)}
-              onSelect={() => onSampleSelect(product.id)}
+              isSelected={selectedSamples.includes(product.name)}
+              onSelect={() => onSampleSelect(product.name)}
             />
           ))}
         </div>
