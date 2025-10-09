@@ -43,7 +43,7 @@ const accordionData = [
 
 export default function SampleRequestForm() {
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [selectedSamples, setSelectedSamples] = useState<{ [key: string]: number[] }>({});
+  const [selectedSamples, setSelectedSamples] = useState<string[]>([]); // ✅ now stores NAMES
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -61,35 +61,66 @@ export default function SampleRequestForm() {
     );
   };
 
-  const handleSampleSelect = (sectionTitle: string, id: number) => {
+  // ✅ Global selection limit (4 total) - using names
+  const handleSampleSelect = (sampleName: string) => {
     setSelectedSamples((prev) => {
-      const current = prev[sectionTitle] || [];
-      if (current.includes(id)) {
-        return { ...prev, [sectionTitle]: current.filter((sample) => sample !== id) };
-      } else if (current.length < 4) {
-        return { ...prev, [sectionTitle]: [...current, id] };
+      if (prev.includes(sampleName)) {
+        return prev.filter((name) => name !== sampleName);
+      } else if (prev.length < 4) {
+        return [...prev, sampleName];
       } else {
-        alert("You can select up to 4 samples only per category");
+        alert("You can select up to 4 samples total.");
         return prev;
       }
     });
   };
 
+  // ✅ Remove all selected samples
+  const handleRemoveSample = () => {
+    setSelectedSamples([]);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const target = e.target as HTMLInputElement;
     const { name, value, type, checked } = target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ formData, selectedSamples });
-    alert("Your sample request has been submitted successfully!");
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const selectedSampleNames = selectedSamples.map((id) => {
+      const found = accordionData
+        .flatMap((s) => s.products)
+        .find((p) => p.name === id);
+      return found ? found.name : "";
+    });
+
+    const response = await fetch("/api/send-sample", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        formData,
+        selectedSamples: selectedSampleNames.map((name) => ({ name })),
+      }),
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      alert("✅ Your sample request has been sent!");
+      setSelectedSamples([]);
+    } else {
+      alert("❌ Failed to send email. Please try again.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong!");
+  }
+};
 
   return (
     <section className="py-16">
@@ -104,8 +135,8 @@ export default function SampleRequestForm() {
               products={section.products}
               expanded={expanded.includes(section.title)}
               onToggle={() => handleAccordionToggle(section.title)}
-              selectedSamples={selectedSamples[section.title] || []}
-              onSampleSelect={(id) => handleSampleSelect(section.title, id)}
+              selectedSamples={selectedSamples}
+              onSampleSelect={(name) => handleSampleSelect(name)}
             />
           ))}
         </div>
@@ -116,6 +147,9 @@ export default function SampleRequestForm() {
             formData={formData}
             onChange={handleChange}
             onSubmit={handleSubmit}
+            accordionData={accordionData}
+            selectedSamples={selectedSamples}
+            onRemoveSample={handleRemoveSample}
           />
         </div>
       </div>
