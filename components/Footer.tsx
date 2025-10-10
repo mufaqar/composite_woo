@@ -14,7 +14,7 @@ const products = [
 ]
 
 const information = [
-  { name: "About Us", href: "#" },
+  { name: "About Us", href: "/about" },
   { name: "Customer Reviews", href: "#" },
   { name: "Advice Centre", href: "#" },
   { name: "FAQ", href: "#" },

@@ -77,13 +77,23 @@ const Shop = () => {
   }, []);
 
   return (
-    <section className="pt-24 pb-12 bg-background">
+    <section className="py-16 bg-[#F0FAF7] relative ">
+         <Image
+           src="/images/boxes2.png"
+           alt="boxes2"
+           width={232}
+           height={155}
+           className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
+         />
       {/* Heading + Read More */}
       <HeadingSection
         title="Shop Composite Decking Online"
         desc="CompositeWarehouse – Your one-stop-shop for all kinds of composite materials. You will buy Eco-friendly and low maintenance composite materials for your projects."
         readMore
       />
+      <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
+        Shop Composite Decking Online
+      </h2>
 
       {/* Slider Section */}
       <div className="container mx-auto px-4 mt-12 relative">
@@ -117,7 +127,10 @@ const Shop = () => {
           <Link href="/sample-product" className="primary_btn">
             Request a Free Sample
           </Link>
-          <Link href="/contact" className="secondary_btn !bg-black !text-white ">
+          <Link
+            href="/contact"
+            className="secondary_btn !bg-black !text-white "
+          >
             contact us
           </Link>
         </div>

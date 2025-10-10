@@ -41,7 +41,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setMblMenu(!mblMenu)}
-            className={`${pathname === "/" ? "text-white " : "text-title"} text-4xl md:hidden inline-flex items-center justify-center`}
+            className={`${pathname === "/" ? "text-white border-white/30 bg-white/20 " : "text-[#003D2C] border-black/65 hover:text-white bg-white"} hover:bg-primary hover:border-primary text-2xl md:hidden  inline-flex w-[59px] h-[59px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
           >
             {mblMenu ? <IoMdClose /> : <FaBars />}
           </button>
@@ -50,8 +50,9 @@ const Header = () => {
           <nav
             className={`
               md:static absolute top-20 left-0 right-0 
-              md:bg-transparent bg-primary 
+              
               md:p-0 p-4 transition-all duration-300 ease-in-out
+              ${pathname === "/" ? "md:bg-transparent  bg-title": "md:bg-transparent bg-white "}
               ${mblMenu ? "block" : "hidden"} md:block
             `}
           >

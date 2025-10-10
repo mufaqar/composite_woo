@@ -23,7 +23,7 @@ const PostBox = ({ data }: any) => {
                     <span className="text-description">|</span>
                     <Link href="#" className="text-primary font-medium">{data.category}</Link>
                 </p>
-                <Link href="#" className="md:text-[22px] text-lg leading-none font-normal font-DM_Sans inline-flex mt-3 mb-4">
+                <Link href="/blog/single" className="md:text-[22px] text-lg leading-none font-normal font-DM_Sans inline-flex mt-3 mb-4">
                     {data.title}
                 </Link>
                 <div className="py-2 border-t border-[#D2D2D7]">
