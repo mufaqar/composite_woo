@@ -7,7 +7,7 @@ import AnimateOnScroll, { useAutoDelay } from '../Animation'
 const Hero = () => {
   const getDelay = useAutoDelay();
   return (
-    <section className="bg-[url('/images/main-hero.png')] bg-cover bg-no-repeat flex items-center justify-center md:pt-[350px] pt-[300px] pb-[100px] relative mt-[-102px]">
+    <section className="bg-[url('/images/hero.jpg')] bg-black/40 bg-blend-overlay bg-cover bg-no-repeat flex items-center justify-center md:pt-[350px] pt-[300px] pb-[100px] relative mt-[-102px]">
       <Image src="/images/boxes1.png" alt='boxes1' width={185} height={249} className='absolute left-0 md:top-[154px] top-28 md:w-[185px] md:h-[249px] w-[94px] h-[126px]' />
       <div className='max-w-[1170px] mx-auto px-4'>
         <AnimateOnScroll type="fade-up" delay={getDelay()}>
