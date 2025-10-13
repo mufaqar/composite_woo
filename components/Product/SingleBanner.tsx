@@ -43,7 +43,7 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
             </div>
 
             {pathname === "/demo-pro" && <CalculateArea />}
-           <FenceConfigurator />
+           <FenceConfigurator data={data} />
         </section>
     )
 }

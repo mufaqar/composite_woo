@@ -11,6 +11,7 @@ import { useState } from "react";
 export default function CheckoutPage() {
   const { items } = useSelector((state: RootState) => state.cart);
 
+  console.log(items);
   const [billing, setBilling] = useState({
     firstName: "",
     lastName: "",
@@ -38,7 +39,6 @@ export default function CheckoutPage() {
       return;
     }
 
-    // ✅ Include everything in orderData
     const orderData = {
       billing,
       items,
@@ -46,24 +46,28 @@ export default function CheckoutPage() {
       deliverDifferent,
     };
 
-    console.log("🛍️ Order Submitted:", orderData);
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
 
-    // try {
-    //   const res = await fetch("/api/order", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(orderData),
-    //   });
+      const result = await res.json();
 
-    //   if (res.ok) {
-    //     alert("✅ Order placed successfully!");
-    //   } else {
-    //     alert("❌ Something went wrong. Please try again.");
-    //   }
-    // } catch (error) {
-    //   console.error("Order submission failed:", error);
-    //   alert("⚠️ Failed to submit order. Check console for details.");
-    // }
+      if (res.ok) {
+        alert("✅ Order placed successfully!");
+        console.log("Order created:", result.order);
+
+        // optional: redirect to thank-you page
+        // router.push(`/order-success/${result.order.id}`);
+      } else {
+        alert("❌ " + (result.error?.message || "Order failed"));
+      }
+    } catch (error) {
+      console.error("Order submission failed:", error);
+      alert("⚠️ Failed to submit order.");
+    }
   };
 
   return (

@@ -20,14 +20,6 @@ export default async function ProductDetail({ params }: { params: { slug: string
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
 
 
-
-
-
-
-
-
-
-
     return (
         <main>
             <SingleBanner data={product}/>

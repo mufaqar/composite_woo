@@ -6,6 +6,7 @@ import { FaCheck } from "react-icons/fa6";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/slices/cartSlice";
+import { WooProduct } from "@/lib/woocommerce-types";
 
 type Option = {
   id: string;
@@ -24,7 +25,14 @@ type Step = {
   content?: JSX.Element;
 };
 
-export default function FenceConfigurator() {
+
+interface FenceProps {
+  data: WooProduct;
+}
+
+export default function FenceConfigurator({data}:FenceProps) {
+
+  console.log("DD",data);
   const dispatch = useDispatch();
   const [openSteps, setOpenSteps] = useState<number[]>([1]);
 
@@ -46,7 +54,7 @@ export default function FenceConfigurator() {
   const [installation, setInstallation] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const basePrice = 129.99;
+  const basePrice = parseFloat(data.price);
   const totalPrice = basePrice * quantity;
 
   // OPTIONS (same as before)
@@ -205,12 +213,12 @@ export default function FenceConfigurator() {
 
   const handleAddToCart = () => {
     const productData = {
-      id: `${slatType}-${Date.now()}`,
-      title: "Vertical Composite Fencing Panel",
+      id: data.id.toString(),
+      title: data.name,
       price: totalPrice,
       basePrice,
       quantity,
-      image: "/images/comslat7.png",
+      image: data.images?.[0]?.src || "/images/comslat7.png",
       options: {
         height,
         postType,

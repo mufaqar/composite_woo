@@ -10,8 +10,9 @@ import Link from "next/link";
 
 export default function CartPage() {
     const { items } = useSelector((state: RootState) => state.cart);
-    const dispatch = useDispatch();
 
+
+    const dispatch = useDispatch();
     const cartItems = useSelector((state: RootState) => state.cart.items);
 
     // Calculate subtotal
@@ -28,6 +29,8 @@ export default function CartPage() {
         if (newQuantity < 1) return;
         dispatch(updateQuantity({ id, quantity: newQuantity }));
     };
+
+    console.log("items" , items);
 
     return (
         <>
