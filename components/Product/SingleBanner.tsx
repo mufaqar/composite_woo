@@ -4,7 +4,6 @@ import ProductGallery from "./ProductGallery";
 import BreadCrumb from "./BreadCrumb";
 import FenceConfigurator from "./FenceConfigurator";
 import CalculateArea from "./CalculateArea";
-import { usePathname } from "next/navigation";
 import { WooProduct } from "@/lib/woocommerce-types";
 
 interface SingleBannerProps {
@@ -12,8 +11,8 @@ interface SingleBannerProps {
 }
 
 const SingleBanner = ({ data }: SingleBannerProps) => {
-  const pathname = usePathname();
   const productType = data?.acf?.product_type;
+   const rating = data.rating_count || 0;
 
   return (
     <section className="pt-16 pb-20">
@@ -32,7 +31,7 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
             <div className="flex items-center gap-1 text-yellow-500 text-lg mt-5">
               {"★".repeat(5)}
               <span className="md:text-lg text-sm font-bold text-title ml-1 ">
-                371 Reviews
+                {rating} Reviews
               </span>
             </div>
             <h4 className="md:text-5xl text-[28px] font-bold text-secondary font-DM_Sans my-8">
