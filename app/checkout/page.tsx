@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function CheckoutPage() {
   const { items } = useSelector((state: RootState) => state.cart);
 
-  console.log(items);
+  //console.log(items);
   const [billing, setBilling] = useState({
     firstName: "",
     lastName: "",

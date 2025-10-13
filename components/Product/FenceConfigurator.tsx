@@ -25,14 +25,12 @@ type Step = {
   content?: JSX.Element;
 };
 
-
 interface FenceProps {
   data: WooProduct;
 }
 
-export default function FenceConfigurator({data}:FenceProps) {
-
-  console.log("DD",data);
+export default function FenceConfigurator({ data }: FenceProps) {
+  console.log("FenchConfigure", data);
   const dispatch = useDispatch();
   const [openSteps, setOpenSteps] = useState<number[]>([1]);
 
@@ -76,9 +74,21 @@ export default function FenceConfigurator({data}:FenceProps) {
   ];
 
   const posts: Option[] = [
-    { id: "aluminium", label: "Our Aluminium Posts", image: "/images/comp1.png" },
-    { id: "composite", label: "Our Composite Posts", image: "/images/comp2.png" },
-    { id: "concrete", label: "Your Concrete Posts", image: "/images/comp3.png" },
+    {
+      id: "aluminium",
+      label: "Our Aluminium Posts",
+      image: "/images/comp1.png",
+    },
+    {
+      id: "composite",
+      label: "Our Composite Posts",
+      image: "/images/comp2.png",
+    },
+    {
+      id: "concrete",
+      label: "Your Concrete Posts",
+      image: "/images/comp3.png",
+    },
   ];
 
   const slats: Option[] = [
@@ -100,8 +110,16 @@ export default function FenceConfigurator({data}:FenceProps) {
   ];
 
   const panelTrims: Option[] = [
-    { id: "upgradedtrim", label: "Upgraded Trim", image: "/images/paneltrim1.png" },
-    { id: "standardtrim", label: "Standard Trim", image: "/images/paneltrim2.png" },
+    {
+      id: "upgradedtrim",
+      label: "Upgraded Trim",
+      image: "/images/paneltrim1.png",
+    },
+    {
+      id: "standardtrim",
+      label: "Standard Trim",
+      image: "/images/paneltrim2.png",
+    },
   ];
 
   const screenstyles: Option[] = [
@@ -116,9 +134,21 @@ export default function FenceConfigurator({data}:FenceProps) {
   ];
 
   const installations: Option[] = [
-    { id: "solidconcrete", label: "Solid / Concrete", image: "/images/installation1.png" },
-    { id: "timberdecking", label: "Timber / Decking", image: "/images/installation2.png" },
-    { id: "sunkintoground", label: "Sunk Into Ground", image: "/images/installation3.png" },
+    {
+      id: "solidconcrete",
+      label: "Solid / Concrete",
+      image: "/images/installation1.png",
+    },
+    {
+      id: "timberdecking",
+      label: "Timber / Decking",
+      image: "/images/installation2.png",
+    },
+    {
+      id: "sunkintoground",
+      label: "Sunk Into Ground",
+      image: "/images/installation3.png",
+    },
   ];
 
   const getLabel = (options: Option[], id: string) =>
@@ -139,8 +169,9 @@ export default function FenceConfigurator({data}:FenceProps) {
         >
           {opt.image && (
             <div
-              className={`relative mb-2 border-3 ${selected === opt.id ? "border-secondary" : "border-transparent"
-                }`}
+              className={`relative mb-2 border-3 ${
+                selected === opt.id ? "border-secondary" : "border-transparent"
+              }`}
             >
               {selected === opt.id && (
                 <span className="absolute -top-2 -right-2 w-7 h-7 flex items-center justify-center rounded-full bg-secondary text-white">
@@ -168,19 +199,26 @@ export default function FenceConfigurator({data}:FenceProps) {
     {
       id: 1,
       title: "Step 1",
-      label: `Post Height: ${getLabel(unit === "cm" ? heightsCM : heightsFT, height)}`,
+      label: `Post Height: ${getLabel(
+        unit === "cm" ? heightsCM : heightsFT,
+        height
+      )}`,
       content: (
         <div>
           <div className="flex gap-2 mt-4 divide-x divide-[#E4E4E4]">
             <button
               onClick={() => setUnit("cm")}
-              className={`${unit === "cm" ? "text-secondary" : "text-description"} md:text-lg text-sm font-normal hover:text-secondary px-4`}
+              className={`${
+                unit === "cm" ? "text-secondary" : "text-description"
+              } md:text-lg text-sm font-normal hover:text-secondary px-4`}
             >
               CM
             </button>
             <button
               onClick={() => setUnit("ft")}
-              className={`${unit === "ft" ? "text-secondary" : "text-description"} md:text-lg text-sm font-normal hover:text-secondary px-4`}
+              className={`${
+                unit === "ft" ? "text-secondary" : "text-description"
+              } md:text-lg text-sm font-normal hover:text-secondary px-4`}
             >
               FT
             </button>
@@ -190,10 +228,11 @@ export default function FenceConfigurator({data}:FenceProps) {
               <button
                 key={h.id}
                 onClick={() => setHeight(h.id)}
-                className={`md:text-lg text-sm font-normal px-4 py-2 rounded-full border hover:bg-primary hover:text-white ${height === h.id
+                className={`md:text-lg text-sm font-normal px-4 py-2 rounded-full border hover:bg-primary hover:text-white ${
+                  height === h.id
                     ? "bg-primary text-white"
                     : "bg-white text-description border-transparent"
-                  }`}
+                }`}
               >
                 {h.label}
               </button>
@@ -202,13 +241,62 @@ export default function FenceConfigurator({data}:FenceProps) {
         </div>
       ),
     },
-    { id: 2, title: "Step 2", label: `Post Type: ${getLabel(posts, postType)}`, options: posts, selected: postType, setSelected: setPostType },
-    { id: 3, title: "Step 3", label: `Slat Type: ${getLabel(slats, slatType)}`, options: slats, selected: slatType, setSelected: setSlatType },
-    { id: 4, title: "Step 4", label: `Slat Colour: ${getLabel(colours, slatColour)}`, options: colours, selected: slatColour, setSelected: setSlatColour },
-    { id: 5, title: "Step 5", label: "Upgrade and add our Top & Bottom Panel Trim", options: panelTrims, selected: panelTrim, setSelected: setPanelTrim },
-    { id: 6, title: "Step 6", label: `Screen Style: ${getLabel(screenstyles, screenstyle)}`, options: screenstyles, selected: screenstyle, setSelected: setScreenstyle },
-    { id: 7, title: "Step 7", label: `Post Colour: ${getLabel(postcolors, postcolor)}`, options: postcolors, selected: postcolor, setSelected: setPostColour },
-    { id: 8, title: "Step 8", label: `Installation Method: ${getLabel(installations, installation)}`, options: installations, selected: installation, setSelected: setInstallation },
+    {
+      id: 2,
+      title: "Step 2",
+      label: `Post Type: ${getLabel(posts, postType)}`,
+      options: posts,
+      selected: postType,
+      setSelected: setPostType,
+    },
+    {
+      id: 3,
+      title: "Step 3",
+      label: `Slat Type: ${getLabel(slats, slatType)}`,
+      options: slats,
+      selected: slatType,
+      setSelected: setSlatType,
+    },
+    {
+      id: 4,
+      title: "Step 4",
+      label: `Slat Colour: ${getLabel(colours, slatColour)}`,
+      options: colours,
+      selected: slatColour,
+      setSelected: setSlatColour,
+    },
+    {
+      id: 5,
+      title: "Step 5",
+      label: "Upgrade and add our Top & Bottom Panel Trim",
+      options: panelTrims,
+      selected: panelTrim,
+      setSelected: setPanelTrim,
+    },
+    {
+      id: 6,
+      title: "Step 6",
+      label: `Screen Style: ${getLabel(screenstyles, screenstyle)}`,
+      options: screenstyles,
+      selected: screenstyle,
+      setSelected: setScreenstyle,
+    },
+    {
+      id: 7,
+      title: "Step 7",
+      label: `Post Colour: ${getLabel(postcolors, postcolor)}`,
+      options: postcolors,
+      selected: postcolor,
+      setSelected: setPostColour,
+    },
+    {
+      id: 8,
+      title: "Step 8",
+      label: `Installation Method: ${getLabel(installations, installation)}`,
+      options: installations,
+      selected: installation,
+      setSelected: setInstallation,
+    },
   ];
 
   const handleAddToCart = () => {
@@ -232,7 +320,9 @@ export default function FenceConfigurator({data}:FenceProps) {
     };
 
     dispatch(addToCart(productData));
-    alert(`✅ Added ${quantity} item(s) to cart. Total: €${totalPrice.toFixed(2)}`);
+    alert(
+      `✅ Added ${quantity} item(s) to cart. Total: €${totalPrice.toFixed(2)}`
+    );
   };
 
   return (
@@ -250,16 +340,21 @@ export default function FenceConfigurator({data}:FenceProps) {
 
       {/* Configurator */}
       <div className="md:w-1/2 w-full space-y-6 md:-mt-[129px]">
-        <div className='py-3.5 bg-background'>
-          <h3 className='md:text-3xl text-xl font-medium text-title text-center font-DM_Sans capitalize'>
+        <div className="py-3.5 bg-background">
+          <h3 className="md:text-3xl text-xl font-medium text-title text-center font-DM_Sans capitalize">
             fence configurator
           </h3>
-          <p className='md:text-lg text-sm font-normal text-description text-center font-Satoshi'>
+          <p className="md:text-lg text-sm font-normal text-description text-center font-Satoshi">
             use specs below
           </p>
         </div>
         {steps.map((step) => (
-          <div key={step.id} className={`border border-[#E4E4E4] p-2 ${openSteps.includes(step.id) ? "pb-9" : ""}`}>
+          <div
+            key={step.id}
+            className={`border border-[#E4E4E4] p-2 ${
+              openSteps.includes(step.id) ? "pb-9" : ""
+            }`}
+          >
             <button
               onClick={() => toggleStep(step.id)}
               className="w-full flex justify-between items-center bg-[#003D2C] text-white py-4 px-7 text-xs md:text-lg font-Satoshi"
@@ -268,11 +363,19 @@ export default function FenceConfigurator({data}:FenceProps) {
               <p className="text-white">{step.label}</p>
               <span>{openSteps.includes(step.id) ? "−" : "+"}</span>
             </button>
-            <div className={`transition-all duration-300 overflow-hidden ${openSteps.includes(step.id) ? "max-h-full" : "max-h-0 "}`}>
+            <div
+              className={`transition-all duration-300 overflow-hidden ${
+                openSteps.includes(step.id) ? "max-h-full" : "max-h-0 "
+              }`}
+            >
               {step.content
                 ? step.content
                 : step.options &&
-                renderOptions(step.options, step.selected || "", step.setSelected!)}
+                  renderOptions(
+                    step.options,
+                    step.selected || "",
+                    step.setSelected!
+                  )}
             </div>
           </div>
         ))}
@@ -282,9 +385,21 @@ export default function FenceConfigurator({data}:FenceProps) {
           <h3 className="md:text-xl text-sm font-bold mb-5">Quantity</h3>
           <div className="flex items-center gap-4">
             <div className="flex items-center border border-[#B2B2B2] rounded-full px-4 py-3">
-              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="px-2 text-lg">-</button>
-              <span className="px-4 text-lg font-bold">{quantity.toString().padStart(2, "0")}</span>
-              <button onClick={() => setQuantity((q) => q + 1)} className="px-2 text-lg">+</button>
+              <button
+                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                className="px-2 text-lg"
+              >
+                -
+              </button>
+              <span className="px-4 text-lg font-bold">
+                {quantity.toString().padStart(2, "0")}
+              </span>
+              <button
+                onClick={() => setQuantity((q) => q + 1)}
+                className="px-2 text-lg"
+              >
+                +
+              </button>
             </div>
             <button
               onClick={handleAddToCart}

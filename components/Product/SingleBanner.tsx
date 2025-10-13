@@ -12,7 +12,7 @@ interface SingleBannerProps {
 
 const SingleBanner = ({ data }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
-   const rating = data.rating_count || 0;
+  const rating = data.rating_count || 0;
 
   return (
     <section className="pt-16 pb-20">
@@ -43,9 +43,6 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
           </div>
         </div>
       </div>
-
-     
-
       {productType === "Decking" ? (
         <CalculateArea data={data} />
       ) : (

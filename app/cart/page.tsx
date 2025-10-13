@@ -30,7 +30,7 @@ export default function CartPage() {
         dispatch(updateQuantity({ id, quantity: newQuantity }));
     };
 
-    console.log("items" , items);
+    console.log("Cart Data" , items);
 
     return (
         <>

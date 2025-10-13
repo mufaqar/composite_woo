@@ -1,45 +1,47 @@
-import FaqsSection from '@/components/FaqSection'
-import FeaturedIcons from '@/components/HomePage/FeaturedIcons'
-import TrendingProducts from '@/components/HomePage/TrendingProducts'
-import NewsLetter from '@/components/Product/NewsLetter'
-import ProductTabs from '@/components/Product/ProductTabs'
-import SingleBanner from '@/components/Product/SingleBanner'
-import Testimonials from '@/components/Product/Testimonails'
-import Image from 'next/image'
-import React from 'react'
+import FaqsSection from "@/components/FaqSection";
+import FeaturedIcons from "@/components/HomePage/FeaturedIcons";
+import TrendingProducts from "@/components/HomePage/TrendingProducts";
+import NewsLetter from "@/components/Product/NewsLetter";
+import ProductTabs from "@/components/Product/ProductTabs";
+import SingleBanner from "@/components/Product/SingleBanner";
+import Testimonials from "@/components/Product/Testimonails";
+import Image from "next/image";
+import React from "react";
 import { getProductBySlug, getRelatedProducts } from "@/lib/woocommerce-api";
 
-export default async function ProductDetail({ params }: { params: { slug: string } }) {
+export default async function ProductDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const product = await getProductBySlug(params.slug);
   if (!product) {
     return <div className="p-10">Product not found.</div>;
   }
 
-   // ✅ Fetch related products using category IDs
+  // ✅ Fetch related products using category IDs
   const categoryIds = product.categories?.map((cat: any) => cat.id) || [];
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
   // console.log("Product", product);
 
-
-    return (
-        <main>
-            <SingleBanner data={product}/>
-            <FeaturedIcons />
-            <ProductTabs />
-            <section className='bg-[#F0FAF7] relative'>
-                <Image
-                    src="/images/boxes-right.png"
-                    alt="boxes-right"
-                    width={232}
-                    height={155}
-                    className=" md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33] absolute top-0 left-0"
-                />
-                <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
-            </section>
-            <TrendingProducts data={relatedProducts} /> 
-            <NewsLetter />
-            <FaqsSection title="Composite Fencing FAQ" />
-        </main>
-    )
+  return (
+    <main>
+      <SingleBanner data={product} />
+      <FeaturedIcons />
+      <ProductTabs />
+      <section className="bg-[#F0FAF7] relative">
+        <Image
+          src="/images/boxes-right.png"
+          alt="boxes-right"
+          width={232}
+          height={155}
+          className=" md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33] absolute top-0 left-0"
+        />
+        <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
+      </section>
+      <TrendingProducts data={relatedProducts} />
+      <NewsLetter />
+      <FaqsSection title="Composite Fencing FAQ" />
+    </main>
+  );
 }
-

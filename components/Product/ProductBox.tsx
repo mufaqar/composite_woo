@@ -4,7 +4,7 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 
 const ProductBox = ({ data }: any) => {
-  console.log(data);
+  //console.log("Product Box",data);
   return (
     <div>
       <div className="group">
