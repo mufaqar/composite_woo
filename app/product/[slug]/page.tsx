@@ -18,6 +18,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
    // ✅ Fetch related products using category IDs
   const categoryIds = product.categories?.map((cat: any) => cat.id) || [];
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
+  // console.log("Product", product);
 
 
     return (

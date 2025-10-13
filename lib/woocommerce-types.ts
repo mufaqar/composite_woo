@@ -65,6 +65,17 @@ export interface WooProduct {
   stock_status: "instock" | "outofstock" | "onbackorder";
   has_options?: boolean;
   _links?: WooLinks;
+   acf?: WooACF;
+}
+
+/** Woo ACF Fields */
+export interface WooACF {
+  product_type?: string; // e.g. "Decking" or "Fence"
+  product_color?: string;
+  product_material?: string;
+  product_gallery?: WooImage[];
+  custom_price_label?: string;
+  [key: string]: any; // fallback for untyped ACF fields
 }
 
 /**
