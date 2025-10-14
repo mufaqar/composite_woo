@@ -1,14 +1,11 @@
 import RequestSample from "@/components/Blogs/RequestSample";
 import Image from "next/image";
-
 import React from "react";
 //mport { FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
-
 import { GET_POST_BY_SLUG } from "@/lib/queries/getPostBySlug";
 import client from "@/lib/apollo-client";
 import { Post } from "@/lib/gql-types";
 import { notFound } from "next/navigation";
-import BlogsSection from "@/components/BlogSection";
 
 interface PostPageProps {
   params: { slug: string };

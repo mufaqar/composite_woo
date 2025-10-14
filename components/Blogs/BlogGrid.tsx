@@ -9,14 +9,18 @@ interface BlogGridProps {
 }
 
 const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
-  if (!posts.length)
+  // No posts
+  if (!posts?.length) {
     return <p className="text-center text-gray-500">No blog posts found.</p>;
+  }
 
   const [visibleCount, setVisibleCount] = useState(6);
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 3); // show 3 more on each click
   };
+
+  const hasMoreToShow = posts.length > 6 && visibleCount < posts.length;
 
   return (
     <section className="py-20">
@@ -29,7 +33,7 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
         </div>
 
         {/* Load More Button */}
-        {visibleCount < posts.length && (
+        {hasMoreToShow && (
           <div className="flex justify-center mt-8">
             <button
               onClick={handleLoadMore}
