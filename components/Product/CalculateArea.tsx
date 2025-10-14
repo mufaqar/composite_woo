@@ -8,17 +8,11 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/slices/cartSlice";
 
 
-export type Option = {
-  length: number;
-  boards: number;
-  area?: number;
-};
-interface SingleBannerProps {
-  data: WooProduct;
-  Options : Option
+interface CalculateAreaProps {
+  data : WooProduct;
+  
 }
-
-const CalculateArea = ({ data }: SingleBannerProps) => {
+const CalculateArea = ({ data   }: CalculateAreaProps) => {
   const [length, setLength] = useState(1);
   const [boards, setBoards] = useState(2);
   const dispatch = useDispatch();

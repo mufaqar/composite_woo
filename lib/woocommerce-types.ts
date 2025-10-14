@@ -66,6 +66,7 @@ export interface WooProduct {
   has_options?: boolean;
   _links?: WooLinks;
    acf?: WooACF;
+   options:Options
 }
 
 /** Woo ACF Fields */
@@ -164,3 +165,9 @@ export interface WooLinks {
 export interface WooLink {
   href: string;
 }
+
+export interface Options  {
+  length: number;
+  boards: number;
+  area?: number;
+};

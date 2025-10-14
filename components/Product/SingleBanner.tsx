@@ -3,8 +3,8 @@ import React from "react";
 import ProductGallery from "./ProductGallery";
 import BreadCrumb from "./BreadCrumb";
 import FenceConfigurator from "./FenceConfigurator";
-import CalculateArea from "./CalculateArea";
 import { WooProduct } from "@/lib/woocommerce-types";
+import CalculateArea from "./CalculateArea";
 
 interface SingleBannerProps {
   data: WooProduct;
@@ -38,7 +38,7 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
               {data.price}
             </h4>
             <p className="md:text-xl text-sm font-normal text-description">
-              Availability: <span className="text-primary">In Stock</span>
+              Availability: <span className="text-primary"> {data.stock_status}</span>
             </p>
           </div>
         </div>
