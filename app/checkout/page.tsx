@@ -176,8 +176,6 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-         
-
           {/* Deliver to Different Address + Notes */}
           <div className="flex md:flex-row flex-col gap-5 mt-10">
             <div className="md:w-3/5 bg-[#F0FAF7] md:px-11 py-12 p-6 border border-[#E4E4E4]">
@@ -195,20 +193,20 @@ export default function CheckoutPage() {
                   onChange={(e) => setDeliverDifferent(e.target.checked)}
                 />
               </div>
-               {/* Shipping Fields */}
-          {deliverDifferent && (
-            <div className="flex md:flex-row flex-col gap-5 mt-10">
-              <div className="">
-                <h3 className="text-lg font-semibold mb-4">
-                  Shipping Information
-                </h3>
-                <CheckoutForm
-                  formData={shipping}
-                  onChange={(e) => handleChange(e, "shipping")}
-                />
-              </div>
-            </div>
-          )}
+              {/* Shipping Fields */}
+              {deliverDifferent && (
+                <div className="flex md:flex-row flex-col gap-5 mt-10">
+                  <div className="">
+                    <h3 className="text-lg font-semibold mb-4">
+                      Shipping Information
+                    </h3>
+                    <CheckoutForm
+                      formData={shipping}
+                      onChange={(e) => handleChange(e, "shipping")}
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="mt-10">
                 <label

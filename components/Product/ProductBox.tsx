@@ -6,9 +6,9 @@ import { CiHeart } from "react-icons/ci";
 const ProductBox = ({ data }: any) => {
   //console.log("Product Box",data);
   return (
-    <div>
-      <div className="group">
-        <div className="relative ">
+    <div className="bg-background">
+      <div className="group ">
+        <div className="relative h-[300px]">
           <button className="absolute top-2.5 right-2.5 bg-white p-2 rounded-full shadow cursor-pointer z-[3]">
             <CiHeart className="w-7 h-7 text-description" />
           </button>
@@ -36,24 +36,21 @@ const ProductBox = ({ data }: any) => {
           </div>
         </div>
         {/* Rating */}
-        <div className="flex items-center gap-1 text-yellow-500 text-lg mt-5">
+        <div className="flex items-center gap-1 text-yellow-500 text-lg mt-5 px-4">
           {"★".repeat(4)}
           <span className="text-description ml-1 ">{data.rating}</span>
         </div>
 
-        {/* Title */}
+       <div className="px-4">
         <Link
           href={`/product/${data.slug}`}
-          className="text-lg font-bold mt-2 text-black"
+          className="text-lg font-bold mt-2 text-black "
         >
           {data.name}
         </Link>
-        <div
-          className="md:text-base text-sm font-normal text-description font-Satoshi"
-          dangerouslySetInnerHTML={{ __html: data.short_description }}
-        />
+        </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-4 px-4">
         {/* Icons row */}
         <div className="flex gap-3 mt-3">
           <button className="flex flex-col justify-center items-center group relative w-fit">
@@ -112,9 +109,23 @@ const ProductBox = ({ data }: any) => {
         {/* Price */}
         <div className="mt-3 flex items-center gap-2">
           <span className="text-description line-through">{data.price}</span>
-          <span className="text-title font-semibold text-md">
+          <span className="text-title font-semibold text-xl">
             {data.sale_price}
           </span>
+        </div>
+        <div className="flex md:flex-row flex-col items-center justify-center gap-3 py-4 ">
+          <Link
+            href={`/product/${data.slug}`}
+            className="px-5 py-2 bg-secondary text-white font-semibold rounded-full hover:bg-primary"
+          >
+            View product
+          </Link>
+          <Link
+            href="/sample-product"
+            className="px-5 py-2 bg-white text-black hover:text-white font-semibold rounded-full hover:bg-primary"
+          >
+            Get Free Sample
+          </Link>
         </div>
       </div>
     </div>
