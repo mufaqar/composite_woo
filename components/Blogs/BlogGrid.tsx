@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
+import React from "react";
 import PostBox from "./PostBox";
 import { Post } from "@/lib/gql-types";
 
@@ -14,26 +13,26 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
     return <p className="text-center text-gray-500">No blog posts found.</p>;
   }
 
-  const [visibleCount, setVisibleCount] = useState(6);
+  // const [visibleCount, setVisibleCount] = useState(6);
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 3); // show 3 more on each click
-  };
+  // const handleLoadMore = () => {
+  //   setVisibleCount((prev) => prev + 3); // show 3 more on each click
+  // };
 
-  const hasMoreToShow = posts.length > 6 && visibleCount < posts.length;
+  //const hasMoreToShow = posts.length > 6 && visibleCount < posts.length;
 
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {posts.slice(0, visibleCount).map((post) => (
+          {posts.map((post) => (
             <PostBox key={post.id} data={post} />
           ))}
         </div>
 
         {/* Load More Button */}
-        {hasMoreToShow && (
+        {/* {hasMoreToShow && (
           <div className="flex justify-center mt-8">
             <button
               onClick={handleLoadMore}
@@ -42,7 +41,7 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
               Load More
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );
