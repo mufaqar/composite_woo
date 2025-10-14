@@ -32,7 +32,7 @@ const ProBlog = () => {
                             <p className="md:text-base text-sm font-normal text-description font-Satoshi mt-2 mb-11">
                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             </p>
-                            <PostBox data={item} />
+                            {/* <PostBox data={item} /> */}
                         </div>
                     })}
                 </div>

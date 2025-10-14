@@ -17,7 +17,7 @@ const BlogsSection = ({ posts }:BlogGridProps) => {
       {/* Heading + Read More */}
       <HeadingSection title="our blogs" desc="" />
       <div className="container mx-auto px-4">
-        {/* Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-[65px]">
            {posts.map((post) => (
             <PostBox key={post.id} data={post} />
