@@ -1,94 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import type { Post } from "@/app/blog/page"; // import from the same page types or move to types/post.ts
 import PostBox from "./PostBox";
 
-interface Post {
-  id: number;
-  title: string;
-  date: string;
-  category: string;
-  readTime: string;
-  image: string;
+interface BlogGridProps {
+  posts: Post[];
 }
 
-const posts: Post[] = [
-  {
-    id: 1,
-    date: "13 Feb 2022",
-    category: "Design",
-    title: "Timeless product crafted beautifully with a sustainable materials",
-    readTime: "3 minute read",
-    image: "/images/blog1.png",
-  },
-  {
-    id: 2,
-    date: "12 Jan 2022",
-    category: "Lifestyle",
-    title: "Timeless product crafted beautifully with a sustainable materials",
-    readTime: "8 minute read",
-    image: "/images/blog2.png",
-  },
-  {
-    id: 3,
-    date: "11 Dec 2021",
-    category: "Inspiration",
-    title: "Timeless product crafted beautifully with a sustainable materials",
-    readTime: "4 minute read",
-    image: "/images/blog3.png",
-  },
-  {
-    id: 4,
-    title: "How to Increase your Property Value?",
-    date: "Mar 2024",
-    category: "Inspiration",
-    readTime: "4 min read",
-    image: "/images/blog1.png",
-  },
-  {
-    id: 5,
-    title: "Fencing Costs",
-    date: "Mar 2024",
-    category: "Lifestyle",
-    readTime: "2 min read",
-    image: "/images/blog2.png",
-  },
-  {
-    id: 6,
-    title: "Tips to Improve your Outdoor Space",
-    date: "Mar 2024",
-    category: "Design",
-    readTime: "3 min read",
-    image: "/images/blog3.png",
-  },
-  {
-    id: 7,
-    title: "Ways to Decorate your Garden",
-    date: "Mar 2024",
-    category: "Inspiration",
-    readTime: "3 min read",
-    image: "/images/blog2.png",
-  },
-  {
-    id: 8,
-    title: "Modern Patio Ideas",
-    date: "Mar 2024",
-    category: "Lifestyle",
-    readTime: "2 min read",
-    image: "/images/blog1.png",
-  },
-  {
-    id: 9,
-    title: "Outdoor Furniture Trends",
-    date: "Mar 2024",
-    category: "Design",
-    readTime: "2 min read",
-    image: "/images/blog3.png",
-  },
-];
+const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
+  if (!posts.length)
+    return <p className="text-center text-gray-500">No blog posts found.</p>;
 
-const BlogGrid: React.FC = () => {
   const [visibleCount, setVisibleCount] = useState(6);
 
   const handleLoadMore = () => {
