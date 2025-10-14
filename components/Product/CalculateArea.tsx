@@ -4,18 +4,48 @@ import { WooProduct } from "@/lib/woocommerce-types";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/slices/cartSlice";
 
+
+export type Option = {
+  length: number;
+  boards: number;
+  area?: number;
+};
 interface SingleBannerProps {
   data: WooProduct;
+  Options : Option
 }
 
 const CalculateArea = ({ data }: SingleBannerProps) => {
   const [length, setLength] = useState(1);
   const [boards, setBoards] = useState(2);
+  const dispatch = useDispatch();
 
   // Example price per board (adjust as needed)
   const pricePerBoard = parseFloat(data.price);
   const totalPrice = (boards * pricePerBoard).toFixed(2);
+
+  const handleAddToCart = () => {
+    const total = parseFloat(totalPrice);
+
+    const productData = {
+      id: data.id.toString(),
+      title: data.name,
+      price: total,
+      quantity: boards,
+      image: data.images?.[0]?.src || "/images/placeholder.png",
+      options: {
+        length: length.toString(),
+        boards: boards.toString(),
+        area: (length * boards).toFixed(1),
+      },
+    };
+
+    dispatch(addToCart(productData));
+    alert(`✅ Added ${boards} board(s) to cart. Total: £${total.toFixed(2)}`);
+  };
 
   return (
     <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
@@ -119,8 +149,11 @@ const CalculateArea = ({ data }: SingleBannerProps) => {
 
           {/* Buttons */}
           <div className="flex items-center gap-4">
-            <button className="bg-secondary text-white hover:bg-primary md:text-lg text-sm font-bold inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out">
-              Add to basket
+            <button
+              onClick={handleAddToCart}
+              className="bg-secondary text-white hover:bg-primary md:text-lg text-sm font-bold inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out"
+            >
+              Add to Basket
             </button>
             <Link
               href="/sample-product"
