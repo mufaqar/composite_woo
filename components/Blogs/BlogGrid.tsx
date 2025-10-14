@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import type { Post } from "@/app/blog/page"; // import from the same page types or move to types/post.ts
 import PostBox from "./PostBox";
+import { Post } from "@/lib/gql-types";
 
 interface BlogGridProps {
   posts: Post[];

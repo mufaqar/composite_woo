@@ -1,39 +1,70 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { Post } from "@/lib/gql-types";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-const PostBox = ({ data }: any) => {
-    return (
-        <div className="">
-            {/* Image */}
-            <div className="relative w-full">
-                <Image
-                    src={data.image}
-                    alt={data.title}
-                    width={400}
-                    height={400}
-                />
-            </div>
 
-            {/* Content */}
-            <div className="mt-4 hover:bg-[#D2D2D7] p-2">
-                <p className="text-sm text-description font-DM_Sans flex items-center gap-2">
-                    <span className="text-red-500 text-lg">•</span>
-                    {data.date}
-                    <span className="text-description">|</span>
-                    <Link href="#" className="text-primary font-medium">{data.category}</Link>
-                </p>
-                <Link href="/blog/single" className="md:text-[22px] text-lg leading-none font-normal font-DM_Sans inline-flex mt-3 mb-4">
-                    {data.title}
-                </Link>
-                <div className="py-2 border-t border-[#D2D2D7]">
-                    <p className="text-sm text-description ">
-                        {data.readTime}
-                    </p>
-                </div>
-            </div>
-        </div>
-    )
+interface PostBoxProps {
+  data: Post;
 }
 
-export default PostBox
+const PostBox: React.FC<PostBoxProps> = ({ data }) => {
+  const { title, slug, featuredImage, date, categories } = data;
+
+  const featureImage = featuredImage?.node?.sourceUrl || "/images/placeholder.png";
+  const formattedDate = new Date(date).toLocaleDateString();
+
+  return (
+    <article className="group rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all bg-white">
+      {/* Image */}
+      <Link href={`/blog/${slug}`} className="block relative w-full aspect-[4/3]">
+        <Image
+          src={featureImage}
+          alt={featuredImage?.node?.altText || title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </Link>
+
+      {/* Content */}
+      <div className="p-4">
+        {/* Meta Info (Date + Categories) */}
+        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-3">
+          <span>{formattedDate}</span>
+          {categories?.edges?.length ? (
+            <>
+              <span className="text-gray-400">|</span>
+              {categories.edges.map(({ node }) => (
+                <Link
+                  key={node.slug}
+                  href={`/category/${node.slug}`}
+                  className="text-xs font-semibold bg-gray-100 text-gray-700 px-3 py-1 rounded-full hover:bg-secondary hover:text-white transition"
+                >
+                  {node.name}
+                </Link>
+              ))}
+            </>
+          ) : null}
+        </div>
+
+        {/* Title */}
+        <Link
+          href={`/blog/${slug}`}
+          className="block text-lg md:text-xl font-semibold text-gray-900 mb-2 hover:text-secondary transition-colors leading-snug"
+        >
+          {title}
+        </Link>
+
+        {/* Read More */}
+        <Link
+          href={`/blog/${slug}`}
+          className="text-sm font-medium text-secondary hover:underline"
+        >
+          Read More →
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+export default PostBox;
