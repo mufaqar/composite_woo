@@ -45,6 +45,15 @@ export interface Post {
   };
 }
 
+// --------------------
+// Root Query Type
+// --------------------
+export interface GetPostsQuery {
+  posts?: {
+    nodes?: Maybe<Array<Maybe<Post>>>;
+  };
+}
+
 
 // --------------------
 // FAQ Query Types
@@ -62,11 +71,3 @@ export interface GetFaqByCatQuery {
   };
 }
 
-// --------------------
-// Root Query Type
-// --------------------
-export interface GetPostsQuery {
-  posts?: {
-    nodes?: Maybe<Array<Maybe<Post>>>;
-  };
-}
