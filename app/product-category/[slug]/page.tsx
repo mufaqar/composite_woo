@@ -71,7 +71,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           categoryDescription={category.description}
         />
       </section>
-      <Testimonials title="Lorem ipsum dolor sit amet." />
+      <Testimonials title={`${category?.name} Reviews`} />
       <CompositPanel />
       <Compare />
       <div className="relative ">
@@ -82,7 +82,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           height={155}
           className=" md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33] absolute top-0 right-0"
         />
-        <FaqsSection title="Composite Fencing FAQ" faqs={faqs_Cat} />
+        <FaqsSection title={`${category?.name} Frequently Asked Questions`} faqs={faqs_Cat} />
       </div>
       <FollowInsta />
     </main>
