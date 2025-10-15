@@ -12,9 +12,9 @@ type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { label: "Decking", href: "/category/plastic-decking" },
-  { label: "Fencing", href: "/category/composite-fencing" },
-  { label: "Cladding", href: "/category/cladding-pvc-panels-uk" },
+  { label: "Decking", href: "/product-category/plastic-decking" },
+  { label: "Fencing", href: "/product-category/composite-fencing" },
+  { label: "Cladding", href: "/product-category/cladding-pvc-panels-uk" },
   { label: "About Us", href: "/" },
   { label: "Blog", href: "/blog" },
   { label: "Cart", href: "/cart" },

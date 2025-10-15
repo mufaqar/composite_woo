@@ -22,6 +22,13 @@ export default async function CategoryPage({
 }) {
   const category = await getCategoryBySlug(params.slug);
 
+  console.log(category);
+ 
+  const cat_sub_title = category.acf.sub_title;
+    const sale_offer = category.acf.cat_sales_off;
+
+  
+
   if (!category) {
     return (
       <div className="p-10 text-center text-gray-600">Category not found.</div>
@@ -42,13 +49,13 @@ export default async function CategoryPage({
       <Banner
         title={category?.name}
         img={category?.image || "/images/fencing.png"}
-        desc={category?.description}
+        desc={cat_sub_title}
       />
       <FeaturedIcons />
       <ProductSection
         data={mappedProducts}
         readMore
-        categoryTitle={category.title}
+        categoryTitle={category.name}
         categoryDescription={category.description}
       />
       <ProBlog />
@@ -57,7 +64,7 @@ export default async function CategoryPage({
         <ProductSection
           data={mappedProducts}
           readMore
-          categoryTitle={category.title}
+          categoryTitle={category.name}
           categoryDescription={category.description}
         />
       </section>

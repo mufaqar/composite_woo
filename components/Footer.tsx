@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
-import { FaEnvelope, FaPhoneVolume } from "react-icons/fa6"
+import Image from "next/image";
+import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaEnvelope, FaPhoneVolume } from "react-icons/fa6";
 
 // Footer Menus
 const products = [
-  { name: "Composite Decking", href: "#" },
-  { name: "Composite Fencing", href: "#" },
-  { name: "Composite Cladding", href: "#" },
-  { name: "Free Samples", href: "#" },
-]
+  { name: "Composite Decking", href: "/product-category/plastic-decking" },
+  { name: "Composite Fencing", href: "/product-category/composite-fencing" },
+  { name: "Composite Cladding", href: "/product-category/cladding-pvc-panels-uk" },
+  { name: "Free Samples", href: "/sample-product" },
+];
 
 const information = [
   { name: "About Us", href: "/about" },
@@ -21,14 +21,14 @@ const information = [
   { name: "Delivery & Returns", href: "#" },
   { name: "Privacy Policy", href: "#" },
   { name: "Terms & Conditions", href: "#" },
-]
+];
 
 // Social Icons
 const socials = [
   { name: "Facebook", href: "#", icon: FaFacebookF },
   { name: "Instagram", href: "#", icon: FaInstagram },
   { name: "YouTube", href: "#", icon: FaYoutube },
-]
+];
 
 const Footer = () => {
   return (
@@ -38,10 +38,16 @@ const Footer = () => {
         <div className="">
           <div className="max-w-[380px]">
             <Link href="/">
-              <Image src="/images/logo.png" alt="logo" width={148} height={74} />
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                width={148}
+                height={74}
+              />
             </Link>
             <p className="md:text-lg text-sm font-normal text-white mt-5">
-              Lorem ipsum dolor sit amet, consectetur adip elit.Posuere dolor massa, pellentesque.
+              Lorem ipsum dolor sit amet, consectetur adip elit.Posuere dolor
+              massa, pellentesque.
             </p>
           </div>
         </div>
@@ -49,11 +55,16 @@ const Footer = () => {
         <div className="flex md:flex-row flex-col gap-4">
           {/* Products */}
           <div className="md:w-1/3 w-full">
-            <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">PRODUCTS</h6>
+            <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">
+              PRODUCTS
+            </h6>
             <ul className="space-y-4">
               {products.map((item, i) => (
                 <li key={i}>
-                  <Link href={item.href} className="text-base font-normal text-white hover:text-primary">
+                  <Link
+                    href={item.href}
+                    className="text-base font-normal text-white hover:text-primary"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -63,11 +74,16 @@ const Footer = () => {
 
           {/* Information */}
           <div className="md:w-1/3 w-full">
-            <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">INFORMATION</h6>
+            <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">
+              INFORMATION
+            </h6>
             <ul className="space-y-4">
               {information.map((item, i) => (
                 <li key={i}>
-                  <Link href={item.href} className="text-base font-normal text-white hover:text-primary">
+                  <Link
+                    href={item.href}
+                    className="text-base font-normal text-white hover:text-primary"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -77,17 +93,29 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="md:w-1/3 w-full">
-            <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">CONTACT US</h6>
+            <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">
+              CONTACT US
+            </h6>
             <ul className="space-y-4">
               <li>
-                <Link href="#" className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center">
-                  <span className="text-secondary"><FaEnvelope /></span>
+                <Link
+                  href="#"
+                  className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center"
+                >
+                  <span className="text-secondary">
+                    <FaEnvelope />
+                  </span>
                   yourcompany@email.com
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center">
-                  <span className="text-secondary"><FaPhoneVolume /></span>
+                <Link
+                  href="#"
+                  className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center"
+                >
+                  <span className="text-secondary">
+                    <FaPhoneVolume />
+                  </span>
                   +1 627 8907 1264
                 </Link>
               </li>
@@ -105,7 +133,7 @@ const Footer = () => {
         {/* Social Icons */}
         <div className="flex gap-4 mt-4 md:mt-0">
           {socials.map((social, i) => {
-            const Icon = social.icon
+            const Icon = social.icon;
             return (
               <Link
                 key={i}
@@ -115,12 +143,12 @@ const Footer = () => {
               >
                 <Icon />
               </Link>
-            )
+            );
           })}
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
