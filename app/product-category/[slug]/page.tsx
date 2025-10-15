@@ -14,20 +14,23 @@ import {
   getCategoryBySlug,
   getProductsByCategory,
 } from "@/lib/woocommerce-api";
+import client from "@/lib/apollo-client";
+import { GetPostsQuery } from "@/lib/gql-types";
+import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const category = await getCategoryBySlug(params.slug);
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // ✅ Await here
 
-  console.log(category);
- 
+  const category = await getCategoryBySlug(slug);
   const cat_sub_title = category.acf.sub_title;
-    const sale_offer = category.acf.cat_sales_off;
+  const sale_offer = category.acf.cat_sales_off;
 
-  
+  const { data } = await client.query<GetPostsQuery>({
+    query: GET_FAQ_BY_CAT,
+    variables: { id: slug }, // ✅ use the awaited slug
+  });
+
+  const faqs_Cat = data?.faqtype?.faqs?.nodes;
 
   if (!category) {
     return (
@@ -79,7 +82,7 @@ export default async function CategoryPage({
           height={155}
           className=" md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33] absolute top-0 right-0"
         />
-        <FaqsSection title="Composite Fencing FAQ" />
+        <FaqsSection title="Composite Fencing FAQ" faqs={faqs_Cat} />
       </div>
       <FollowInsta />
     </main>

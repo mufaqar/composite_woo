@@ -35,6 +35,9 @@ export interface Post {
   id: string;
   title: string;
   slug: string;
+  faqtype ?: {
+    edges: Category[];
+  };
   excerpt: string;
   content : string;
   date: string;
