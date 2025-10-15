@@ -13,7 +13,7 @@ import WhyChooseus from "@/components/HomePage/WhyChooseus";
 import { getBlogData, getFaqData, getHomeData } from "@/lib/api/getHomeData";
 
 import { HomeInfoSection } from "@/lib/gql-types";
-import { getFeaturedProducts, getProductReviews } from "@/lib/woocommerce-api";
+import { getAllProductReviews, getFeaturedProducts } from "@/lib/woocommerce-api";
 
 export default async function Home() {
   const [posts, faqs_Cat, homeInfo] = await Promise.all([
@@ -22,7 +22,7 @@ export default async function Home() {
     getHomeData(),
   ]);
   const featuredsProducts = await getFeaturedProducts();
-  const reviews = await getProductReviews();
+  const reviews = await getAllProductReviews();
   return (
     <main>
       <Hero data={homeInfo?.sliderInfo} />

@@ -11,8 +11,8 @@ import CompositPanel from "@/components/Product/CompositPanel";
 import FollowInsta from "@/components/Product/FollowInsta";
 import Compare from "@/components/Product/Compare";
 import {
+  getAllProductReviews,
   getCategoryBySlug,
-  getProductReviews,
   getProductsByCategory,
 } from "@/lib/woocommerce-api";
 import client from "@/lib/apollo-client";
@@ -41,7 +41,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   const products = await getProductsByCategory(category.id);
 
-       const reviews = await getProductReviews();
+       const reviews = await getAllProductReviews();
 
   // Map WooProduct[] to Product[]
   const mappedProducts = products.map((p: any) => ({

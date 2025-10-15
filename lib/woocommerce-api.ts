@@ -1,5 +1,5 @@
 import { wooApi } from "./woocommerce";
-import { WooProduct } from "./woocommerce-types";
+import { WooProduct, WooReview } from "./woocommerce-types";
 
 
 /**
@@ -103,21 +103,39 @@ export async function getFeaturedProducts(per_page: number = 8) {
 /**
  * Fetch the latest product reviews (global or by product)
  */
-export async function getProductReviews(limit = 10, productId?: number): Promise<any[]> {
+export async function getAllProductReviews(limit = 10): Promise<WooReview[]> {
   try {
-    const endpoint = productId
-      ? `products/${productId}/reviews`
-      : `products/reviews`;
-
-    const { data } = await wooApi.get(endpoint, {
-      per_page: limit,
-      orderby: "date",
-      order: "desc",
+    const { data } = await wooApi.get<WooReview[]>("products/reviews", {
+      params: {
+        per_page: limit,
+        orderby: "date",
+        order: "desc",
+      },
     });
 
     return Array.isArray(data) ? data : [];
   } catch (error: any) {
-    console.error("Error fetching product reviews:", error.response?.data || error.message);
+    console.error("Error fetching all product reviews:", error.response?.data || error.message);
+    return [];
+  }
+}
+
+export async function getProductReviewsById(productId: number, limit = 10): Promise<WooReview[]> {
+  if (!productId) return [];
+
+  try {
+    const { data } = await wooApi.get<WooReview[]>("products/reviews", {
+      params: {
+        product: productId, // filter by product ID
+        per_page: limit,
+        orderby: "date",
+        order: "desc",
+      },
+    });
+
+    return Array.isArray(data) ? data : [];
+  } catch (error: any) {
+    console.error(`Error fetching reviews for product ID ${productId}:`, error.response?.data || error.message);
     return [];
   }
 }

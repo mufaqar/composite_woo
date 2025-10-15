@@ -65,8 +65,8 @@ export interface WooProduct {
   stock_status: "instock" | "outofstock" | "onbackorder";
   has_options?: boolean;
   _links?: WooLinks;
-   acf?: WooACF;
-   options:Options
+  acf?: WooACF;
+  options: Options;
 }
 
 /** Woo ACF Fields */
@@ -166,23 +166,23 @@ export interface WooLink {
   href: string;
 }
 
-export interface Options  {
+export interface Options {
   length: number;
   boards: number;
   area?: number;
-};
-
+}
 
 export interface WooReview {
-  id: number;
+ id: number;
   date_created: string;
-  review: string;
+  date_created_gmt: string;
+  product_id: number;
   reviewer: string;
   reviewer_email: string;
+  review: string;
   rating: number;
   verified: boolean;
-  product_id: number;
-  reviewer_avatar_urls?: {
-    [key: string]: string;
+  reviewer_avatar_urls: {
+    [size: string]: string;
   };
 }
