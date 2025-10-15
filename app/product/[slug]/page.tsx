@@ -30,7 +30,7 @@ export default async function ProductDetail({
 
 
 
-const reviews = await getProductReviewsById(7755, 10);
+const reviews = await getProductReviewsById(product.id);
 console.log("Product reviews", reviews);
   const faqs = [
     {

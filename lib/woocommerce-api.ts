@@ -121,12 +121,9 @@ export async function getProductReviewsById(productId: number, limit = 10): Prom
   if (!productId) return [];
 
   try {
-    const { data } = await wooApi.get<WooReview[]>("products/reviews", {
-      product: productId,   // ✅ pass product ID directly
-      per_page: limit,
-      orderby: "date",
-      order: "desc",
-    });
+    const { data } = await wooApi.get<WooReview[]>(
+      `products/reviews?product=${productId}&per_page=${limit}&orderby=date&order=desc`
+    );
 
     return Array.isArray(data) ? data : [];
   } catch (error: any) {
