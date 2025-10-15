@@ -100,7 +100,7 @@ export async function getFeaturedProducts(per_page: number = 8) {
 }
 
 /**
- * Fetch the latest product reviews (global or by product)
+ * Reviews
  */
 export async function getAllProductReviews(limit = 10): Promise<WooReview[]> {
   try {
