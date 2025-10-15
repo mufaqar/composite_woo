@@ -10,9 +10,11 @@ import ProductRange from "@/components/HomePage/ProductRange";
 import Testimonials from "@/components/HomePage/Testimonails";
 import TrendingProducts from "@/components/HomePage/TrendingProducts";
 import WhyChooseus from "@/components/HomePage/WhyChooseus";
+import { getHomeData } from "@/lib/api/getHomeData";
 import client from "@/lib/apollo-client";
-import { GetFaqByCatQuery, GetPostsQuery, Post } from "@/lib/gql-types";
+import { GetFaqByCatQuery, GetPostsQuery, HomeInfo, Post } from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
+import { GET_HOME } from "@/lib/queries/GetFrontPage";
 
 import { GET_POSTS } from "@/lib/queries/getPosts";
 import { getFeaturedProducts } from "@/lib/woocommerce-api";
@@ -37,6 +39,10 @@ export default async function Home() {
 
 
   const faqs_Cat = faqData?.faqtype?.faqs?.nodes ?? [];
+
+
+   const homeInfo: HomeInfo = await getHomeData();
+  console.log(homeInfo);
  
 
   const featuredsProducts = await getFeaturedProducts();
@@ -44,7 +50,7 @@ export default async function Home() {
     <main>
       <Hero />
       <FeaturedIcons />
-      <WhyChooseus />
+      <WhyChooseus data={homeInfo?.whyChooseUs} />
       <ProductRange />
       <TrendingProducts data={featuredsProducts} />
       <Advanteges />

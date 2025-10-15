@@ -36,7 +36,7 @@ export interface Post {
   title: string;
   slug: string;
   excerpt: string;
-  content : string;
+  content: string;
   date: string;
   featuredImage?: FeaturedImage;
   author?: Author;
@@ -53,7 +53,6 @@ export interface GetPostsQuery {
     nodes?: Maybe<Array<Maybe<Post>>>;
   };
 }
-
 
 // --------------------
 // FAQ Query Types
@@ -72,10 +71,58 @@ export interface GetFaqByCatQuery {
 }
 
 export interface GetFaqs {
-
-    faqs?: {
-      nodes?: Maybe<Array<Maybe<Faq>>>;
-    };
- 
+  faqs?: {
+    nodes?: Maybe<Array<Maybe<Faq>>>;
+  };
 }
 
+// types/home.ts
+export interface HomeInfoSection {
+  title?: string;
+  subTitle?: string;
+}
+
+
+
+export interface HomeInfoWhyWereDifferent extends HomeInfoSection {
+  options?: {
+    title?: string;
+    description?: string;
+    icon?: { node?: { mediaItemUrl?: string } };
+  }[] | null;
+}
+
+export interface HomeWhyChooseUs extends HomeInfoSection {
+  whyCards?: {
+    title?: string;
+    description?: string;
+    icon?: {
+      node?: {
+        mediaItemUrl?: string;
+      };
+    };
+  }[] | null;
+}
+
+export interface HomeInfoCustomersInnovate {
+  title?: string;
+  description?: string;
+  customerName?: string;
+  customerFeeback?: string;
+}
+
+export interface HomeInfo {
+  whyChooseUs?: HomeWhyChooseUs;
+  productRange?: HomeInfoSection;
+  trendingProducts?: HomeInfoSection;
+  whyWereDifferent?: HomeInfoWhyWereDifferent;
+  customersInnovate?: HomeInfoCustomersInnovate;
+  dreamOutdoor?: HomeInfoSection;
+}
+
+export interface GetHomeQuery {
+  page?: {
+    title?: string;
+    homeInfo?: HomeInfo;
+  };
+}
