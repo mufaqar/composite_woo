@@ -5,52 +5,14 @@ import Slider from "react-slick";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useRef } from "react";
+import { WooReview } from "@/lib/woocommerce-types";
 
-const testimonials = [
-  {
-    id: 1,
-    title: "Professional work, awesome!",
-    text: "Excellent quality decking and fantastic customer service. Highly recommend!",
-    name: "John D.",
-    role: "CEO, Company",
-    email: "@buckybn",
-    image: "/images/testimonail.png", // place in public folder
-    rating: 5,
-  },
-  {
-    id: 2,
-    title: "Professional work, awesome!",
-    text: "The composite fencing looks amazing and was so easy to install. Very happy!",
-    name: "Sarah M.",
-    role: "Manager",
-    email: "@buckybn",
-    image: "/images/testimonail.png",
-    rating: 4,
-  },
-  {
-    id: 3,
-    title: "Professional work, awesome!",
-    text: "I’m impressed with the durability and look of the cladding. Great choice!",
-    name: "Michael B.",
-    role: "Homeowner",
-    email: "@buckybn",
-    image: "/images/testimonail.png",
-    rating: 5,
-  },
-  {
-    id: 4,
-    title: "Professional work, awesome!",
-    text: "I’m impressed with the durability and look of the cladding. Great choice!",
-    name: "Michael B.",
-    role: "Homeowner",
-    email: "@buckybn",
-    image: "/images/testimonail.png",
-    rating: 5,
-  },
-];
+interface TestimonialsProps {
+  title: string;
+  reviews?: WooReview[];
+}
 
-
-const Testimonials = ({ title }: any) => {
+const Testimonials = ({ title, reviews }: TestimonialsProps) => {
   const sliderRef = useRef<any>(null);
   const settings = {
     dots: false,
@@ -75,7 +37,6 @@ const Testimonials = ({ title }: any) => {
 
   return (
     <section className="py-20 relative">
-
       {/* Header */}
       <div className="max-w-[848px] mx-auto px-4 md:mb-16 mb-12">
         <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title text-center font-DM_Sans">
@@ -85,38 +46,60 @@ const Testimonials = ({ title }: any) => {
       <div className="container mx-auto px-4">
         {/* Slider */}
         <Slider ref={sliderRef} {...settings}>
-          {testimonials.map((t) => (
-            <div key={t.id} className="px-4">
+          {reviews?.map((t, index) => (
+            <div key={t.id || index} className="px-4">
               <div className="border border-[#E5E5E5] bg-white rounded-[10px] p-6 h-full flex flex-col justify-between hover:border-transparent transition-all ease-in-out duration-300">
+                {/* Stars */}
                 <div className="flex text-[#FAAE4B]">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <FaStar key={i} />
-                  ))}
+                  {Array.from({ length: t.rating || t.rating || 5 }).map(
+                    (_, i) => (
+                      <FaStar key={i} />
+                    )
+                  )}
                 </div>
 
-                <h3 className="md:text-2xl text-[22px] leading-none font-normal text-title font-DM_Sans mt-8 mb-3.5">
-                  Professional work, awesome!
-                </h3>
-                <p className="md:text-lg text-sm text-description mb-6">{t.text}</p>
+                <div
+                  className="md:text-lg text-sm text-description mb-6 max-h-[100px] overflow-y-auto p-2"
+                  dangerouslySetInnerHTML={{ __html: `${t.review}` }}
+                />
+
                 <span className="flex w-[30px] h-[2px] bg-[#E5E5E5] mb-6"></span>
+
+                {/* Reviewer info */}
                 <div className="flex items-center gap-4 mt-auto">
                   <Image
-                    src={t.image}
-                    alt={t.name}
+                    src={
+                      t.reviewer_avatar_urls?.["96"] ||
+                      "/images/testimonail.png"
+                    }
+                    alt={t.reviewer}
                     width={50}
                     height={50}
                     className="rounded-full object-cover"
                   />
                   <div>
-                    <h4 className="md:text-lg text-sm font-semibold text-title">{t.name}</h4>
-                    <p className="md:text-sm text-sm text-description"><span>{t.role} </span> <span className="text-[#5138ED]"> {t.email}</span></p>
+                    <h4 className="md:text-lg text-sm font-semibold text-title">
+                      {reviews ? t.reviewer : t.reviewer}
+                    </h4>
+                    {reviews ? (
+                      <p className="md:text-sm text-sm text-description">
+                        Verified: Yes | Rating:{t.rating}
+                      </p>
+                    ) : (
+                      <p className="md:text-sm text-sm text-description">
+                        <span>{t.reviewer} </span>{" "}
+                        <span className="text-[#5138ED]">
+                          {t.reviewer_email}
+                        </span>
+                      </p>
+                    )}
                   </div>
                 </div>
-
               </div>
             </div>
           ))}
         </Slider>
+
         {/* Custom Arrows */}
         <div className="flex items-center gap-5 w-fit mx-auto mt-16">
           <button

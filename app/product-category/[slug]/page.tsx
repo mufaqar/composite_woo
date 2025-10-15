@@ -12,6 +12,7 @@ import FollowInsta from "@/components/Product/FollowInsta";
 import Compare from "@/components/Product/Compare";
 import {
   getCategoryBySlug,
+  getProductReviews,
   getProductsByCategory,
 } from "@/lib/woocommerce-api";
 import client from "@/lib/apollo-client";
@@ -39,6 +40,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   }
 
   const products = await getProductsByCategory(category.id);
+
+       const reviews = await getProductReviews();
 
   // Map WooProduct[] to Product[]
   const mappedProducts = products.map((p: any) => ({
@@ -71,7 +74,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           categoryDescription={category.description}
         />
       </section>
-      <Testimonials title={`${category?.name} Reviews`} />
+      <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
       <CompositPanel />
       <Compare />
       <div className="relative ">

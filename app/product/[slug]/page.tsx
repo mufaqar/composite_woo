@@ -7,7 +7,7 @@ import SingleBanner from "@/components/Product/SingleBanner";
 import Testimonials from "@/components/Product/Testimonails";
 import Image from "next/image";
 import React from "react";
-import { getProductBySlug, getRelatedProducts } from "@/lib/woocommerce-api";
+import { getProductBySlug, getProductReviews, getRelatedProducts } from "@/lib/woocommerce-api";
 
 
 export default async function ProductDetail({
@@ -23,7 +23,14 @@ export default async function ProductDetail({
   // ✅ Fetch related products using category IDs
   const categoryIds = product.categories?.map((cat: any) => cat.id) || [];
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
-   console.log("Product", product);
+   console.log("Product iD", product.id);
+   //const reviews = await getProductReviews(5, product.id); // fetch last 5 reviews
+
+     const reviews = await getProductReviews();
+
+    console.log("Product reviews", reviews);
+
+
 
   const faqs = [
   {
@@ -63,7 +70,7 @@ const pro_info = {
           height={155}
           className=" md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33] absolute top-0 left-0"
         />
-        <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
+        <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" reviews={reviews} />
       </section>
       <TrendingProducts data={relatedProducts} info={pro_info} />
       <NewsLetter />

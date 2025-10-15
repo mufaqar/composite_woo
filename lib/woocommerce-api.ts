@@ -103,7 +103,7 @@ export async function getFeaturedProducts(per_page: number = 8) {
 /**
  * Fetch the latest product reviews (global or by product)
  */
-export async function getProductReviews(limit: number = 10, productId?: number): Promise<any[]> {
+export async function getProductReviews(limit = 10, productId?: number): Promise<any[]> {
   try {
     const endpoint = productId
       ? `products/${productId}/reviews`
@@ -115,7 +115,7 @@ export async function getProductReviews(limit: number = 10, productId?: number):
       order: "desc",
     });
 
-    return data;
+    return Array.isArray(data) ? data : [];
   } catch (error: any) {
     console.error("Error fetching product reviews:", error.response?.data || error.message);
     return [];

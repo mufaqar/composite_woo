@@ -75,7 +75,7 @@ const Testimonials = ({data}:Props) => {
                 <div className="bg-[#2A2A2A] p-6 h-full flex flex-col justify-between">
                   <FaQuoteLeft className="text-primary text-2xl mb-4 -rotate-180" />
                    <div
-                    className="text-white mb-6"
+                    className="text-white mb-6 max-h-[100px] overflow-y-auto"
                     dangerouslySetInnerHTML={{ __html: `${r.review}` }}
                   />
 
