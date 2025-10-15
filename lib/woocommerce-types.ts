@@ -171,3 +171,18 @@ export interface Options  {
   boards: number;
   area?: number;
 };
+
+
+export interface WooReview {
+  id: number;
+  date_created: string;
+  review: string;
+  reviewer: string;
+  reviewer_email: string;
+  rating: number;
+  verified: boolean;
+  product_id: number;
+  reviewer_avatar_urls?: {
+    [key: string]: string;
+  };
+}

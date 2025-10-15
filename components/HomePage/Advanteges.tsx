@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import AnimateOnScroll, { useAutoDelay } from '../Animation';
+import { HomeInfoAdvanteges } from '@/lib/gql-types';
 
 const faqs = [
     {
@@ -21,9 +22,16 @@ const faqs = [
     },
 ];
 
-const Advanteges = () => {
+interface Props {
+  data?: HomeInfoAdvanteges;
+}
+
+
+const Advanteges = ({data}:Props) => {
     const getDelay = useAutoDelay();
     const [activeIndex, setActiveIndex] = useState(0);
+     const options = data?.options ?? [];
+
     return (
         <section className="pt-16 bg-background relative flex mb-20 ">
             <Image
@@ -39,16 +47,16 @@ const Advanteges = () => {
                 <div className="2xl:w-[45%] md:w-[55%] w-full md:px-0 px-4 md:pb-16 pb-8">
                     <AnimateOnScroll type="fade-up" delay={getDelay()}>
                         <h4 className="text-lg font-bold text-primary font-DM_Sans md:block hidden mb-4">
-                            Why We're Different:
+                           {data?.subTitle}
                         </h4>
                     </AnimateOnScroll>
                     <AnimateOnScroll type="fade-up" delay={getDelay()}>
                         <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
-                            The Composite Warehouse Advantage
+                           {data?.title}
                         </h2>
                     </AnimateOnScroll>
                     <div className="mt-6 divide-y divide-[#D6D6D6]">
-                        {faqs.map((item, index) => (
+                        {options?.map((item:any, index:number) => (
                             <AnimateOnScroll key={index} type="fade-up" delay={getDelay()}>
                                 <div className="flex items-start gap-2 py-3 cursor-pointer"
                                     onClick={() =>
@@ -57,7 +65,7 @@ const Advanteges = () => {
                                 >
                                     <div className="relative w-[22px] md:w-[48px]">
                                         <Image
-                                            src="/images/shield.png"
+                                            src={item.icon.node.mediaItemUrl}
                                             alt="shield"
                                             width={48}
                                             height={48}

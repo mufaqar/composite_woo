@@ -5,6 +5,9 @@ export const GET_HOME = gql`
     page(id: "2", idType: DATABASE_ID) {
       title
       homeInfo {
+       sliderInfo {
+        ...HomeInfoSliderInfoFragment
+      }
         whyChooseUs {
           ...HomeInfoWhyChooseUsFragment
            whyCards {
@@ -17,13 +20,9 @@ export const GET_HOME = gql`
         trendingProducts {
           ...HomeInfoTrendingProductsFragment
         }
-        whyWereDifferent {
-          title
-          subTitle
-          options {
-            ...HomeInfoWhyWereDifferentOptionsFragment1
-          }
-        }
+        advantages {
+        ...HomeInfoAdvantagesFragment
+      }
         customersInnovate {
           ...HomeInfoCustomersInnovateFragment
         }
@@ -33,6 +32,11 @@ export const GET_HOME = gql`
       }
     }
   }
+
+  fragment HomeInfoSliderInfoFragment on HomeInfoSliderInfo {
+  subTitle
+  title
+}
 
   fragment HomeInfoWhyChooseUsFragment on HomeInfoWhyChooseUs {
     title
@@ -49,15 +53,7 @@ export const GET_HOME = gql`
     subTitle
   }
 
-  fragment HomeInfoWhyWereDifferentOptionsFragment1 on HomeInfoWhyWereDifferentOptions {
-    title
-    description
-    icon {
-      node {
-        mediaItemUrl
-      }
-    }
-  }
+ 
 
   fragment HomeInfoCustomersInnovateFragment on HomeInfoCustomersInnovate {
     title
@@ -70,6 +66,23 @@ export const GET_HOME = gql`
     title
     subTitle
   }
+    fragment HomeInfoAdvantagesOptionsFragment on HomeInfoAdvantagesOptions {
+  description
+  icon {
+    node {
+      mediaItemUrl
+    }
+  }
+  title
+}
+
+fragment HomeInfoAdvantagesFragment on HomeInfoAdvantages {
+  title
+  subTitle
+  options {
+    ...HomeInfoAdvantagesOptionsFragment
+  }
+}
     fragment HomeInfoWhyChooseUsWhyCardsFragment on HomeInfoWhyChooseUsWhyCards {
   description
   title

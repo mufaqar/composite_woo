@@ -6,27 +6,26 @@
 
 // export default nextConfig;
 
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     domains: [
-      'woocommerce-1531534-5907732.cloudwaysapps.com',
-      'via.placeholder.com'
+      "woocommerce-1531534-5907732.cloudwaysapps.com",
+      "secure.gravatar.com",
     ],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '**',
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "**",
       },
       {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
-        pathname: '**',
+        protocol: "https",
+        hostname: "via.placeholder.com",
+        pathname: "**",
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

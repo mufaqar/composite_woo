@@ -98,3 +98,26 @@ export async function getFeaturedProducts(per_page: number = 8) {
   });
   return data;
 }
+
+
+/**
+ * Fetch the latest product reviews (global or by product)
+ */
+export async function getProductReviews(limit: number = 10, productId?: number): Promise<any[]> {
+  try {
+    const endpoint = productId
+      ? `products/${productId}/reviews`
+      : `products/reviews`;
+
+    const { data } = await wooApi.get(endpoint, {
+      per_page: limit,
+      orderby: "date",
+      order: "desc",
+    });
+
+    return data;
+  } catch (error: any) {
+    console.error("Error fetching product reviews:", error.response?.data || error.message);
+    return [];
+  }
+}

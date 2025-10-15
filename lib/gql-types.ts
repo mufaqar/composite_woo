@@ -84,7 +84,7 @@ export interface HomeInfoSection {
 
 
 
-export interface HomeInfoWhyWereDifferent extends HomeInfoSection {
+export interface HomeInfoAdvanteges extends HomeInfoSection {
   options?: {
     title?: string;
     description?: string;
@@ -112,10 +112,11 @@ export interface HomeInfoCustomersInnovate {
 }
 
 export interface HomeInfo {
+  sliderInfo?: HomeInfoSection;
   whyChooseUs?: HomeWhyChooseUs;
   productRange?: HomeInfoSection;
   trendingProducts?: HomeInfoSection;
-  whyWereDifferent?: HomeInfoWhyWereDifferent;
+  advantages?: HomeInfoAdvanteges;
   customersInnovate?: HomeInfoCustomersInnovate;
   dreamOutdoor?: HomeInfoSection;
 }

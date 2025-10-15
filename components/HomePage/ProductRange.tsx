@@ -3,8 +3,13 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import HeadingSection from '../HeadingSection';
 import AnimateOnScroll, { useAutoDelay } from '../Animation';
+import { HomeInfoSection } from '@/lib/gql-types';
 
-const ProductRange = () => {
+interface Props {
+  data?: HomeInfoSection;
+}
+
+const ProductRange = ({data}:Props) => {
     const [active, setActive] = useState<number | null>(0);
     const getDelay = useAutoDelay();
 
@@ -32,7 +37,7 @@ const ProductRange = () => {
     return (
         <section className="pt-24">
             {/* Heading + Read More */}
-            <HeadingSection title="Explore Our Composite Product Range" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua" readMore />
+            <HeadingSection title={data?.title} desc={data?.subTitle} readMore />
             <AnimateOnScroll type="fade-up" delay={getDelay()}>
             <div className='flex md:flex-row flex-col w-full mt-12'>
                 {products.map((product) => (

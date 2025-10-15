@@ -12,16 +12,20 @@ import TrendingProducts from "@/components/HomePage/TrendingProducts";
 import WhyChooseus from "@/components/HomePage/WhyChooseus";
 import { getHomeData } from "@/lib/api/getHomeData";
 import client from "@/lib/apollo-client";
-import { GetFaqByCatQuery, GetPostsQuery, HomeInfo, Post } from "@/lib/gql-types";
+import {
+  GetFaqByCatQuery,
+  GetPostsQuery,
+  HomeInfo,
+  HomeInfoSection,
+  Post,
+} from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 import { GET_HOME } from "@/lib/queries/GetFrontPage";
 
 import { GET_POSTS } from "@/lib/queries/getPosts";
-import { getFeaturedProducts } from "@/lib/woocommerce-api";
-
+import { getFeaturedProducts, getProductReviews } from "@/lib/woocommerce-api";
 
 export default async function Home() {
-
   const { data } = await client.query<GetPostsQuery>({
     query: GET_POSTS,
     variables: { first: 6 },
@@ -31,35 +35,38 @@ export default async function Home() {
   const posts: Post[] = (data?.posts?.nodes ?? []).filter(
     (post): post is Post => !!post
   );
- 
+
   const { data: faqData } = await client.query<GetFaqByCatQuery>({
     query: GET_FAQ_BY_CAT,
     variables: { id: "home" },
   });
 
-
   const faqs_Cat = faqData?.faqtype?.faqs?.nodes ?? [];
 
-
-   const homeInfo: HomeInfo = await getHomeData();
+  const homeInfo: HomeInfo = await getHomeData();
   console.log(homeInfo);
- 
 
   const featuredsProducts = await getFeaturedProducts();
+
+  // Fetch global top 10 reviews
+  const reviews = await getProductReviews();
   return (
     <main>
-      <Hero />
+      <Hero data={homeInfo?.sliderInfo} />
       <FeaturedIcons />
       <WhyChooseus data={homeInfo?.whyChooseUs} />
-      <ProductRange />
-      <TrendingProducts data={featuredsProducts} />
-      <Advanteges />
+      <ProductRange data={homeInfo?.productRange} />
+      <TrendingProducts
+        data={featuredsProducts}
+        info={homeInfo?.trendingProducts ?? {} as HomeInfoSection}
+      />
+      <Advanteges data={homeInfo?.advantages} />
       <ClientLogos />
-      <CustomerInnovate />
-      <Outdoor />
-      <Testimonials />
+      <CustomerInnovate data={homeInfo?.customersInnovate} />
+      <Outdoor data={homeInfo?.dreamOutdoor} />
+      <Testimonials data={reviews}/>
       <FaqsSection title="Frequently Asked Questions" faqs={faqs_Cat} />
-      <BlogsSection  posts={posts} />
+      <BlogsSection posts={posts} />
     </main>
   );
 }

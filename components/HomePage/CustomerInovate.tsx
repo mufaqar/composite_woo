@@ -1,8 +1,13 @@
 "use client";
 import Image from "next/image";
 import AnimateOnScroll, { useAutoDelay } from "../Animation";
+import { HomeInfoCustomersInnovate } from "@/lib/gql-types";
 
-export default function CustomerInnovate() {
+interface Props {
+  data?: HomeInfoCustomersInnovate;
+}
+
+export default function CustomerInnovate({ data }: Props) {
   const getDelay = useAutoDelay();
   return (
     <section className="mb-32 2xl:mb-32">
@@ -24,24 +29,15 @@ export default function CustomerInnovate() {
             {/* Heading */}
             <AnimateOnScroll type="fade-up" delay={getDelay()}>
               <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
-                We Listen to Our Customers to Innovate and Improve
+                {data?.title}
               </h2>
             </AnimateOnScroll>
             {/* Paragraph */}
             <AnimateOnScroll type="fade-up" delay={getDelay()}>
-              <p className="md:text-xl text-sm font-normal text-description mt-5">
-                At Composite Warehouse, your feedback is invaluable. We actively
-                listen to your needs and suggestions, which drives our commitment to
-                continuous improvement and the introduction of new, high-quality
-                products like our composite fencing range, specifically designed
-                based on customer demand for a durable and stylish alternative.
-              </p>
-            </AnimateOnScroll>
-            <AnimateOnScroll type="fade-up" delay={getDelay()}>
-              <p className="md:text-xl text-sm font-normal text-description mt-5">
-                Your insights help us ensure we’re always offering the best solutions
-                for your outdoor projects.
-              </p>
+              <div
+                className="md:text-xl text-sm font-normal text-description mt-5"
+                dangerouslySetInnerHTML={{ __html: data?.description || "" }}
+              />
             </AnimateOnScroll>
           </div>
 
@@ -50,15 +46,21 @@ export default function CustomerInnovate() {
             <AnimateOnScroll type="fade-up" delay={getDelay()}>
               <div className="md:pl-[100px] flex md:flex-row flex-col items-start">
                 <p className="md:text-[28px] text-lg font-normal font-DM_Sans text-white max-w-[561px] mx-auto">
-                  “I mentioned I was looking for composite fencing that could fit into my
-                  existing posts, and Composite Warehouse delivered! So happy with the
-                  new range.”
+                  “ {data?.customerFeeback}”
                 </p>
-                <Image src="/images/qoute.png" alt="qoute" width={168} height={131} className="ml-auto mr-0" />
+                <Image
+                  src="/images/qoute.png"
+                  alt="qoute"
+                  width={168}
+                  height={131}
+                  className="ml-auto mr-0"
+                />
               </div>
             </AnimateOnScroll>
             <AnimateOnScroll type="fade-up" delay={getDelay()}>
-              <p className="md:text-xl text-base italic font-normal font-DM_Sans text-white md:text-end text-start">- Customer Name</p>
+              <p className="md:text-xl text-base italic font-normal font-DM_Sans text-white md:text-end text-start">
+                - {data?.customerName}
+              </p>
             </AnimateOnScroll>
           </div>
         </div>

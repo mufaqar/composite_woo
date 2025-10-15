@@ -7,15 +7,19 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import AnimateOnScroll, { useAutoDelay } from "../Animation";
 import { getAllProducts } from "@/lib/woocommerce-api";
 import { WooProduct } from "@/lib/woocommerce-types";
+import { HomeInfoSection } from "@/lib/gql-types";
 
 interface TrendingProductsProps {
   data: WooProduct[];
+  info: HomeInfoSection;
 }
 
-export default  function TrendingProducts({data}:TrendingProductsProps) {
+export default function TrendingProducts({
+  data,
+  info,
+}: TrendingProductsProps) {
   const getDelay = useAutoDelay();
   const sliderRef = useRef<any>(null);
-   
 
   const settings = {
     dots: false,
@@ -53,13 +57,7 @@ export default  function TrendingProducts({data}:TrendingProductsProps) {
 
   return (
     <section className="py-12 bg-white">
-      {/* Heading + Read More */}
-      <HeadingSection
-        title="Trending Products"
-        desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        readMore
-      />
-
+      <HeadingSection title={info.title} desc={info.subTitle} readMore />
       <div className="container mx-auto px-4 mt-12 relative">
         <AnimateOnScroll type="fade-up" delay={getDelay()}>
           <Slider ref={sliderRef} {...settings}>

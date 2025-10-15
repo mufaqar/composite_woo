@@ -6,45 +6,14 @@ import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useRef } from "react";
 import AnimateOnScroll, { useAutoDelay } from "../Animation";
-
-// testimonialData.ts
-const testimonials = [
-  {
-    id: 1,
-    text: "Excellent quality decking and fantastic customer service. Highly recommend!",
-    name: "John D.",
-    role: "CEO, Company",
-    image: "/images/testimonail.png", // place in public folder
-    rating: 5,
-  },
-  {
-    id: 2,
-    text: "The composite fencing looks amazing and was so easy to install. Very happy!",
-    name: "Sarah M.",
-    role: "Manager",
-    image: "/images/testimonail.png",
-    rating: 4,
-  },
-  {
-    id: 3,
-    text: "I’m impressed with the durability and look of the cladding. Great choice!",
-    name: "Michael B.",
-    role: "Homeowner",
-    image: "/images/testimonail.png",
-    rating: 5,
-  },
-  {
-    id: 4,
-    text: "I’m impressed with the durability and look of the cladding. Great choice!",
-    name: "Michael B.",
-    role: "Homeowner",
-    image: "/images/testimonail.png",
-    rating: 5,
-  },
-];
+import { WooReview } from "@/lib/woocommerce-types";
 
 
-const Testimonials = () => {
+interface Props {
+  data:WooReview[]
+}
+
+const Testimonials = ({data}:Props) => {
   const sliderRef = useRef<any>(null);
   const getDelay = useAutoDelay();
   const settings = {
@@ -101,28 +70,31 @@ const Testimonials = () => {
         <AnimateOnScroll type="fade-up" delay={getDelay()}>
           {/* Slider */}
           <Slider ref={sliderRef} {...settings}>
-            {testimonials.map((t) => (
-              <div key={t.id} className="px-4">
+            {data.map((r,i) => (
+              <div key={i} className="px-4">
                 <div className="bg-[#2A2A2A] p-6 h-full flex flex-col justify-between">
                   <FaQuoteLeft className="text-primary text-2xl mb-4 -rotate-180" />
-                  <p className="text-white mb-6">“{t.text}”</p>
+                   <div
+                    className="text-white mb-6"
+                    dangerouslySetInnerHTML={{ __html: `“${r.review}”` }}
+                  />
 
                   <div className="flex items-center gap-4 mt-auto">
-                    <Image
-                      src={t.image}
-                      alt={t.name}
+                     <Image
+                      src={r.reviewer_avatar_urls?.["96"] || "/images/testimonail.png"}
+                      alt={r.reviewer}
                       width={50}
                       height={50}
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <h4 className="md:text-lg text-sm font-semibold text-white">{t.name}</h4>
-                      <p className="md:text-base text-sm text-[#7E7E7E]">{t.role}</p>
+                      <h4 className="md:text-lg text-sm font-semibold text-white"> {r.reviewer}</h4>
+                      <p className="md:text-base text-sm text-[#7E7E7E]">    Verified Customer</p>
 
                     </div>
                   </div>
                   <div className="flex text-[#CEC400] mt-5">
-                    {Array.from({ length: t.rating }).map((_, i) => (
+                     {Array.from({ length: r.rating || 0 }).map((_, i) => (
                       <FaStar key={i} />
                     ))}
                   </div>
