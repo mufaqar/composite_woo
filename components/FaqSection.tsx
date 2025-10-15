@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import HeadingSection from "./HeadingSection";
 import AnimateOnScroll, { useAutoDelay } from "./Animation";
+import { usePathname } from "next/navigation";
 
 const FaqsSection = ({ faqs, title }: any) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -14,12 +15,14 @@ const FaqsSection = ({ faqs, title }: any) => {
   };
   const getDelay = useAutoDelay();
 
+  const pathname = usePathname();
+
   return (
     <section className="md:py-20 py-16 bg-background">
       {/* Heading + Read More */}
       <HeadingSection title={title} desc="" />
       <div className="max-w-[804px] mx-auto px-4 mt-10">
-        {faqs.map((faq:any, idx:number) => (
+        {faqs.map((faq: any, idx: number) => (
           <AnimateOnScroll key={idx} type="fade-up" delay={getDelay()}>
             <div
               className={`${
@@ -55,13 +58,16 @@ const FaqsSection = ({ faqs, title }: any) => {
             </div>
           </AnimateOnScroll>
         ))}
-        <AnimateOnScroll type="fade-up" delay={getDelay()}>
-          <div className="w-fit mx-auto flex md:flex-row flex-col gap-5 mt-10">
-            <Link href="#" className="primary_btn">
-              View All FAQs
-            </Link>
-          </div>
-        </AnimateOnScroll>
+
+        {pathname !== "/faqs" && (
+          <AnimateOnScroll type="fade-up" delay={getDelay()}>
+            <div className="w-fit mx-auto flex md:flex-row flex-col gap-5 mt-10">
+              <Link href="/faqs" className="primary_btn">
+                View All FAQs
+              </Link>
+            </div>
+          </AnimateOnScroll>
+        )}
       </div>
     </section>
   );

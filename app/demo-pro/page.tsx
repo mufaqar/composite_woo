@@ -25,8 +25,8 @@ function Page() {
                 <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
             </section>
             {/* <TrendingProducts /> */}
-            <NewsLetter />
-            <FaqsSection title="Composite Fencing FAQ" />
+            {/* <NewsLetter />
+            <FaqsSection title="Composite Fencing FAQ" /> */}
         </main>
     )
 }

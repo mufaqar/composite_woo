@@ -17,7 +17,7 @@ const information = [
   { name: "About Us", href: "/about" },
   { name: "Customer Reviews", href: "#" },
   { name: "Advice Centre", href: "#" },
-  { name: "FAQ", href: "#" },
+  { name: "FAQ", href: "/faqs" },
   { name: "Delivery & Returns", href: "#" },
   { name: "Privacy Policy", href: "#" },
   { name: "Terms & Conditions", href: "#" },

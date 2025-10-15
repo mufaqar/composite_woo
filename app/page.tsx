@@ -11,7 +11,9 @@ import Testimonials from "@/components/HomePage/Testimonails";
 import TrendingProducts from "@/components/HomePage/TrendingProducts";
 import WhyChooseus from "@/components/HomePage/WhyChooseus";
 import client from "@/lib/apollo-client";
-import { GetPostsQuery, Post } from "@/lib/gql-types";
+import { GetFaqByCatQuery, GetPostsQuery, Post } from "@/lib/gql-types";
+import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
+
 import { GET_POSTS } from "@/lib/queries/getPosts";
 import { getFeaturedProducts } from "@/lib/woocommerce-api";
 
@@ -27,7 +29,15 @@ export default async function Home() {
   const posts: Post[] = (data?.posts?.nodes ?? []).filter(
     (post): post is Post => !!post
   );
+ 
+  const { data: faqData } = await client.query<GetFaqByCatQuery>({
+    query: GET_FAQ_BY_CAT,
+    variables: { id: "home" },
+  });
 
+
+  const faqs_Cat = faqData?.faqtype?.faqs?.nodes ?? [];
+ 
 
   const featuredsProducts = await getFeaturedProducts();
   return (
@@ -42,7 +52,7 @@ export default async function Home() {
       <CustomerInnovate />
       <Outdoor />
       <Testimonials />
-      <FaqsSection title="Frequently Asked Questions" />
+      <FaqsSection title="Frequently Asked Questions" faqs={faqs_Cat} />
       <BlogsSection  posts={posts} />
     </main>
   );

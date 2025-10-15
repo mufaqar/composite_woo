@@ -71,3 +71,11 @@ export interface GetFaqByCatQuery {
   };
 }
 
+export interface GetFaqs {
+
+    faqs?: {
+      nodes?: Maybe<Array<Maybe<Faq>>>;
+    };
+ 
+}
+

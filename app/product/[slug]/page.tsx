@@ -24,6 +24,24 @@ export default async function ProductDetail({
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
   // console.log("Product", product);
 
+  const faqs = [
+  {
+    title: "Are Composite Materials Slippery?",
+    content:
+      "While traditional wood decking can become slippery, our composite decking is designed with a low slip resistance, offering a safer surface, especially in wet conditions. With an average PTV of 33, it presents a low to medium slip risk.",
+  },
+  {
+    title: "Are Composite Materials Eco-Friendly?",
+    content:
+      "While traditional wood decking can become slippery, our composite decking is designed with a low slip resistance, offering a safer surface, especially in wet conditions. With an average PTV of 33, it presents a low to medium slip risk..",
+  },
+  {
+    title: "How Do I Install Composite Products?",
+    content:
+      "While traditional wood decking can become slippery, our composite decking is designed with a low slip resistance, offering a safer surface, especially in wet conditions. With an average PTV of 33, it presents a low to medium slip risk.",
+  },
+];
+
   return (
     <main>
       <SingleBanner data={product} />
@@ -41,7 +59,7 @@ export default async function ProductDetail({
       </section>
       <TrendingProducts data={relatedProducts} />
       <NewsLetter />
-      <FaqsSection title="Composite Fencing FAQ" />
+      <FaqsSection title="Composite Fencing FAQ" faqs={faqs} />
     </main>
   );
 }
