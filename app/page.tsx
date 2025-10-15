@@ -11,6 +11,7 @@ import Testimonials from "@/components/HomePage/Testimonails";
 import TrendingProducts from "@/components/HomePage/TrendingProducts";
 import WhyChooseus from "@/components/HomePage/WhyChooseus";
 import { getHomeData } from "@/lib/api/getHomeData";
+
 import client from "@/lib/apollo-client";
 import {
   GetFaqByCatQuery,
