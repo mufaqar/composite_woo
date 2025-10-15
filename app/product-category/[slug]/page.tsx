@@ -15,7 +15,7 @@ import {
   getProductsByCategory,
 } from "@/lib/woocommerce-api";
 import client from "@/lib/apollo-client";
-import { GetPostsQuery } from "@/lib/gql-types";
+import { GetFaqByCatQuery } from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,7 +25,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const cat_sub_title = category.acf.sub_title;
   const sale_offer = category.acf.cat_sales_off;
 
-  const { data } = await client.query<GetPostsQuery>({
+  const { data } = await client.query<GetFaqByCatQuery>({
     query: GET_FAQ_BY_CAT,
     variables: { id: slug }, // ✅ use the awaited slug
   });

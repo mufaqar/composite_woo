@@ -35,9 +35,6 @@ export interface Post {
   id: string;
   title: string;
   slug: string;
-  faqtype ?: {
-    edges: Category[];
-  };
   excerpt: string;
   content : string;
   date: string;
@@ -45,6 +42,23 @@ export interface Post {
   author?: Author;
   categories?: {
     edges: Category[];
+  };
+}
+
+
+// --------------------
+// FAQ Query Types
+// --------------------
+export interface Faq {
+  title: string;
+  content: string;
+}
+
+export interface GetFaqByCatQuery {
+  faqtype?: {
+    faqs?: {
+      nodes?: Maybe<Array<Maybe<Faq>>>;
+    };
   };
 }
 

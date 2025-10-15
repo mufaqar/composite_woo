@@ -19,7 +19,7 @@ const FaqsSection = ({ faqs, title }: any) => {
       {/* Heading + Read More */}
       <HeadingSection title={title} desc="" />
       <div className="max-w-[804px] mx-auto px-4 mt-10">
-        {faqs.map((faq, idx) => (
+        {faqs.map((faq:any, idx:number) => (
           <AnimateOnScroll key={idx} type="fade-up" delay={getDelay()}>
             <div
               className={`${
