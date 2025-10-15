@@ -21,8 +21,7 @@ const Outdoor = ({ data }: Props) => {
         width={232}
         height={155}
         className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
-      />
-      {/* Heading + Read More */}
+      />    
       <HeadingSection title={data?.title} desc={data?.subTitle} />
       <AnimateOnScroll type="fade-up" delay={getDelay()}>
         <OutDoorSlider />

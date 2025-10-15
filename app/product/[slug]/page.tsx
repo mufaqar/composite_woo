@@ -9,6 +9,7 @@ import Image from "next/image";
 import React from "react";
 import { getProductBySlug, getRelatedProducts } from "@/lib/woocommerce-api";
 
+
 export default async function ProductDetail({
   params,
 }: {
@@ -22,7 +23,7 @@ export default async function ProductDetail({
   // ✅ Fetch related products using category IDs
   const categoryIds = product.categories?.map((cat: any) => cat.id) || [];
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
-  // console.log("Product", product);
+   console.log("Product", product);
 
   const faqs = [
   {
@@ -42,6 +43,13 @@ export default async function ProductDetail({
   },
 ];
 
+
+const pro_info = {
+  title: "Related Products",
+  subTitle:
+    "While traditional wood decking can become slippery, our composite decking is designed with a low slip resistance, offering a safer surface, especially in wet conditions. With an average PTV of 33, it presents a low to medium slip risk.",
+};
+
   return (
     <main>
       <SingleBanner data={product} />
@@ -57,7 +65,7 @@ export default async function ProductDetail({
         />
         <Testimonials title="Be the first to review “Vertical Composite Fencing Panel”" />
       </section>
-      <TrendingProducts data={relatedProducts} />
+      <TrendingProducts data={relatedProducts} info={pro_info} />
       <NewsLetter />
       <FaqsSection title="Composite Fencing FAQ" faqs={faqs} />
     </main>

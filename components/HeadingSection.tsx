@@ -17,7 +17,7 @@ const HeadingSection = ({ title, desc, readMore }: any) => {
             <AnimateOnScroll type="fade-up" delay={getDelay()}> 
             {readMore ?
                 <p className="md:text-xl text-sm font-normal text-description text-center mt-3.5">
-                    {isExpanded ? text : `${text.substring(0, 122)} ... `}
+                    {isExpanded ? text : `${text?.substring(0, 122)} ... `}
                     <button
                         onClick={() => setIsExpanded(!isExpanded)}
                         className="font-bold text-secondary hover:underline transition"
