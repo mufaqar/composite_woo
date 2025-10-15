@@ -177,6 +177,7 @@ export interface WooReview {
   date_created: string;
   date_created_gmt: string;
   product_id: number;
+  product:number;
   reviewer: string;
   reviewer_email: string;
   review: string;

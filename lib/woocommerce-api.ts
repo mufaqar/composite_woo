@@ -99,18 +99,15 @@ export async function getFeaturedProducts(per_page: number = 8) {
   return data;
 }
 
-
 /**
  * Fetch the latest product reviews (global or by product)
  */
 export async function getAllProductReviews(limit = 10): Promise<WooReview[]> {
   try {
     const { data } = await wooApi.get<WooReview[]>("products/reviews", {
-      params: {
-        per_page: limit,
-        orderby: "date",
-        order: "desc",
-      },
+      per_page: limit,
+      orderby: "date",
+      order: "desc",
     });
 
     return Array.isArray(data) ? data : [];
@@ -125,12 +122,10 @@ export async function getProductReviewsById(productId: number, limit = 10): Prom
 
   try {
     const { data } = await wooApi.get<WooReview[]>("products/reviews", {
-      params: {
-        product: productId, // filter by product ID
-        per_page: limit,
-        orderby: "date",
-        order: "desc",
-      },
+      product: productId,   // ✅ pass product ID directly
+      per_page: limit,
+      orderby: "date",
+      order: "desc",
     });
 
     return Array.isArray(data) ? data : [];
