@@ -85,17 +85,12 @@ const Shop = () => {
         height={155}
         className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
       />
-      {/* Heading + Read More */}
-      {/* <HeadingSection
-        title="Shop Composite Decking Online"
-        desc="CompositeWarehouse – Your one-stop-shop for all kinds of composite materials. You will buy Eco-friendly and low maintenance composite materials for your projects."
-        readMore
-      /> */}
+     
       <div className="md:max-w-[718px] max-w-[389px] mx-auto px-4">
         <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
           Shop Composite Decking Online
         </h2>
-        <h3 className="md:text-[22px] text-lg leading-none font-bold font-DM_Sans text-center my-5">
+        <h3 className="md:text-[22px] text-lg leading-none font-bold text-title font-DM_Sans text-center my-5">
           We Make High Quality, Custom Suits
         </h3>
         <p className="md:text-xl text-sm font-normal text-description text-center">
