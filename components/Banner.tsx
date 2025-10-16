@@ -24,7 +24,7 @@ const Banner = ({ title, img, desc }: any) => {
             </h1>
           </AnimateOnScroll>
           <AnimateOnScroll type="fade-up" delay={getDelay()}>
-            <p className="md:text-xl text-sm font-normal text-white mt-5 max-w-[400px] font-Satoshi">
+            <p className="md:text-xl text-sm font-normal text-white mt-5 max-w-[95%] font-Satoshi">
               {desc}
             </p>
           </AnimateOnScroll>

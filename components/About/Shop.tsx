@@ -78,29 +78,37 @@ const Shop = () => {
 
   return (
     <section className="py-16 bg-[#F0FAF7] relative ">
-         <Image
-           src="/images/boxes2.png"
-           alt="boxes2"
-           width={232}
-           height={155}
-           className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
-         />
+      <Image
+        src="/images/boxes2.png"
+        alt="boxes2"
+        width={232}
+        height={155}
+        className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
+      />
       {/* Heading + Read More */}
-      <HeadingSection
+      {/* <HeadingSection
         title="Shop Composite Decking Online"
         desc="CompositeWarehouse – Your one-stop-shop for all kinds of composite materials. You will buy Eco-friendly and low maintenance composite materials for your projects."
         readMore
-      />
-      <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
-        Shop Composite Decking Online
-      </h2>
+      /> */}
+      <div className="md:max-w-[718px] max-w-[389px] mx-auto px-4">
+        <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
+          Shop Composite Decking Online
+        </h2>
+        <h3 className="md:text-[22px] text-lg leading-none font-bold font-DM_Sans text-center my-5">
+          We Make High Quality, Custom Suits
+        </h3>
+        <p className="md:text-xl text-sm font-normal text-description text-center">
+          CompositeWarehouse – Your one-stop-shop for all kinds of composite materials. You will buy Eco-friendly and low maintenance composite materials for your projects.
+        </p>
+      </div>
 
       {/* Slider Section */}
       <div className="container mx-auto px-4 mt-12 relative">
         <Slider ref={sliderRef} {...settings}>
           {WhyUS.map((item) => (
             <div key={item.id} className="px-2">
-              <div className="border border-[#E4E4E4] bg-background/35 px-11 py-9 h-[353px]">
+              <div className="border border-[#E4E4E4] bg-white px-11 py-9 h-[400px]">
                 <div className="relative w-fit">
                   <Image
                     src={item.icon}
@@ -138,13 +146,13 @@ const Shop = () => {
         {/* Custom Arrows */}
         <button
           onClick={() => sliderRef.current?.slickPrev()}
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-secondary transition"
+          className="absolute left-0 top-[40%] -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-secondary transition"
         >
           <FaChevronLeft size={20} />
         </button>
         <button
           onClick={() => sliderRef.current?.slickNext()}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-secondary transition"
+          className="absolute right-0 top-[40%] -translate-y-1/2 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-secondary transition"
         >
           <FaChevronRight size={20} />
         </button>
