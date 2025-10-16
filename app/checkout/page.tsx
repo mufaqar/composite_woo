@@ -12,9 +12,9 @@ export default function CheckoutPage() {
   const { items } = useSelector((state: RootState) => state.cart);
 
   const [couponCode, setCouponCode] = useState("");
-const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState(0);
 
-  // --- 🧾 Billing / Shipping States ---
+  // Billing & Shipping states
   const [billing, setBilling] = useState({
     firstName: "",
     lastName: "",
@@ -42,9 +42,6 @@ const [discount, setDiscount] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
   const [showCoupon, setShowCoupon] = useState(false);
 
-  // --- 💰 Discount and Totals ---
-  const [discount, setDiscount] = useState(0);
-
   const subTotal = useMemo(
     () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
     [items]
@@ -52,7 +49,7 @@ const [discount, setDiscount] = useState(0);
 
   const total = subTotal - discount;
 
-  // --- 🧾 Handle input change ---
+  // Handle input change
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     type: "billing" | "shipping" = "billing"
@@ -65,7 +62,7 @@ const [discount, setDiscount] = useState(0);
     }
   };
 
-  // --- 🚀 Submit order ---
+  // Submit order
   const handleOrderSubmit = async () => {
     if (items.length === 0) {
       alert("Your cart is empty!");
@@ -78,6 +75,7 @@ const [discount, setDiscount] = useState(0);
       items,
       message,
       discount,
+      couponCode, // 🧾 include coupon in order payload
     };
 
     try {
@@ -160,10 +158,10 @@ const [discount, setDiscount] = useState(0);
         {/* Coupon Section */}
         {showCoupon && (
           <CouponSection
-  subTotal={items.reduce((sum, item) => sum + item.price * item.quantity, 0)}
-  setDiscount={setDiscount}
-  setCouponCode={setCouponCode}
-/>
+            subTotal={subTotal}
+            setDiscount={setDiscount}
+            setCouponCode={setCouponCode}
+          />
         )}
       </section>
 
@@ -205,7 +203,6 @@ const [discount, setDiscount] = useState(0);
                 />
               </div>
 
-              {/* Shipping Form */}
               {deliverDifferent && (
                 <div className="flex md:flex-row flex-col gap-5 mt-10">
                   <div>

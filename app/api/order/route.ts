@@ -4,30 +4,20 @@ import { wooApi } from "@/lib/woocommerce";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
-    const {
-      billing,
-      shipping,
-      items,
-      message,
-      coupon, // e.g. "SUMMER10"
-      shippingMethod, // e.g. { method_id: "flat_rate", method_title: "Flat Rate", total: "10.00" }
-    } = body;
+    const { billing, shipping, items, message, couponCode, shippingMethod } = body;
 
     if (!items?.length) {
       return NextResponse.json({ error: "No items in cart" }, { status: 400 });
     }
 
-   
-
-       // 🧾 Line Items
+    // 🧾 Line Items
     const line_items = items.map((item: any) => ({
       product_id: item.id,
       quantity: item.quantity,
       variation_id: item.variation_id || undefined,
     }));
 
-    // ✅ Build billing structure for WooCommerce
+    // 🧾 Billing
     const billingData = {
       first_name: billing.firstName,
       last_name: billing.lastName,
@@ -40,7 +30,7 @@ export async function POST(req: Request) {
       phone: billing.phone,
     };
 
-    // ✅ Shipping data (if deliver to different address)
+    // 🧾 Shipping
     const shippingData = shipping
       ? {
           first_name: shipping.firstName,
@@ -53,26 +43,23 @@ export async function POST(req: Request) {
         }
       : billingData;
 
-    // ✅ Coupon line (if applied)
-     // 🧾 Coupon Line (if any)
-    const coupon_lines = coupon
-      ? [{ code: coupon }]
-      : [];
+    // 🧾 Coupon (optional)
+    const coupon_lines = couponCode ? [{ code: couponCode }] : [];
 
-    // ✅ Shipping line (if any selected)
+    // 🧾 Shipping (optional)
     const shipping_lines = shippingMethod
       ? [
           {
             method_id: shippingMethod.method_id,
             method_title: shippingMethod.method_title,
-            total: shippingMethod.total, // e.g. "5.00"
+            total: shippingMethod.total,
           },
         ]
       : [];
 
-    // ✅ Build full order payload
+    // 🧾 Complete Order
     const orderPayload = {
-      payment_method: "bacs", // change to "cod" or "stripe" later if needed
+      payment_method: "bacs",
       payment_method_title: "Direct Bank Transfer",
       set_paid: false,
       billing: billingData,
@@ -83,10 +70,9 @@ export async function POST(req: Request) {
       customer_note: message || "",
     };
 
-    console.log("🧾 WooCommerce order response:", JSON.stringify(data, null, 2));
-
-    // ✅ Create WooCommerce order
     const { data } = await wooApi.post("orders", orderPayload);
+
+    console.log("✅ WooCommerce Order Created:", data);
 
     return NextResponse.json({ success: true, order: data }, { status: 201 });
   } catch (error: any) {

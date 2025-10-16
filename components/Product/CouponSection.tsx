@@ -6,10 +6,15 @@ import { toast } from "react-toastify";
 interface CouponSectionProps {
   subTotal: number;
   setDiscount: (amount: number) => void;
+  setCouponCode: (code: string) => void;
 }
 
-const CouponSection: React.FC<CouponSectionProps> = ({ subTotal, setDiscount }) => {
-  const [couponCode, setCouponCode] = useState("");
+const CouponSection: React.FC<CouponSectionProps> = ({
+  subTotal,
+  setDiscount,
+  setCouponCode,
+}) => {
+  const [couponCode, setLocalCouponCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [couponAmount, setCouponAmount] = useState(0);
 
@@ -44,7 +49,6 @@ const CouponSection: React.FC<CouponSectionProps> = ({ subTotal, setDiscount }) 
 
         setDiscount(discountValue);
         setCouponAmount(discountValue);
-
         toast.success(`Coupon applied! You saved Rs ${discountValue.toFixed(2)}`);
       } else {
         toast.error(data.message || "Invalid coupon code.");
@@ -61,12 +65,16 @@ const CouponSection: React.FC<CouponSectionProps> = ({ subTotal, setDiscount }) 
       <p className="text-sm text-description mb-3">
         If you have a coupon code, please apply it below:
       </p>
+
       <div className="flex gap-3">
         <input
           type="text"
           placeholder="Enter coupon code"
           value={couponCode}
-          onChange={(e) => setCouponCode(e.target.value)}
+          onChange={(e) => {
+            setLocalCouponCode(e.target.value);
+            setCouponCode(e.target.value); // share with parent
+          }}
           className="flex-1 border border-[#E4E4E4] rounded-md p-3"
         />
         <button
