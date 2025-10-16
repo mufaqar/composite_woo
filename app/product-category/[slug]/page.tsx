@@ -61,7 +61,7 @@ export default async function CategoryPage({
         desc={cat_sub_title}
       />
       <FeaturedIcons />
-      <SaleSection/>
+      <SaleSection />
       <ProductSection
         data={mappedProducts}
         readMore

@@ -20,6 +20,12 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   const post = data?.post;
   if (!post) return notFound();
 
+  console.log(post);
+
+  
+   const Uppercontent = data?.post.postInfo.upperContent;
+     const Lowercontent = data?.post.postInfo.lowerContent.data;
+
   return (
     <main>
       <section className="py-16">
@@ -47,6 +53,16 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             </div>
           )}
         </div>
+      </section>
+      {Uppercontent.data}
+      {Uppercontent.dataImage.node.mediaItemUrl}
+
+      {Lowercontent}
+      <section className="container mx-auto px-4">
+        <div
+          className="prose prose-lg max-w-none text-gray-800"
+          dangerouslySetInnerHTML={{ __html: post.content || "" }}
+        />
       </section>
       <section className="container mx-auto px-4">
         <div

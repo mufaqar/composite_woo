@@ -5,6 +5,7 @@ export const GET_POST_BY_SLUG = gql`
     post(id: $slug, idType: SLUG) {
       id
       title
+      excerpt
       content
       date
       featuredImage {
@@ -18,6 +19,27 @@ export const GET_POST_BY_SLUG = gql`
           name
         }
       }
+      postInfo {
+        upperContent {
+          ...PostInfoUpperContentFragment
+        }
+        lowerContent {
+          ...PostInfoLowerContentFragment
+        }
+      }
     }
+  }
+
+  fragment PostInfoUpperContentFragment on PostInfoUpperContent {
+    data
+    dataImage {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
+
+  fragment PostInfoLowerContentFragment on PostInfoLowerContent {
+    data
   }
 `;
