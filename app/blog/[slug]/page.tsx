@@ -9,22 +9,22 @@ import { notFound } from "next/navigation";
 
 interface PostPageProps {
   params: { slug: string };
+  post : Post
 }
 
 export default async function SingleBlogPage({ params }: PostPageProps) {
-  const { data } = await client.query<{ post: Post }>({
+ const { data } = await client.query<{ post: Post | null }>({
     query: GET_POST_BY_SLUG,
     variables: { slug: params.slug },
   });
-
   const post = data?.post;
   if (!post) return notFound();
 
   console.log(post);
 
-  
-   const Uppercontent = data?.post.postInfo.upperContent;
-     const Lowercontent = data?.post.postInfo.lowerContent.data;
+  // ✅ Safely access nested optional fields
+  const upperContent = post.postInfo?.upperContent;
+  const lowerContent = post.postInfo?.lowerContent;
 
   return (
     <main>
@@ -54,10 +54,38 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           )}
         </div>
       </section>
-      {Uppercontent.data}
-      {Uppercontent.dataImage.node.mediaItemUrl}
+     {/* Upper Content */}
+      {upperContent?.data && (
+        <section className="max-w-[1144px] mx-auto mb-10 px-4">
+          <div
+            className="prose prose-lg max-w-none"
+            dangerouslySetInnerHTML={{ __html: upperContent.data }}
+          />
+          {upperContent.dataImage?.node?.mediaItemUrl && (
+            <div className="mt-6">
+              <Image
+                src={upperContent.dataImage.node.mediaItemUrl}
+                alt="Upper content image"
+                width={1200}
+                height={600}
+                className="rounded-xl"
+              />
+            </div>
+          )}
+        </section>
+      )}
 
-      {Lowercontent}
+      {/* Lower Content */}
+      {lowerContent?.data && (
+        <section className="max-w-[1144px] mx-auto mb-10 px-4">
+          <div
+            className="prose prose-lg max-w-none"
+            dangerouslySetInnerHTML={{ __html: lowerContent.data }}
+          />
+        </section>
+      )}
+        <RequestSample />
+
       <section className="container mx-auto px-4">
         <div
           className="prose prose-lg max-w-none text-gray-800"
@@ -71,7 +99,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
         />
       </section>
 
-      <RequestSample />
+    
      
     </main>
     

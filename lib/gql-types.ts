@@ -34,16 +34,46 @@ export interface Category {
 export interface Post {
   id: string;
   title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  date: string;
+  excerpt?: string;
+  content?: string;
+  date?: string;
   featuredImage?: FeaturedImage;
   author?: Author;
-  categories?: {
-    edges: Category[];
+  postInfo?: PostInfo;
+}
+
+export interface FeaturedImage {
+  node: {
+    sourceUrl: string;
+    altText?: string;
   };
 }
+
+export interface Author {
+  node: {
+    name: string;
+  };
+}
+
+// For postInfo
+export interface PostInfoUpperContent {
+  data?: string;
+  dataImage?: {
+    node?: {
+      mediaItemUrl: string;
+    };
+  };
+}
+
+export interface PostInfoLowerContent {
+  data?: string;
+}
+
+export interface PostInfo {
+  upperContent?: PostInfoUpperContent;
+  lowerContent?: PostInfoLowerContent;
+}
+
 
 // --------------------
 // Root Query Type
