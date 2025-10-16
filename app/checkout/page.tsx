@@ -5,12 +5,16 @@ import { RootState } from "@/redux/store";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import CheckoutSummary from "@/components/Checkout/CheckoutSummary";
 import BreadCrumb from "@/components/Product/BreadCrumb";
-import Link from "next/link";
-import { useState } from "react";
+import CouponSection from "@/components/Product/CouponSection";
+import { useState, useMemo } from "react";
 
 export default function CheckoutPage() {
   const { items } = useSelector((state: RootState) => state.cart);
 
+  const [couponCode, setCouponCode] = useState("");
+const [discount, setDiscount] = useState(0);
+
+  // --- 🧾 Billing / Shipping States ---
   const [billing, setBilling] = useState({
     firstName: "",
     lastName: "",
@@ -38,6 +42,17 @@ export default function CheckoutPage() {
   const [showLogin, setShowLogin] = useState(false);
   const [showCoupon, setShowCoupon] = useState(false);
 
+  // --- 💰 Discount and Totals ---
+  const [discount, setDiscount] = useState(0);
+
+  const subTotal = useMemo(
+    () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [items]
+  );
+
+  const total = subTotal - discount;
+
+  // --- 🧾 Handle input change ---
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     type: "billing" | "shipping" = "billing"
@@ -50,6 +65,7 @@ export default function CheckoutPage() {
     }
   };
 
+  // --- 🚀 Submit order ---
   const handleOrderSubmit = async () => {
     if (items.length === 0) {
       alert("Your cart is empty!");
@@ -61,6 +77,7 @@ export default function CheckoutPage() {
       shipping: deliverDifferent ? shipping : billing,
       items,
       message,
+      discount,
     };
 
     try {
@@ -108,7 +125,6 @@ export default function CheckoutPage() {
         {/* Login Form */}
         {showLogin && (
           <div className="container mx-auto px-4 md:px-12 py-6 bg-white border border-[#E4E4E4] rounded-lg mb-6">
-            {/* You can import a LoginForm component here */}
             <p className="text-sm text-description mb-2">
               Please login with your WooCommerce account to continue.
             </p>
@@ -141,23 +157,13 @@ export default function CheckoutPage() {
           </button>
         </div>
 
-        {/* Coupon Form */}
+        {/* Coupon Section */}
         {showCoupon && (
-          <div className="container mx-auto px-4 md:px-12 py-6 bg-white border border-[#E4E4E4] rounded-lg mb-6">
-            <p className="text-sm text-description mb-3">
-              If you have a coupon code, please apply it below:
-            </p>
-            <div className="flex gap-3">
-              <input
-                type="text"
-                placeholder="Enter coupon code"
-                className="flex-1 border border-[#E4E4E4] rounded-md p-3"
-              />
-              <button className="bg-secondary text-white px-6 py-2 rounded-md">
-                Apply Coupon
-              </button>
-            </div>
-          </div>
+          <CouponSection
+  subTotal={items.reduce((sum, item) => sum + item.price * item.quantity, 0)}
+  setDiscount={setDiscount}
+  setCouponCode={setCouponCode}
+/>
         )}
       </section>
 
@@ -170,13 +176,18 @@ export default function CheckoutPage() {
               <CheckoutForm formData={billing} onChange={handleChange} />
             </div>
 
-            {/* Summary */}
+            {/* Order Summary */}
             <div className="md:w-2/5 bg-background/30 md:px-11 py-12 p-6 border border-[#E4E4E4]">
-              <CheckoutSummary onSubmit={handleOrderSubmit} />
+              <CheckoutSummary
+                onSubmit={handleOrderSubmit}
+                subTotal={subTotal}
+                discount={discount}
+                total={total}
+              />
             </div>
           </div>
 
-          {/* Deliver to Different Address + Notes */}
+          {/* Shipping + Notes */}
           <div className="flex md:flex-row flex-col gap-5 mt-10">
             <div className="md:w-3/5 bg-[#F0FAF7] md:px-11 py-12 p-6 border border-[#E4E4E4]">
               <div className="flex items-center justify-between">
@@ -193,10 +204,11 @@ export default function CheckoutPage() {
                   onChange={(e) => setDeliverDifferent(e.target.checked)}
                 />
               </div>
-              {/* Shipping Fields */}
+
+              {/* Shipping Form */}
               {deliverDifferent && (
                 <div className="flex md:flex-row flex-col gap-5 mt-10">
-                  <div className="">
+                  <div>
                     <h3 className="text-lg font-semibold mb-4">
                       Shipping Information
                     </h3>
