@@ -19,7 +19,7 @@ const menuItems: MenuItem[] = [
     label: "Accessories",
     href: "/product-category/composite-deck-accessories/",
   },
-  { label: "About Us", href: "/" },
+  { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Cart", href: "/cart" },
   { label: "Contact Us", href: "/contact" },

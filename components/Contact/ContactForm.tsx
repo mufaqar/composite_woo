@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import { FaEnvelope, FaMapPin } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa";
@@ -33,55 +33,133 @@ const contacts = [
 ];
 
 function ContactForm() {
+  // ✅ State to hold all input values
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  // ✅ Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // ✅ Handle form submit
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("📝 Form Data Submitted:", formData);
+
+    // Optional: clear form
+    setFormData({ name: "", email: "", subject: "", message: "" });
+  };
+
   return (
-    <section className="w-full flex justify-center py-12 px-4 bg-[#F0FAF7] relative">
+    <section className="py-20 bg-[#F0FAF7] relative">
       <Image
         src="/images/contact-box.png"
         alt="boxes-right"
         width={232}
         height={155}
-        className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] object-contain object-left  absolute left-0 top-0"
+        className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] object-contain object-left absolute left-0 top-0"
       />
-      <div className="container mx-auto px-4  text-center">
-        <h3 className="mt-4 font-semibold md:text-6xl  text-title font-DM_Sans">Fill the form below</h3>
+
+      <div className="container mx-auto px-4">
+        <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
+          Fill the form below
+        </h2>
 
         {/* Contact Form */}
-        <form className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-12 flex flex-col gap-6 max-w-3xl mx-auto"
+        >
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Full Name */}
+            <div>
+              <label
+                htmlFor="name"
+                className="md:text-lg text-sm font-normal text-description mb-2 block"
+              >
+                Full Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
+            </div>
 
-          {/* Name */}
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="w-full px-4 py-3 border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
-          />
-
-          {/* Email */}
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="w-full px-4 py-3 border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
-          />
+            {/* Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="md:text-lg text-sm font-normal text-description mb-2 block"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
+            </div>
+          </div>
 
           {/* Subject */}
-          <input
-            type="text"
-            placeholder="Subject"
-            className="w-full px-4 py-3 border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 md:col-span-2"
-          />
+          <div>
+            <label
+              htmlFor="subject"
+              className="md:text-lg text-sm font-normal text-description mb-2 block"
+            >
+              Subject
+            </label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+          </div>
 
           {/* Message */}
-          <textarea
-           
-            placeholder="Message"
-            className="w-full px-4 py-3 border border-gray-300 rounded-md  bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 md:col-span-2"
-          ></textarea>
+          <div>
+            <label
+              htmlFor="message"
+              className="md:text-lg text-sm font-normal text-description mb-2 block"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={6}
+              value={formData.message}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 border border-[#E4E4E4] rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            ></textarea>
+          </div>
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
             type="submit"
-            className="bg-[#F06F38] text-white font-medium px-6 py-3 rounded-full hover:opacity-90 transition md:col-span-2 tex-center mx-auto"
+            className="md:text-base text-sm font-bold text-white inline-flex w-full justify-center md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mx-auto max-w-[266px]"
           >
-            Send Message
+            Send
           </button>
         </form>
       </div>
@@ -90,6 +168,3 @@ function ContactForm() {
 }
 
 export default ContactForm;
-
-
-

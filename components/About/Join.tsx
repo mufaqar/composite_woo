@@ -1,42 +1,29 @@
 "use client";
-import Link from "next/link";
 import React from "react";
 
 function Join() {
   return (
-    <section className="w-full flex justify-center py-20 px-4">
-      <div className="max-w-2xl text-center">
-        {/* Top Small Text */}
-        <p className="text-md font-semibold text-[#00DFA2] uppercase tracking-wide font-DM_Sans">
+    <section className="py-20 relative">
+      {/* Header */}
+      <div className="container mx-auto px-4">
+        <h3 className='text-lg font-bold text-primary font-Satoshi text-center mb-4'>
           Do you want to keep up-to-date?
-        </p>
-
-        {/* Heading */}
-        <h2 className="text-6xl font-bold text-title mt-2 font-DM_Sans">
+        </h3>
+        <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title text-center font-DM_Sans">
           Join Our Newsletter
         </h2>
-
-        {/* Description */}
-        <p className="mt-4 text-description font-DM_Sans">
-          Join our happy customers and readers all over UK and Europe and get
-          updated with the latest news in the composite decking industry.
+        <p className="md:text-xl text-sm font-normal text-description text-center mt-5 max-w-[717px] mx-auto">
+          Join our happy customers and readers all over UK and Europe and get updated with the latest news in the composite decking industry.
         </p>
-
-        {/* Input + Button */}
-        <form className="mt-6 flex items-center justify-center">
-          <div className="flex w-full max-w-md rounded-full border border-gray-300 overflow-hidden">
-            <input
-              type="email"
-              placeholder="Enter your mail"
-              className="flex-1 px-4 py-4 text-gray-700 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="bg-orange-500 text-white font-medium px-6 py-3  hover:opacity-90 transition rounded-full "
-            >
-              Subscribe
-            </button>
-          </div>
+        <form className='max-w-[475px] mx-auto border md:border-[#B2B2B2] border-transparent rounded-full flex md:flex-row flex-col p-1.5 md:gap-0 gap-5 justify-center items-center mt-14'>
+          <label htmlFor='email' className='hidden'>
+            Email
+          </label>
+          <input name="email" id='email' type='email' placeholder='Enter your mail'
+            className='md:text-base text-sm font-normal text-description placeholder:text-description w-full border md:border-transparent border-[#B2B2B2] rounded-full outline-none px-6 md:py-1.5 py-3.5' />
+          <button className='md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out'>
+            SUBSCRIBE
+          </button>
         </form>
       </div>
     </section>
