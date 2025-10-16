@@ -18,8 +18,13 @@ import {
 import client from "@/lib/apollo-client";
 import { GetFaqByCatQuery } from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
+import SaleSection from "@/components/Product/SaleSection";
 
-export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params; // ✅ Await here
 
   const category = await getCategoryBySlug(slug);
@@ -40,10 +45,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   }
 
   const products = await getProductsByCategory(category.id);
+  const reviews = await getAllProductReviews();
 
-       const reviews = await getAllProductReviews();
-
-  // Map WooProduct[] to Product[]
   const mappedProducts = products.map((p: any) => ({
     title: p.name,
     image: p.images?.[0]?.src || "",
@@ -58,6 +61,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         desc={cat_sub_title}
       />
       <FeaturedIcons />
+      <SaleSection/>
       <ProductSection
         data={mappedProducts}
         readMore
@@ -85,7 +89,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           height={155}
           className=" md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33] absolute top-0 right-0"
         />
-        <FaqsSection title={`${category?.name} Frequently Asked Questions`} faqs={faqs_Cat} />
+        <FaqsSection
+          title={`${category?.name} Frequently Asked Questions`}
+          faqs={faqs_Cat}
+        />
       </div>
       <FollowInsta />
     </main>
