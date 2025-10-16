@@ -20,8 +20,6 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   const post = data?.post;
   if (!post) return notFound();
 
-  console.log(post);
-
   // ✅ Safely access nested optional fields
   const upperContent = post.postInfo?.upperContent;
   const lowerContent = post.postInfo?.lowerContent;
