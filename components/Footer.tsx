@@ -9,23 +9,24 @@ import { FaEnvelope, FaPhoneVolume } from "react-icons/fa6";
 const products = [
   { name: "Composite Decking", href: "/product-category/plastic-decking" },
   { name: "Composite Fencing", href: "/product-category/composite-fencing" },
-  { name: "Composite Cladding", href: "/product-category/cladding-pvc-panels-uk" },
+  {
+    name: "Composite Cladding",
+    href: "/product-category/cladding-pvc-panels-uk",
+  },
   { name: "Free Samples", href: "/sample-product" },
 ];
 
 const information = [
   { name: "About Us", href: "/about" },
-  { name: "Customer Reviews", href: "#" },
-  { name: "Advice Centre", href: "#" },
+  { name: "Advice Centre", href: "/contact-us/" },
   { name: "FAQ", href: "/faqs" },
-  { name: "Delivery & Returns", href: "#" },
-  { name: "Privacy Policy", href: "#" },
-  { name: "Terms & Conditions", href: "#" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms & Conditions", href: "/terms-and-conditions/" },
 ];
 
 // Social Icons
 const socials = [
-  { name: "Facebook", href: "#", icon: FaFacebookF },
+  { name: "Facebook", href: "https://www.facebook.com/109562640875230/posts/visit-composite-warehouse-uk-for-your-composite-decking-their-team-of-experts-wi/124346816063479/", icon: FaFacebookF },
   { name: "Instagram", href: "#", icon: FaInstagram },
   { name: "YouTube", href: "#", icon: FaYoutube },
 ];
@@ -46,8 +47,9 @@ const Footer = () => {
               />
             </Link>
             <p className="md:text-lg text-sm font-normal text-white mt-5">
-              Lorem ipsum dolor sit amet, consectetur adip elit.Posuere dolor
-              massa, pellentesque.
+              Unit 11 Grosvenor Garage,
+              <br />
+              Woolston, Warrington WA1 4SF
             </p>
           </div>
         </div>
@@ -99,24 +101,24 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <Link
-                  href="#"
+                  href="mailto:support@compositewarehouse.co.uk"
                   className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center"
                 >
                   <span className="text-secondary">
                     <FaEnvelope />
                   </span>
-                  yourcompany@email.com
+                  support@compositewarehouse.co.uk
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="tel:01925407884"
                   className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center"
                 >
                   <span className="text-secondary">
                     <FaPhoneVolume />
                   </span>
-                  +1 627 8907 1264
+                  01925 407884
                 </Link>
               </li>
             </ul>
@@ -127,7 +129,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="container mx-auto px-4 border-t border-white/25 mt-[59px] py-6 flex flex-col md:flex-row justify-between items-center">
         <p className="md:text-base text-sm font-normal text-white">
-          © 2025 Copyright Company.com
+          © 2025 Copyright CompositeWarehouse – Composite Supplier. All Rights Reserved.
         </p>
 
         {/* Social Icons */}
