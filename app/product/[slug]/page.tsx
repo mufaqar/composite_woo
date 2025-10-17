@@ -58,7 +58,7 @@ console.log("Product reviews", reviews);
 
   return (
     <main>
-      <SingleBanner data={product} />
+      <SingleBanner data={product} images={product.images || []} />
       <FeaturedIcons />
       <ProductTabs />
       <section className="bg-[#F0FAF7] relative">

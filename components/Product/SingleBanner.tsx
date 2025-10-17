@@ -8,14 +8,18 @@ import CalculateArea from "./CalculateArea";
 
 interface SingleBannerProps {
   data: WooProduct;
-  images: WooImage[]
+  images: WooImage[];
 }
 
 const SingleBanner = ({ data }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
   const rating = data.rating_count || 0;
 
-  console.log(data);
+  // Extract WooCommerce price info
+  const regularPrice = data.regular_price;
+  const salePrice = data.sale_price;
+  const isOnSale = !!salePrice && salePrice !== regularPrice;
+  const stockStatus = data.stock_status;
 
   return (
     <section className="pt-16 pb-20">
@@ -37,11 +41,41 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
                 {rating} Reviews
               </span>
             </div>
-            <h4 className="md:text-5xl text-[28px] font-bold text-secondary font-DM_Sans my-8">
-              {data.price}
-            </h4>
+
+            <div className="my-8">
+              {isOnSale ? (
+                <div className="flex items-center gap-3">
+                  <h4 className="md:text-5xl text-[28px] font-bold text-secondary font-DM_Sans">
+                    £{salePrice}
+                  </h4>
+                  <span className="md:text-2xl text-lg font-normal text-gray-400 line-through">
+                    £{regularPrice}
+                  </span>
+                </div>
+              ) : (
+                <h4 className="md:text-5xl text-[28px] font-bold text-secondary font-DM_Sans">
+                  £{regularPrice || data.price}
+                </h4>
+              )}
+            </div>
+
             <p className="md:text-xl text-sm font-normal text-description">
-              Availability: <span className="text-primary"> {data.stock_status}</span>
+              Availability:
+              <span
+                className={
+                  stockStatus === "instock"
+                    ? "text-primary"
+                    : stockStatus === "outofstock"
+                    ? "text-red-500"
+                    : "text-yellow-500"
+                }
+              >
+                {stockStatus === "instock"
+                  ? "In Stock"
+                  : stockStatus === "outofstock"
+                  ? "Out of Stock"
+                  : "Backorder"}
+              </span>
             </p>
           </div>
         </div>
