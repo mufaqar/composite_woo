@@ -9,16 +9,11 @@ import { usePathname } from "next/navigation";
 
 const FaqsSection = ({ faqs, title }: any) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  console.log(faqs);
-
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
   const getDelay = useAutoDelay();
-
   const pathname = usePathname();
-
   return (
     <section className="md:py-20 py-16 bg-background">
       {/* Heading + Read More */}

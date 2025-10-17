@@ -28,9 +28,7 @@ const faqs: FAQs[] = [
 
 const FaqsSection = () => {
   const [open, setOpen] = useState(false);
-
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index); // close if same, else open new
   };

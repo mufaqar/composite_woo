@@ -74,7 +74,6 @@ export interface PostInfo {
   lowerContent?: PostInfoLowerContent;
 }
 
-
 // --------------------
 // Root Query Type
 // --------------------
@@ -112,26 +111,42 @@ export interface HomeInfoSection {
   subTitle?: string;
 }
 
+export interface HomeInfoProductRange {
+  title?: string;
 
+  subTitle?: string;
+  categoryInfo?:
+    | {
+        title?: string;
+        link?: string;
+        desc?: string;
+        image?: { node?: { mediaItemUrl?: string } };
+      }[]
+    | null;
+}
 
 export interface HomeInfoAdvanteges extends HomeInfoSection {
-  options?: {
-    title?: string;
-    description?: string;
-    icon?: { node?: { mediaItemUrl?: string } };
-  }[] | null;
+  options?:
+    | {
+        title?: string;
+        description?: string;
+        icon?: { node?: { mediaItemUrl?: string } };
+      }[]
+    | null;
 }
 
 export interface HomeWhyChooseUs extends HomeInfoSection {
-  whyCards?: {
-    title?: string;
-    description?: string;
-    icon?: {
-      node?: {
-        mediaItemUrl?: string;
-      };
-    };
-  }[] | null;
+  whyCards?:
+    | {
+        title?: string;
+        description?: string;
+        icon?: {
+          node?: {
+            mediaItemUrl?: string;
+          };
+        };
+      }[]
+    | null;
 }
 
 export interface HomeInfoCustomersInnovate {
@@ -144,7 +159,7 @@ export interface HomeInfoCustomersInnovate {
 export interface HomeInfo {
   sliderInfo?: HomeInfoSection;
   whyChooseUs?: HomeWhyChooseUs;
-  productRange?: HomeInfoSection;
+  productRange?: HomeInfoProductRange;
   trendingProducts?: HomeInfoSection;
   advantages?: HomeInfoAdvanteges;
   customersInnovate?: HomeInfoCustomersInnovate;

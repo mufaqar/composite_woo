@@ -5,14 +5,14 @@ export const GET_HOME = gql`
     page(id: "2", idType: DATABASE_ID) {
       title
       homeInfo {
-       sliderInfo {
-        ...HomeInfoSliderInfoFragment
-      }
+        sliderInfo {
+          ...HomeInfoSliderInfoFragment
+        }
         whyChooseUs {
           ...HomeInfoWhyChooseUsFragment
-           whyCards {
-          ...HomeInfoWhyChooseUsWhyCardsFragment
-        }
+          whyCards {
+            ...HomeInfoWhyChooseUsWhyCardsFragment
+          }
         }
         productRange {
           ...HomeInfoProductRangeFragment
@@ -21,8 +21,8 @@ export const GET_HOME = gql`
           ...HomeInfoTrendingProductsFragment
         }
         advantages {
-        ...HomeInfoAdvantagesFragment
-      }
+          ...HomeInfoAdvantagesFragment
+        }
         customersInnovate {
           ...HomeInfoCustomersInnovateFragment
         }
@@ -34,9 +34,9 @@ export const GET_HOME = gql`
   }
 
   fragment HomeInfoSliderInfoFragment on HomeInfoSliderInfo {
-  subTitle
-  title
-}
+    subTitle
+    title
+  }
 
   fragment HomeInfoWhyChooseUsFragment on HomeInfoWhyChooseUs {
     title
@@ -46,14 +46,22 @@ export const GET_HOME = gql`
   fragment HomeInfoProductRangeFragment on HomeInfoProductRange {
     title
     subTitle
+    categoryInfo {
+      title
+      link
+      desc
+      image {
+        node {
+          mediaItemUrl
+        }
+      }
+    }
   }
 
   fragment HomeInfoTrendingProductsFragment on HomeInfoTrendingProducts {
     title
     subTitle
   }
-
- 
 
   fragment HomeInfoCustomersInnovateFragment on HomeInfoCustomersInnovate {
     title
@@ -66,30 +74,30 @@ export const GET_HOME = gql`
     title
     subTitle
   }
-    fragment HomeInfoAdvantagesOptionsFragment on HomeInfoAdvantagesOptions {
-  description
-  icon {
-    node {
-      mediaItemUrl
+  fragment HomeInfoAdvantagesOptionsFragment on HomeInfoAdvantagesOptions {
+    description
+    icon {
+      node {
+        mediaItemUrl
+      }
     }
+    title
   }
-  title
-}
 
-fragment HomeInfoAdvantagesFragment on HomeInfoAdvantages {
-  title
-  subTitle
-  options {
-    ...HomeInfoAdvantagesOptionsFragment
-  }
-}
-    fragment HomeInfoWhyChooseUsWhyCardsFragment on HomeInfoWhyChooseUsWhyCards {
-  description
-  title
-  icon {
-    node {
-      mediaItemUrl
+  fragment HomeInfoAdvantagesFragment on HomeInfoAdvantages {
+    title
+    subTitle
+    options {
+      ...HomeInfoAdvantagesOptionsFragment
     }
   }
-}
+  fragment HomeInfoWhyChooseUsWhyCardsFragment on HomeInfoWhyChooseUsWhyCards {
+    description
+    title
+    icon {
+      node {
+        mediaItemUrl
+      }
+    }
+  }
 `;

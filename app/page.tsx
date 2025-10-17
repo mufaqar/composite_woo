@@ -16,13 +16,14 @@ import { HomeInfoSection } from "@/lib/gql-types";
 import { getAllProductReviews, getFeaturedProducts } from "@/lib/woocommerce-api";
 
 export default async function Home() {
-  const [posts, faqs_Cat, homeInfo] = await Promise.all([
+  const [posts, faqs_Cat, homeInfo,featuredsProducts,reviews] = await Promise.all([
     getBlogData(),
     getFaqData("home"),
     getHomeData(),
+    getFeaturedProducts(),
+    getAllProductReviews()
   ]);
-  const featuredsProducts = await getFeaturedProducts();
-  const reviews = await getAllProductReviews();
+
   return (
     <main>
       <Hero data={homeInfo?.sliderInfo} />
