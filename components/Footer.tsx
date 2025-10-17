@@ -35,8 +35,8 @@ const Footer = () => {
   return (
     <footer className="bg-black ">
       <Image src="/images/square.png" alt="aquare" width={77} height={77} />
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-10">
+        <div className="md:col-span-2">
           <div className="max-w-[380px]">
             <Link href="/">
               <Image
@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col gap-4">
+        <div className="md:col-span-3 flex md:flex-row flex-col gap-4">
           {/* Products */}
           <div className="md:w-1/3 w-full">
             <h6 className="text-sm font-bold text-white font-DM_Sans mb-4">
