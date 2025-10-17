@@ -60,7 +60,7 @@ console.log("Product reviews", reviews);
     <main>
       <SingleBanner data={product} images={product.images || []} />
       <FeaturedIcons />
-      <ProductTabs />
+      <ProductTabs data={product} />
       <section className="bg-[#F0FAF7] relative">
         <Image
           src="/images/boxes-right.png"
