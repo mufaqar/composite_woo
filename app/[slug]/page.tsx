@@ -7,7 +7,7 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { data } = await client.query({
+  const { data } = await client.query<{ page: any }>({
     query: GET_PAGE_BY_SLUG,
     variables: { slug: params.slug },
   });
