@@ -3,16 +3,19 @@ import React from "react";
 import ProductGallery from "./ProductGallery";
 import BreadCrumb from "./BreadCrumb";
 import FenceConfigurator from "./FenceConfigurator";
-import { WooProduct } from "@/lib/woocommerce-types";
+import { WooImage, WooProduct } from "@/lib/woocommerce-types";
 import CalculateArea from "./CalculateArea";
 
 interface SingleBannerProps {
   data: WooProduct;
+  images: WooImage[]
 }
 
 const SingleBanner = ({ data }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
   const rating = data.rating_count || 0;
+
+  console.log(data);
 
   return (
     <section className="pt-16 pb-20">
@@ -21,7 +24,7 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
       </div>
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center">
         <div className="md:w-1/2 w-full">
-          <ProductGallery />
+          <ProductGallery images={data.images} />
         </div>
         <div className="md:w-1/2 w-full">
           <div className="pb-6 border-b border-[#D2D2D2] mb-10">
