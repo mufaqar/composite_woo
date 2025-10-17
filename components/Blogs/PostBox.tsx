@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-
 interface PostBoxProps {
   data: Post;
 }
@@ -11,13 +10,19 @@ interface PostBoxProps {
 const PostBox: React.FC<PostBoxProps> = ({ data }) => {
   const { title, slug, featuredImage, date, categories } = data;
 
-  const featureImage = featuredImage?.node?.sourceUrl || "/images/placeholder.png";
-  const formattedDate = new Date(date).toLocaleDateString();
+  const featureImage =
+    featuredImage?.node?.sourceUrl || "/images/placeholder.png";
+  const formattedDate = date
+    ? new Date(date).toLocaleDateString()
+    : "Unknown date";
 
   return (
     <article className="group rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all bg-white">
       {/* Image */}
-      <Link href={`/blog/${slug}`} className="block relative w-full aspect-[4/3]">
+      <Link
+        href={`/blog/${slug}`}
+        className="block relative w-full aspect-[4/3]"
+      >
         <Image
           src={featureImage}
           alt={featuredImage?.node?.altText || title}
@@ -34,7 +39,7 @@ const PostBox: React.FC<PostBoxProps> = ({ data }) => {
           {categories?.edges?.length ? (
             <>
               <span className="text-gray-400">|</span>
-              {categories.edges.map(({ node }) => (
+              {categories.edges.map(({ node }: any) => (
                 <Link
                   key={node.slug}
                   href={`/category/${node.slug}`}

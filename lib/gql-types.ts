@@ -20,26 +20,35 @@ export interface FeaturedImage {
   };
 }
 
-// Category
-export interface Category {
-  node: {
-    name: string;
-    slug: string;
-  };
+// Category node type
+export interface CategoryNode {
+  name: string;
+  slug: string;
 }
 
+// Category edge type
+export interface CategoryEdge {
+  node: CategoryNode;
+}
+
+// Categories connection type (GraphQL style)
+export interface CategoriesConnection {
+  edges: CategoryEdge[];
+}
 // --------------------
 // Main Post Interface
 // --------------------
 export interface Post {
   id: string;
   title: string;
+  slug: string;
   excerpt?: string;
   content?: string;
   date?: string;
   featuredImage?: FeaturedImage;
   author?: Author;
   postInfo?: PostInfo;
+ categories?: CategoriesConnection;
 }
 
 export interface FeaturedImage {
