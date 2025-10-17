@@ -71,11 +71,11 @@ const Testimonials = ({data}:Props) => {
           {/* Slider */}
           <Slider ref={sliderRef} {...settings}>
             {data.map((r,i) => (
-              <div key={i} className="px-4">
+              <div key={i} className="px-4 test_Scroll">
                 <div className="bg-[#2A2A2A] p-6 h-full flex flex-col justify-between">
                   <FaQuoteLeft className="text-primary text-2xl mb-4 -rotate-180" />
                    <div
-                    className="text-white mb-6 max-h-[100px] overflow-y-auto"
+                    className="text-white mb-6 h-[100px] overflow-y-auto"
                     dangerouslySetInnerHTML={{ __html: `${r.review}` }}
                   />
 

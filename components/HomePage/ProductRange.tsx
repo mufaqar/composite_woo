@@ -37,7 +37,7 @@ const ProductRange = ({ data }: Props) => {
                 backgroundImage: `url(${product.image?.node?.mediaItemUrl})`,
               }}
             >
-              <h3 className="md:text-[28px] text-lg font-semibold text-white font-DM_Sans">
+              <h3 className="md:text-[28px] md:leading-none text-lg font-semibold text-white font-DM_Sans">
                 {product.title}
               </h3>
               <div className={`${active === idx ? "block" : "hidden"}`}>
