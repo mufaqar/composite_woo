@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import AnimateOnScroll, { useAutoDelay } from "../Animation";
 
-function CompositeWarehouse() {
+function CompositeWarehouse({ data }: any) {
   const getDelay = useAutoDelay();
   return (
     <section className="py-20  ">
@@ -11,24 +11,19 @@ function CompositeWarehouse() {
         <div>
           <AnimateOnScroll type="fade-up" delay={getDelay()}>
             <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
-              Composite warehouse – Home Of WPC Composite Decking
+              {data.title}
             </h2>
           </AnimateOnScroll>
           <AnimateOnScroll type="fade-up" delay={getDelay()}>
             <p className="md:text-xl text-sm font-normal text-description mt-10">
-              Composite fencing is quickly becoming one of the most widely used
-              fencing materials in the UK today. Homeowners now understand the
-              benefits of its low maintenance attributes. It is not only modern
-              and attractive but also durable, which means that you will avoid
-              the hassle of installing and maintaining your fence panels every
-              year.
+              {data.description}
             </p>
           </AnimateOnScroll>
         </div>
         <div>
           <AnimateOnScroll type="fade-up" delay={getDelay()}>
             <Image
-              src="/images/CompositeWarehouse.png"
+              src={data.image}
               alt="advantage"
               width={605}
               height={627}

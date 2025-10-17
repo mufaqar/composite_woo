@@ -1,22 +1,28 @@
-import Banner from '@/components/Banner'
-import CompositeWarehouse from '@/components/About/CompositeWarehouse'
-import FeaturedIcons from '@/components/HomePage/FeaturedIcons'
-import React from 'react'
-import Shop from '@/components/About/Shop'
-import Join from '@/components/About/Join'
+import Banner from "@/components/Banner";
+import CompositeWarehouse from "@/components/About/CompositeWarehouse";
+import FeaturedIcons from "@/components/HomePage/FeaturedIcons";
+import React from "react";
+import Shop from "@/components/About/Shop";
+import Join from "@/components/About/Join";
+import { getAboutPageData } from "@/lib/api/getHomeData";
 
-export default function About() {
-    return (
-        <main>
-            <Banner
-                title="About Composite Warehouse"
-                img="/images/about-banner.png"
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
-            <FeaturedIcons />
-            <CompositeWarehouse />
-            <Shop />
-            <Join />
-            
-        </main>
-    )
+export default async function About() {
+  const aboutData = await getAboutPageData();
+  if (!aboutData) return <p>Failed to load About page</p>;
+
+  console.log(aboutData);
+
+  return (
+    <main>
+      <Banner
+        title={aboutData.title}
+        img="/images/about-banner.png"
+        desc={aboutData?.aboutUs?.description}
+      />
+      <FeaturedIcons />
+      <CompositeWarehouse  data={aboutData.aboutUs} />
+      <Shop  data={aboutData.shopOnline}/>
+      <Join />
+    </main>
+  );
 }

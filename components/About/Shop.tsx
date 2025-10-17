@@ -37,7 +37,7 @@ const WhyUS = [
   },
 ];
 
-const Shop = () => {
+const Shop = ({ data }: Props) => {
   const sliderRef = useRef<any>(null);
 
   const settings = {
@@ -51,33 +51,27 @@ const Shop = () => {
     autoplaySpeed: 2500,
     pauseOnHover: false,
     pauseOnFocus: false,
-    swipeToSlide: true, // helps on touch devices
+    swipeToSlide: true,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 640,
-        settings: { slidesToShow: 1 },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 640, settings: { slidesToShow: 1 } },
     ],
   };
 
-  // 🔧 Fix for mobile autoplay freeze (resize event)
   useEffect(() => {
     const handleResize = () => {
-      if (sliderRef.current) {
-        sliderRef.current.slickPlay();
-      }
+      if (sliderRef.current) sliderRef.current.slickPlay();
     };
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (!data) return null;
+
   return (
-    <section className="py-16 bg-[#F0FAF7] relative ">
+    <section className="py-16 bg-[#F0FAF7] relative">
+      {/* Background Image */}
       <Image
         src="/images/boxes2.png"
         alt="boxes2"
@@ -85,33 +79,36 @@ const Shop = () => {
         height={155}
         className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
       />
-     
-      <div className="md:max-w-[718px] max-w-[389px] mx-auto px-4">
-        <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
-          Shop Composite Decking Online
+
+      {/* Section Heading */}
+      <div className="md:max-w-[718px] max-w-[389px] mx-auto px-4 text-center">
+        <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans">
+          {data.title}
         </h2>
-        <h3 className="md:text-[22px] text-lg leading-none font-bold text-title font-DM_Sans text-center my-5">
-          We Make High Quality, Custom Suits
+        <h3 className="md:text-[22px] text-lg leading-none font-bold text-title font-DM_Sans my-5">
+          {data.subTitle}
         </h3>
-        <p className="md:text-xl text-sm font-normal text-description text-center">
-          CompositeWarehouse – Your one-stop-shop for all kinds of composite materials. You will buy Eco-friendly and low maintenance composite materials for your projects.
+        <p className="md:text-xl text-sm font-normal text-description">
+          {data.description}
         </p>
       </div>
 
-      {/* Slider Section */}
+      {/* Slider */}
       <div className="container mx-auto px-4 mt-12 relative">
         <Slider ref={sliderRef} {...settings}>
-          {WhyUS.map((item) => (
-            <div key={item.id} className="px-2">
+          {data.whyCards?.map((item, index) => (
+            <div key={index} className="px-2">
               <div className="border border-[#E4E4E4] bg-white px-11 py-9 h-[400px]">
                 <div className="relative w-fit">
-                  <Image
-                    src={item.icon}
-                    alt={item.title}
-                    width={72}
-                    height={72}
-                    className="w-[32px] h-[32px] md:w-[72px] md:h-[72px]"
-                  />
+                  {item.icon?.node?.mediaItemUrl && (
+                    <Image
+                      src={item.icon.node.mediaItemUrl}
+                      alt={item.title || "card icon"}
+                      width={72}
+                      height={72}
+                      className="w-[32px] h-[32px] md:w-[72px] md:h-[72px]"
+                    />
+                  )}
                   <span className="absolute md:w-10 md:h-10 w-[22px] h-[22px] bg-primary/20 rounded-full -bottom-2"></span>
                 </div>
                 <h3 className="md:text-[28px] text-lg font-semibold text-title font-DM_Sans mt-4">
@@ -132,9 +129,9 @@ const Shop = () => {
           </Link>
           <Link
             href="/contact"
-            className="secondary_btn !bg-black !text-white "
+            className="secondary_btn !bg-black !text-white"
           >
-            contact us
+            Contact Us
           </Link>
         </div>
 

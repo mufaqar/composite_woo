@@ -4,6 +4,7 @@ import { GET_HOME } from "../queries/GetFrontPage";
 import { Faq, GetFaqByCatQuery, GetHomeQuery, GetPostsQuery, Post } from "../gql-types";
 import { GET_POSTS } from "../queries/getPosts";
 import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
+import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
 
 
 export async function getHomeData() {
@@ -45,3 +46,44 @@ export async function getFaqData(categorySlug: string = "home"): Promise<Faq[]> 
     return [];
   }
 }
+
+
+export async function getAboutPageData() {
+  try {
+    const { data } = await client.query<AboutPageQuery>({
+      query: GET_ABOUT,
+    });
+
+    const page = data?.page;
+    const aboutUs = page?.aboutInfo?.aboutUs;
+    const shopOnline = page?.aboutInfo?.shopOnline;
+
+    return {
+      title: page?.title ?? "",
+      aboutUs: aboutUs
+        ? {
+            title: aboutUs.title ?? "",
+            description: aboutUs.description ?? "",
+            image: aboutUs.aboutImage?.node?.mediaItemUrl ?? "",
+          }
+        : null,
+      shopOnline: shopOnline
+        ? {
+            title: shopOnline.title ?? "",
+            subTitle: shopOnline.subTitle ?? "",
+            description: shopOnline.description ?? "",
+            whyCards:
+              shopOnline.whyCards?.map((card) => ({
+                title: card?.title ?? "",
+                description: card?.description ?? "",
+                icon: card?.icon?.node?.mediaItemUrl ?? "",
+              })) ?? [],
+          }
+        : null,
+    };
+  } catch (error) {
+    console.error("Error fetching About Page:", error);
+    return null;
+  }
+}
+
