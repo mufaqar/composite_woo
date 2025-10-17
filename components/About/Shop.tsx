@@ -3,41 +3,9 @@ import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Slider from "react-slick";
-import HeadingSection from "../HeadingSection";
 import Link from "next/link";
 
-const WhyUS = [
-  {
-    id: 1,
-    title: "Only the Finest Materials",
-    description:
-      "We go extra length to make sure our customers get the right decking material for their project. From composite decking boards to composite decking accessories.",
-    icon: "/images/crown.png",
-  },
-  {
-    id: 2,
-    title: "Designed For Outdoor Flooring",
-    description:
-      "Get all you need, call one of our expert skilled men today and place your orders. Your items will be delivered directly to your home.",
-    icon: "/images/crown.png",
-  },
-  {
-    id: 3,
-    title: "Premium Product Available",
-    description:
-      "At Compositewarehouse, we offer all types of composite materials for all kinds of projects. Let us walk you through our full range of products.",
-    icon: "/images/crown.png",
-  },
-  {
-    id: 4,
-    title: "Trusted Service",
-    description:
-      "Our experts provide unmatched support to guide you every step of the way.",
-    icon: "/images/crown.png",
-  },
-];
-
-const Shop = ({ data }: Props) => {
+const Shop = ({ data }: any) => {
   const sliderRef = useRef<any>(null);
 
   const settings = {
@@ -96,7 +64,7 @@ const Shop = ({ data }: Props) => {
       {/* Slider */}
       <div className="container mx-auto px-4 mt-12 relative">
         <Slider ref={sliderRef} {...settings}>
-          {data.whyCards?.map((item, index) => (
+          {data.whyCards?.map((item: any, index: number) => (
             <div key={index} className="px-2">
               <div className="border border-[#E4E4E4] bg-white px-11 py-9 h-[400px]">
                 <div className="relative w-fit">
@@ -127,10 +95,7 @@ const Shop = ({ data }: Props) => {
           <Link href="/sample-product" className="primary_btn">
             Request a Free Sample
           </Link>
-          <Link
-            href="/contact"
-            className="secondary_btn !bg-black !text-white"
-          >
+          <Link href="/contact" className="secondary_btn !bg-black !text-white">
             Contact Us
           </Link>
         </div>
