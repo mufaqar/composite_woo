@@ -187,3 +187,20 @@ export interface WooReview {
     [size: string]: string;
   };
 }
+
+
+export interface WooVariation {
+  id: number;
+  name: string;
+  regular_price: string;
+  sale_price: string;
+  price: string;
+  stock_status: 'instock' | 'outofstock' | 'onbackorder';
+  in_stock: boolean;
+  sku: string;
+  attributes: Array<{
+    name: string;
+    option: string;
+  }>;
+  images: WooImage[];
+}

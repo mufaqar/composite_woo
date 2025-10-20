@@ -1,5 +1,5 @@
 import { wooApi } from "./woocommerce";
-import { WooProduct, WooReview } from "./woocommerce-types";
+import { WooProduct, WooReview, WooVariation } from "./woocommerce-types";
 
 
 /**
@@ -128,6 +128,27 @@ export async function getProductReviewsById(productId: number, limit = 10): Prom
     return Array.isArray(data) ? data : [];
   } catch (error: any) {
     console.error(`Error fetching reviews for product ID ${productId}:`, error.response?.data || error.message);
+    return [];
+  }
+}
+
+export async function getProductVariationsById(
+  productId: number,
+  limit = 50
+): Promise<WooVariation[]> {
+  if (!productId) return [];
+
+  try {
+    const { data } = await wooApi.get<WooVariation[]>(
+      `products/${productId}/variations?per_page=${limit}&orderby=menu_order&order=asc`
+    );
+
+    return Array.isArray(data) ? data : [];
+  } catch (error: any) {
+    console.error(
+      `Error fetching variations for product ID ${productId}:`,
+      error.response?.data || error.message
+    );
     return [];
   }
 }

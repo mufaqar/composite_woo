@@ -1,17 +1,19 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import ProductGallery from "./ProductGallery";
 import BreadCrumb from "./BreadCrumb";
 import FenceConfigurator from "./FenceConfigurator";
-import { WooImage, WooProduct } from "@/lib/woocommerce-types";
+import { WooImage, WooProduct, WooVariation } from "@/lib/woocommerce-types";
 import CalculateArea from "./CalculateArea";
+import ProductVariations from "./VariableOptions";
 
 interface SingleBannerProps {
   data: WooProduct;
   images: WooImage[];
+  product_variations: WooVariation[];
 }
 
-const SingleBanner = ({ data }: SingleBannerProps) => {
+const SingleBanner = ({ data,product_variations }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
   const rating = data.rating_count || 0;
 
@@ -20,6 +22,9 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
   const salePrice = data.sale_price;
   const isOnSale = !!salePrice && salePrice !== regularPrice;
   const stockStatus = data.stock_status;
+
+    // 🧩 Manage selected variation state
+  const [selectedVariation, setSelectedVariation] = useState<WooVariation | null>(null);
 
   return (
     <section className="pt-16 pb-20">
@@ -80,11 +85,19 @@ const SingleBanner = ({ data }: SingleBannerProps) => {
           </div>
         </div>
       </div>
-      {productType === "Decking" ? (
+
+      <ProductVariations
+          product_variations={product_variations}
+          selectedVariation={selectedVariation}
+          onVariationChange={setSelectedVariation}
+        />
+      {/* {productType === "Calculator" ? (
         <CalculateArea data={data} />
+      ) : productType === "Other" ? (
+        
       ) : (
         <FenceConfigurator data={data} />
-      )}
+      )} */}
     </section>
   );
 };

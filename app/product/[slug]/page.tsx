@@ -10,6 +10,7 @@ import React from "react";
 import {
   getProductBySlug,
   getProductReviewsById,
+  getProductVariationsById,
   getRelatedProducts,
 } from "@/lib/woocommerce-api";
 
@@ -23,15 +24,15 @@ export default async function ProductDetail({
     return <div className="p-10">Product not found.</div>;
   }
 
-  // ✅ Fetch related products using category IDs
+
   const categoryIds = product.categories?.map((cat: any) => cat.id) || [];
   const relatedProducts = await getRelatedProducts(categoryIds, product.id);
+  const reviews = await getProductReviewsById(product.id);
 
+   const product_variations = await getProductVariationsById(product.id);
 
+ 
 
-
-const reviews = await getProductReviewsById(product.id);
-console.log("Product reviews", reviews);
   const faqs = [
     {
       title: "Are Composite Materials Slippery?",
@@ -58,8 +59,12 @@ console.log("Product reviews", reviews);
 
   return (
     <main>
-      <SingleBanner data={product} images={product.images || []} />
+
+      
+      <SingleBanner data={product} images={product.images || []} product_variations={product_variations} />
       <FeaturedIcons />
+
+
       <ProductTabs data={product} />
       <section className="bg-[#F0FAF7] relative">
         <Image
