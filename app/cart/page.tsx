@@ -120,7 +120,7 @@ export default function CartPage() {
                     <div className="pb-3 flex items-center md:justify-start justify-between gap-4">
                       <div className="flex items-center justify-center w-fit border border-[#B2B2B2] px-4 py-1.5">
                         <h4 className="md:text-xl text-base text-description font-bold text-center">
-                          €{item.price.toFixed(2)}
+                          €{item.price ? Number(item.price).toFixed(2) : "0.00"}
                         </h4>
                       </div>
                     </div>

@@ -67,17 +67,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="container mx-auto px-4 md:px-12 py-10">
-      <h1 className="text-2xl font-bold mb-4">Create an Account</h1>
-
-      <div className="max-w-md bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+    <main className="container max-w-md mx-auto bg-background/30 md:px-11 py-12 p-6 border border-[#E4E4E4] my-10">
+      <h1 className="text-2xl font-semibold text-center mb-4">Create an Account</h1> 
+      <div className="space-y-6">
         <input
           type="text"
           name="username"
           placeholder="Username"
           value={form.username}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md p-3 mb-3"
+          className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         <input
           type="email"
@@ -85,7 +84,7 @@ export default function RegisterPage() {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md p-3 mb-3"
+          className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         <input
           type="password"
@@ -93,7 +92,7 @@ export default function RegisterPage() {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md p-3 mb-3"
+          className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
 
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
@@ -101,7 +100,7 @@ export default function RegisterPage() {
         <button
           onClick={handleRegister}
           disabled={loading}
-          className="bg-secondary text-white px-6 py-2 rounded-md w-full"
+          className="w-full bg-secondary text-white font-semibold py-3 rounded-full hover:bg-primary transition-all"
         >
           {loading ? "Registering..." : "Register"}
         </button>
