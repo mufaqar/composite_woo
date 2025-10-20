@@ -102,7 +102,7 @@ export default function LoginPage() {
           placeholder="Username or Email"
           value={form.username}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md p-3 mb-3"
+          className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         <input
           type="password"
@@ -110,7 +110,7 @@ export default function LoginPage() {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md p-3 mb-3"
+          className="w-full px-4 py-3 border border-[#E4E4E4] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
         <button

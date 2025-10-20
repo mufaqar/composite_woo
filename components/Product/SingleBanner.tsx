@@ -13,7 +13,7 @@ interface SingleBannerProps {
   product_variations: WooVariation[];
 }
 
-const SingleBanner = ({ data,product_variations }: SingleBannerProps) => {
+const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
   const rating = data.rating_count || 0;
 
@@ -23,7 +23,7 @@ const SingleBanner = ({ data,product_variations }: SingleBannerProps) => {
   const isOnSale = !!salePrice && salePrice !== regularPrice;
   const stockStatus = data.stock_status;
 
-    // 🧩 Manage selected variation state
+  // 🧩 Manage selected variation state
   const [selectedVariation, setSelectedVariation] = useState<WooVariation | null>(null);
 
   return (
@@ -71,33 +71,32 @@ const SingleBanner = ({ data,product_variations }: SingleBannerProps) => {
                   stockStatus === "instock"
                     ? "text-primary"
                     : stockStatus === "outofstock"
-                    ? "text-red-500"
-                    : "text-yellow-500"
+                      ? "text-red-500"
+                      : "text-yellow-500"
                 }
               >
                 {stockStatus === "instock"
                   ? "In Stock"
                   : stockStatus === "outofstock"
-                  ? "Out of Stock"
-                  : "Backorder"}
+                    ? "Out of Stock"
+                    : "Backorder"}
               </span>
             </p>
           </div>
         </div>
       </div>
 
-      <ProductVariations
+      {productType === "Calculator" ? (
+        <CalculateArea data={data} />
+      ) : productType === "Other" ? (
+        <ProductVariations
           product_variations={product_variations}
           selectedVariation={selectedVariation}
           onVariationChange={setSelectedVariation}
         />
-      {/* {productType === "Calculator" ? (
-        <CalculateArea data={data} />
-      ) : productType === "Other" ? (
-        
-      ) : (
+      ) : productType === "Fencing" ? (
         <FenceConfigurator data={data} />
-      )} */}
+      ) : null}
     </section>
   );
 };

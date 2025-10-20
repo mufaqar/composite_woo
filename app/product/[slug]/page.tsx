@@ -59,12 +59,8 @@ export default async function ProductDetail({
 
   return (
     <main>
-
-      
       <SingleBanner data={product} images={product.images || []} product_variations={product_variations} />
       <FeaturedIcons />
-
-
       <ProductTabs data={product} />
       <section className="bg-[#F0FAF7] relative">
         <Image
