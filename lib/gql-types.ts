@@ -181,3 +181,43 @@ export interface GetHomeQuery {
     homeInfo?: HomeInfo;
   };
 }
+
+
+// src/types/auth.ts
+
+export interface LoginInput {
+  username: string;
+  password: string;
+}
+
+export interface LoginUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface LoginResponse {
+  login: {
+    authToken: string;
+    refreshToken: string;
+    user: LoginUser;
+  };
+}
+
+
+// ✅ TypeScript types
+export interface RegisterUserInput {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface RegisterUserResponse {
+  registerUser: {
+    user: {
+      id: string;
+      username: string;
+      email: string;
+    };
+  };
+}

@@ -7,14 +7,17 @@ import CheckoutSummary from "@/components/Checkout/CheckoutSummary";
 import BreadCrumb from "@/components/Product/BreadCrumb";
 import CouponSection from "@/components/Product/CouponSection";
 import { useState, useMemo } from "react";
+import LoginForm from "@/components/Account/Login";
 
 export default function CheckoutPage() {
   const { items } = useSelector((state: RootState) => state.cart);
-
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showCoupon, setShowCoupon] = useState(false);
+  const [deliverDifferent, setDeliverDifferent] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // Billing & Shipping states
   const [billing, setBilling] = useState({
     firstName: "",
     lastName: "",
@@ -37,11 +40,6 @@ export default function CheckoutPage() {
     postcode: "",
   });
 
-  const [message, setMessage] = useState("");
-  const [deliverDifferent, setDeliverDifferent] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showCoupon, setShowCoupon] = useState(false);
-
   const subTotal = useMemo(
     () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
     [items]
@@ -49,7 +47,6 @@ export default function CheckoutPage() {
 
   const total = subTotal - discount;
 
-  // Handle input change
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     type: "billing" | "shipping" = "billing"
@@ -62,7 +59,7 @@ export default function CheckoutPage() {
     }
   };
 
-  // Submit order
+  // 🧾 Submit Order
   const handleOrderSubmit = async () => {
     if (items.length === 0) {
       alert("Your cart is empty!");
@@ -75,13 +72,19 @@ export default function CheckoutPage() {
       items,
       message,
       discount,
-      couponCode, // 🧾 include coupon in order payload
+      couponCode,
     };
+
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("wp_token") : null;
 
     try {
       const res = await fetch("/api/order", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify(orderData),
       });
 
@@ -101,7 +104,6 @@ export default function CheckoutPage() {
 
   return (
     <main>
-      {/* Breadcrumb */}
       <section className="pt-16">
         <div className="container mx-auto px-4">
           <BreadCrumb title="Checkout" />
@@ -120,27 +122,7 @@ export default function CheckoutPage() {
           </button>
         </div>
 
-        {/* Login Form */}
-        {showLogin && (
-          <div className="container mx-auto px-4 md:px-12 py-6 bg-white border border-[#E4E4E4] rounded-lg mb-6">
-            <p className="text-sm text-description mb-2">
-              Please login with your WooCommerce account to continue.
-            </p>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border border-[#E4E4E4] rounded-md p-3 mb-2"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full border border-[#E4E4E4] rounded-md p-3 mb-3"
-            />
-            <button className="bg-secondary text-white px-6 py-2 rounded-md">
-              Login
-            </button>
-          </div>
-        )}
+        {showLogin && <LoginForm />}
 
         {/* Coupon Toggle */}
         <div className="container mx-auto px-4 md:px-12 py-7 bg-[#F0FAF7] flex md:flex-row flex-col gap-4 items-center justify-between">
@@ -155,7 +137,6 @@ export default function CheckoutPage() {
           </button>
         </div>
 
-        {/* Coupon Section */}
         {showCoupon && (
           <CouponSection
             subTotal={subTotal}
@@ -169,12 +150,10 @@ export default function CheckoutPage() {
       <section className="py-14">
         <div className="container mx-auto px-4">
           <div className="flex md:flex-row flex-col gap-5 mt-10">
-            {/* Billing Form */}
             <div className="md:w-3/5 bg-background/30 md:px-11 py-12 p-6 border border-[#E4E4E4]">
               <CheckoutForm formData={billing} onChange={handleChange} />
             </div>
 
-            {/* Order Summary */}
             <div className="md:w-2/5 bg-background/30 md:px-11 py-12 p-6 border border-[#E4E4E4]">
               <CheckoutSummary
                 onSubmit={handleOrderSubmit}
@@ -185,18 +164,13 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Shipping + Notes */}
           <div className="flex md:flex-row flex-col gap-5 mt-10">
             <div className="md:w-3/5 bg-[#F0FAF7] md:px-11 py-12 p-6 border border-[#E4E4E4]">
               <div className="flex items-center justify-between">
-                <label
-                  className="md:text-base text-sm font-medium text-title font-DM_Sans"
-                  htmlFor="another_delivery"
-                >
+                <label className="md:text-base text-sm font-medium text-title font-DM_Sans">
                   Deliver to a different address?
                 </label>
                 <input
-                  name="another_delivery"
                   type="checkbox"
                   checked={deliverDifferent}
                   onChange={(e) => setDeliverDifferent(e.target.checked)}
@@ -204,32 +178,26 @@ export default function CheckoutPage() {
               </div>
 
               {deliverDifferent && (
-                <div className="flex md:flex-row flex-col gap-5 mt-10">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">
-                      Shipping Information
-                    </h3>
-                    <CheckoutForm
-                      formData={shipping}
-                      onChange={(e) => handleChange(e, "shipping")}
-                    />
-                  </div>
+                <div className="mt-10">
+                  <h3 className="text-lg font-semibold mb-4">
+                    Shipping Information
+                  </h3>
+                  <CheckoutForm
+                    formData={shipping}
+                    onChange={(e) => handleChange(e, "shipping")}
+                  />
                 </div>
               )}
 
               <div className="mt-10">
-                <label
-                  className="md:text-base text-sm font-medium text-title font-DM_Sans"
-                  htmlFor="message"
-                >
+                <label className="md:text-base text-sm font-medium text-title font-DM_Sans">
                   Order Notes (optional)
                 </label>
                 <textarea
-                  name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="text-base font-normal text-description font-Satoshi placeholder:text-description border border-[#E4E4E4] bg-white rounded-[20px] px-6 py-3.5 w-full outline-none focus:border-secondary min-h-[202px] mt-8"
-                  placeholder="Notes about your order, e.g. special delivery instructions"
+                  placeholder="Notes about your order..."
                 ></textarea>
               </div>
             </div>
