@@ -33,12 +33,11 @@ const ProductGallery: React.FC<{ images: WooImage[] }> = ({ images }) => {
           <button
             key={index}
             onClick={() => setSelectedImage(src)}
-            className={`relative w-full md:h-[131px] h-[80px] border bg-background overflow-hidden 
-                        ${
-                          selectedImage === src
-                            ? "border-secondary"
-                            : "border-transparent"
-                        }`}
+            className={`relative max-w-1/5 w-full md:h-[131px] h-[80px] border bg-background overflow-hidden 
+                        ${selectedImage === src
+                ? "border-secondary"
+                : "border-transparent"
+              }`}
           >
             <Image
               src={src}
