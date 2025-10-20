@@ -6,6 +6,7 @@ import FenceConfigurator from "./FenceConfigurator";
 import { WooImage, WooProduct, WooVariation } from "@/lib/woocommerce-types";
 import CalculateArea from "./CalculateArea";
 import ProductVariations from "./VariableOptions";
+import SimpleCart from "./SimpleCart";
 
 interface SingleBannerProps {
   data: WooProduct;
@@ -24,7 +25,8 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
   const stockStatus = data.stock_status;
 
   // 🧩 Manage selected variation state
-  const [selectedVariation, setSelectedVariation] = useState<WooVariation | null>(null);
+  const [selectedVariation, setSelectedVariation] =
+    useState<WooVariation | null>(null);
 
   return (
     <section className="pt-16 pb-20">
@@ -71,15 +73,15 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
                   stockStatus === "instock"
                     ? "text-primary"
                     : stockStatus === "outofstock"
-                      ? "text-red-500"
-                      : "text-yellow-500"
+                    ? "text-red-500"
+                    : "text-yellow-500"
                 }
               >
                 {stockStatus === "instock"
                   ? "In Stock"
                   : stockStatus === "outofstock"
-                    ? "Out of Stock"
-                    : "Backorder"}
+                  ? "Out of Stock"
+                  : "Backorder"}
               </span>
             </p>
           </div>
@@ -96,7 +98,9 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
         />
       ) : productType === "Fencing" ? (
         <FenceConfigurator data={data} />
-      ) : null}
+      ) : (
+        <SimpleCart data={data} />
+      )}
     </section>
   );
 };
