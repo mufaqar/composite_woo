@@ -6,18 +6,17 @@ import React, { useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/slices/cartSlice";
+import { title } from "process";
 
 interface CalculateAreaProps {
   data: WooProduct;
 }
 const SimpleCart = ({ data }: CalculateAreaProps) => {
-  const [length, setLength] = useState(1);
-  const [boards, setBoards] = useState(2);
   const dispatch = useDispatch();
 
   // Example price per board (adjust as needed)
   const pricePerBoard = parseFloat(data.price);
-  const totalPrice = (boards * pricePerBoard).toFixed(2);
+  const totalPrice = pricePerBoard.toFixed(2);
 
   const handleAddToCart = () => {
     const total = parseFloat(totalPrice);
@@ -26,17 +25,12 @@ const SimpleCart = ({ data }: CalculateAreaProps) => {
       id: data.id.toString(),
       title: data.name,
       price: total,
-      quantity: boards,
+      quantity: 1,
       image: data.images?.[0]?.src || "/images/placeholder.png",
-      options: {
-        length: length.toString(),
-        boards: boards.toString(),
-        area: (length * boards).toFixed(1),
-      },
     };
 
     dispatch(addToCart(productData));
-    alert(`✅ Added ${boards} board(s) to cart. Total: £${total.toFixed(2)}`);
+    alert(`✅ Added Prooduct. Total: £${total.toFixed(2)}`);
   };
 
   return (
