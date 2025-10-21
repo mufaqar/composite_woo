@@ -28,7 +28,6 @@ const SimpleCart = ({ data }: CalculateAreaProps) => {
       quantity: 1,
       image: data.images?.[0]?.src || "/images/placeholder.png",
     };
-
     dispatch(addToCart(productData));
     alert(`✅ Added Prooduct. Total: £${total.toFixed(2)}`);
   };
