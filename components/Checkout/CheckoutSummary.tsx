@@ -36,7 +36,7 @@ export default function CheckoutSummary({
           items.map((item) => (
             <div
               key={item.id}
-              className="flex md:flex-row flex-col items-center border-b border-[#E4E4E4] md:pb-10 md:mb-10 pb-6 mb-6"
+              className="flex md:flex-row flex-col items-center justify-between border-b border-[#E4E4E4] md:pb-10 md:mb-10 pb-6 mb-6"
             >
               <div className="flex flex-row gap-4 items-center">
                 {/* Product Image */}

@@ -68,21 +68,21 @@ export default function LoginPage() {
   if (user) {
     return (
       <main className="container mx-auto px-4 md:px-12 py-10">
-        <div className="max-w-md bg-white border border-gray-200 rounded-lg p-6 shadow-sm text-center">
+        <div className="max-w-md mx-auto bg-background/30 md:px-11 py-12 p-6 border border-[#E4E4E4] text-center">
           <h1 className="text-2xl font-bold mb-4">Welcome back!</h1>
-          <p className="mb-2 text-gray-600">You’re logged in as:</p>
+          <p className="mb-2 text-title">You’re logged in as:</p>
           <p className="font-semibold mb-4">{user.name}</p>
 
           <div className="flex gap-4 justify-center">
             <button
               onClick={() => router.push("/checkout")}
-              className="bg-green-600 text-white px-6 py-2 rounded-md"
+              className="w-full bg-primary text-white font-semibold py-3 rounded-full hover:bg-secondary transition-all"
             >
               Go to Checkout
             </button>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-6 py-2 rounded-md"
+              className="w-full bg-red-500 text-white rounded-full px-6 py-3 font-bold hover:bg-primary transition-all"
             >
               Logout
             </button>
@@ -93,9 +93,9 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="container mx-auto px-4 md:px-12 py-10">
-      <h1 className="text-2xl font-bold mb-4">Login to Your Account</h1>
-      <div className="max-w-md bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+    <main className="container max-w-md mx-auto bg-background/30 md:px-11 py-12 p-6 border border-[#E4E4E4] mb-10">
+      <h1 className="text-2xl font-semibold text-center mb-4">Login to Your Account</h1>
+      <div className="space-y-6">
         <input
           type="text"
           name="username"
@@ -116,7 +116,7 @@ export default function LoginPage() {
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="bg-secondary text-white px-6 py-2 rounded-md w-full"
+          className="w-full bg-secondary text-white font-semibold py-3 rounded-full hover:bg-primary transition-all"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
