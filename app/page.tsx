@@ -10,14 +10,15 @@ import ProductRange from "@/components/HomePage/ProductRange";
 import Testimonials from "@/components/HomePage/Testimonails";
 import TrendingProducts from "@/components/HomePage/TrendingProducts";
 import WhyChooseus from "@/components/HomePage/WhyChooseus";
-import { getBlogData, getFaqData, getHomeData } from "@/lib/api/getHomeData";
+import { getBlogData, getFaqData, getHomeData, getInspirtionData } from "@/lib/api/getHomeData";
 
 import { HomeInfoSection } from "@/lib/gql-types";
 import { getAllProductReviews, getFeaturedProducts } from "@/lib/woocommerce-api";
 
 export default async function Home() {
-  const [posts, faqs_Cat, homeInfo,featuredsProducts,reviews] = await Promise.all([
+  const [posts, inpirtations, faqs_Cat, homeInfo,featuredsProducts,reviews] = await Promise.all([
     getBlogData(),
+    getInspirtionData(),
     getFaqData("home"),
     getHomeData(),
     getFeaturedProducts(),
@@ -37,7 +38,7 @@ export default async function Home() {
       <Advanteges data={homeInfo?.advantages} />
       <ClientLogos />
       <CustomerInnovate data={homeInfo?.customersInnovate} />
-      <Outdoor data={homeInfo?.dreamOutdoor} />
+      <Outdoor data={homeInfo?.dreamOutdoor} post={inpirtations} />
       <Testimonials data={reviews} />
       <FaqsSection title="Frequently Asked Questions" faqs={faqs_Cat} />
       <BlogsSection posts={posts} />

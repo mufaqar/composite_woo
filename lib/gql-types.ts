@@ -221,3 +221,26 @@ export interface RegisterUserResponse {
     };
   };
 }
+
+
+// ✅ TypeScript Types
+export interface InspirationImage {
+  node: {
+    sourceUrl: string;
+    altText: string;
+  };
+}
+
+export interface Inspiration {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  featuredImage?: InspirationImage | null;
+}
+
+export interface InspirationsResponse {
+  inspirations: {
+    nodes: Inspiration[];
+  };
+}

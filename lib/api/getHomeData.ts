@@ -1,8 +1,8 @@
 // lib/api/getHomeData.ts
 import client from "@/lib/apollo-client";
 import { GET_HOME } from "../queries/GetFrontPage";
-import { Faq, GetFaqByCatQuery, GetHomeQuery, GetPostsQuery, Post } from "../gql-types";
-import { GET_POSTS } from "../queries/getPosts";
+import { Faq, GetFaqByCatQuery, GetHomeQuery, GetPostsQuery, Inspiration, InspirationsResponse, Post } from "../gql-types";
+import { GET_INSPIRATIONS, GET_POSTS } from "../queries/getPosts";
 import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
 import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
 
@@ -22,6 +22,21 @@ export async function getBlogData(): Promise<Post[]> {
 
     // Ensure only valid posts are returned
     return (data?.posts?.nodes ?? []).filter((p): p is Post => !!p);
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
+}
+
+
+export async function getInspirtionData(): Promise<Inspiration[]> {
+  try {
+    const { data } = await client.query<InspirationsResponse>({
+      query: GET_INSPIRATIONS,
+     });
+
+    // Ensure only valid posts are returned
+    return (data?.inspirations?.nodes ?? []).filter((p): p is Inspiration => !!p);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     return [];
