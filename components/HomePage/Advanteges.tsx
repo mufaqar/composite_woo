@@ -31,6 +31,7 @@ const Advanteges = ({data}:Props) => {
     const getDelay = useAutoDelay();
     const [activeIndex, setActiveIndex] = useState(0);
      const options = data?.options ?? [];
+     console.log("Advanteges data:", data);
 
     return (
         <section className="pt-16 bg-background relative flex mb-20 ">
@@ -99,7 +100,7 @@ const Advanteges = ({data}:Props) => {
                         className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 -ml-5 md:hidden block"
                     />
                     <Image
-                        src="/images/advantage.png"
+                        src={data?.icon?.node.mediaItemUrl || "/images/advantage.png"}
                         alt="advantage"
                         width={605}
                         height={627}

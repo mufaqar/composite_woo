@@ -34,7 +34,7 @@ const ProductRange = ({ data }: Props) => {
                             }
                             `}
               style={{
-                backgroundImage: `url(${product.image?.node?.mediaItemUrl})`,
+                backgroundImage: `url(${product.icon?.node?.mediaItemUrl})`,
               }}
             >
               <h3 className="md:text-[28px] md:leading-none text-lg font-semibold text-white font-DM_Sans">

@@ -19,6 +19,7 @@ import client from "@/lib/apollo-client";
 import { GetFaqByCatQuery } from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 import SaleSection from "@/components/Product/SaleSection";
+import { getClientLogoData } from "@/lib/api/getHomeData";
 
 export default async function CategoryPage({
   params,
@@ -30,6 +31,7 @@ export default async function CategoryPage({
   const category = await getCategoryBySlug(slug);
   const cat_sub_title = category.acf.sub_title;
   const sale_offer = category.acf.cat_sales_off;
+
 
   const { data } = await client.query<GetFaqByCatQuery>({
     query: GET_FAQ_BY_CAT,
@@ -43,6 +45,8 @@ export default async function CategoryPage({
       <div className="p-10 text-center text-gray-600">Category not found.</div>
     );
   }
+
+    const client_logos = await getClientLogoData();
 
   const products = await getProductsByCategory(category.id);
   const reviews = await getAllProductReviews();
@@ -69,7 +73,7 @@ export default async function CategoryPage({
         categoryDescription={category.description}
       />
       <ProBlog />
-      <ClientLogos />
+      <ClientLogos data={client_logos} />
       <section className="bg-background">
         <ProductSection
           data={mappedProducts}

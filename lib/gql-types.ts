@@ -48,7 +48,7 @@ export interface Post {
   featuredImage?: FeaturedImage;
   author?: Author;
   postInfo?: PostInfo;
- categories?: CategoriesConnection;
+  categories?: CategoriesConnection;
 }
 
 export interface FeaturedImage {
@@ -122,40 +122,47 @@ export interface HomeInfoSection {
 
 export interface HomeInfoProductRange {
   title?: string;
-
   subTitle?: string;
   categoryInfo?:
     | {
         title?: string;
         link?: string;
         desc?: string;
-        image?: { node?: { mediaItemUrl?: string } };
+        icon?: IconType;
       }[]
     | null;
 }
 
-export interface HomeInfoAdvanteges extends HomeInfoSection {
+export interface HomeInfoAdvanteges {
+  title?: string;
+  subTitle?: string;
+  icon?: IconType;
   options?:
     | {
         title?: string;
         description?: string;
-        icon?: { node?: { mediaItemUrl?: string } };
+        icon?: IconType;
       }[]
     | null;
 }
 
-export interface HomeWhyChooseUs extends HomeInfoSection {
+export interface HomeWhyChooseUs {
+  title?: string;
+  subTitle?: string;
   whyCards?:
     | {
         title?: string;
         description?: string;
-        icon?: {
-          node?: {
-            mediaItemUrl?: string;
-          };
-        };
+        icon?: IconType;
       }[]
     | null;
+}
+
+export interface IconType {
+  node: {
+    mediaItemUrl: string;
+    altText?: string;
+  };
 }
 
 export interface HomeInfoCustomersInnovate {
@@ -163,6 +170,7 @@ export interface HomeInfoCustomersInnovate {
   description?: string;
   customerName?: string;
   customerFeeback?: string;
+  icon?: IconType;
 }
 
 export interface HomeInfo {
@@ -181,7 +189,6 @@ export interface GetHomeQuery {
     homeInfo?: HomeInfo;
   };
 }
-
 
 // src/types/auth.ts
 
@@ -204,7 +211,6 @@ export interface LoginResponse {
   };
 }
 
-
 // ✅ TypeScript types
 export interface RegisterUserInput {
   username: string;
@@ -221,7 +227,6 @@ export interface RegisterUserResponse {
     };
   };
 }
-
 
 // ✅ TypeScript Types
 export interface InspirationImage {
@@ -241,6 +246,12 @@ export interface Inspiration {
 
 export interface InspirationsResponse {
   inspirations: {
+    nodes: Inspiration[];
+  };
+}
+
+export interface ClientsResponse {
+  clientLogos: {
     nodes: Inspiration[];
   };
 }

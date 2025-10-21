@@ -51,3 +51,21 @@ export const GET_INSPIRATIONS = gql`
     }
   }
 `;
+
+export const Query_ClientLogo = gql`
+  query ClientLogos($first: Int = 10) {
+    clientLogos(first: $first) {
+      nodes {
+        id
+        slug
+        title
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+`;

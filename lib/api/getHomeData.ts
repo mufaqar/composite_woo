@@ -1,17 +1,24 @@
 // lib/api/getHomeData.ts
 import client from "@/lib/apollo-client";
 import { GET_HOME } from "../queries/GetFrontPage";
-import { Faq, GetFaqByCatQuery, GetHomeQuery, GetPostsQuery, Inspiration, InspirationsResponse, Post } from "../gql-types";
-import { GET_INSPIRATIONS, GET_POSTS } from "../queries/getPosts";
+import {
+  ClientsResponse,
+  Faq,
+  GetFaqByCatQuery,
+  GetHomeQuery,
+  GetPostsQuery,
+  Inspiration,
+  InspirationsResponse,
+  Post,
+} from "../gql-types";
+import { GET_INSPIRATIONS, GET_POSTS, Query_ClientLogo } from "../queries/getPosts";
 import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
 import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
-
 
 export async function getHomeData() {
   const { data } = await client.query<GetHomeQuery>({ query: GET_HOME });
   return data?.page?.homeInfo || {};
 }
-
 
 export async function getBlogData(): Promise<Post[]> {
   try {
@@ -28,15 +35,28 @@ export async function getBlogData(): Promise<Post[]> {
   }
 }
 
-
 export async function getInspirtionData(): Promise<Inspiration[]> {
   try {
     const { data } = await client.query<InspirationsResponse>({
       query: GET_INSPIRATIONS,
-     });
+    });
 
     // Ensure only valid posts are returned
-    return (data?.inspirations?.nodes ?? []).filter((p): p is Inspiration => !!p);
+    return data?.inspirations?.nodes ?? [];
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
+}
+
+export async function getClientLogoData(): Promise<Inspiration[]> {
+  try {
+    const { data } = await client.query<ClientsResponse>({
+      query: Query_ClientLogo,
+    });
+
+    // Ensure only valid posts are returned
+    return data?.clientLogos?.nodes ?? [];
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     return [];
@@ -46,7 +66,9 @@ export async function getInspirtionData(): Promise<Inspiration[]> {
 /**
  * Fetch FAQs by category slug (e.g., "home")
  */
-export async function getFaqData(categorySlug: string = "home"): Promise<Faq[]> {
+export async function getFaqData(
+  categorySlug: string = "home"
+): Promise<Faq[]> {
   try {
     const { data } = await client.query<GetFaqByCatQuery>({
       query: GET_FAQ_BY_CAT,
@@ -61,7 +83,6 @@ export async function getFaqData(categorySlug: string = "home"): Promise<Faq[]> 
     return [];
   }
 }
-
 
 export async function getAboutPageData() {
   try {
@@ -101,4 +122,3 @@ export async function getAboutPageData() {
     return null;
   }
 }
-

@@ -33,6 +33,8 @@ export const GET_HOME = gql`
     }
   }
 
+  # ===== Fragments =====
+
   fragment HomeInfoSliderInfoFragment on HomeInfoSliderInfo {
     subTitle
     title
@@ -50,7 +52,7 @@ export const GET_HOME = gql`
       title
       link
       desc
-      image {
+      icon {
         node {
           mediaItemUrl
         }
@@ -66,6 +68,11 @@ export const GET_HOME = gql`
   fragment HomeInfoCustomersInnovateFragment on HomeInfoCustomersInnovate {
     title
     description
+    icon {
+      node {
+        mediaItemUrl
+      }
+    }
     customerName
     customerFeeback
   }
@@ -74,6 +81,7 @@ export const GET_HOME = gql`
     title
     subTitle
   }
+
   fragment HomeInfoAdvantagesOptionsFragment on HomeInfoAdvantagesOptions {
     description
     icon {
@@ -87,10 +95,16 @@ export const GET_HOME = gql`
   fragment HomeInfoAdvantagesFragment on HomeInfoAdvantages {
     title
     subTitle
+    icon {
+      node {
+        mediaItemUrl
+      }
+    }
     options {
       ...HomeInfoAdvantagesOptionsFragment
     }
   }
+
   fragment HomeInfoWhyChooseUsWhyCardsFragment on HomeInfoWhyChooseUsWhyCards {
     description
     title

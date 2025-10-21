@@ -13,6 +13,8 @@ interface Props {
   post: Inspiration[];
 }
 const Outdoor = ({ data, post }: Props) => {
+
+  console.log("Outdoor posts:", post);
   const getDelay = useAutoDelay();
   return (
     <section className="py-16 bg-[#F0FAF7] relative ">

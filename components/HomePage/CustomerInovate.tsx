@@ -2,11 +2,9 @@
 import Image from "next/image";
 import AnimateOnScroll, { useAutoDelay } from "../Animation";
 import { HomeInfoCustomersInnovate } from "@/lib/gql-types";
-
 interface Props {
   data?: HomeInfoCustomersInnovate;
 }
-
 export default function CustomerInnovate({ data }: Props) {
   const getDelay = useAutoDelay();
   return (
@@ -15,7 +13,9 @@ export default function CustomerInnovate({ data }: Props) {
         {/* Left Image */}
         <div className="md:w-[45%] w-full md:z-[3] z-0">
           <Image
-            src="/images/innovate.png" // replace with your image in /public
+            src={
+              data?.icon?.node.mediaItemUrl || "/images/customer-inovate.png"
+            }
             alt="Composite fencing"
             width={644}
             height={802}
