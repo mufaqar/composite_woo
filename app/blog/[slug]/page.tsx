@@ -23,7 +23,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   if (!post) return notFound();
 
   const contentBlocks = post?.postInfo?.postContent ?? [];
-  //console.log("Content post:", post);
+  console.log("Content contentBlocks:", contentBlocks);
 
   return (
     <main className="">
@@ -31,7 +31,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
         <div className="max-w-[1130px] mx-auto md:px-0 px-4">
           <ul className="flex items-center justify-center gap-2 mb-8">
             <li className="text-sm font-normal text-description hover:text-secondary">
-                 {formatDate(post.date)}
+              {formatDate(post.date)}
             </li>
             <li>/</li>
             <li className="text-sm font-normal text-description hover:text-secondary">
@@ -112,6 +112,23 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                 </div>
               </section>
             );
+          // 🧩 CASE 4: Full Image
+          case "PostInfoPostContentFullWidthImageLayout":
+            return (
+              <section className="py-16" key={i}>
+                <div className="w-full">
+                  {block?.fullImage?.node?.mediaItemUrl && (
+                    <Image
+                      src={block.fullImage.node.mediaItemUrl}
+                      alt={block.fullImage.node.altText || "Content image"}
+                      width={1024}
+                      height={626}
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </div>
+              </section>
+            );
 
           // 🧩 DEFAULT fallback
           default:
@@ -151,11 +168,11 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           </ul>
           <ul className="flex items-center justify-end gap-2">
             <li className="text-sm font-normal text-description hover:text-secondary">
-             {formatDate(post.date)}
+              {formatDate(post.date)}
             </li>
             <li>/</li>
             <li className="text-sm font-normal text-description hover:text-secondary">
-            By: {post.author?.node?.name}
+              By: {post.author?.node?.name}
             </li>
           </ul>
         </div>

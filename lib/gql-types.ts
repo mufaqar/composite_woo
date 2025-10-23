@@ -151,6 +151,7 @@ export interface PostInfo {
 // -----------------------------------
 export type PostContentBlock =
   | FullContentLayout
+  | FullImageLayout
   | GetASampleFromUsLayout
   | ContentWithImageLayout;
 
@@ -160,6 +161,11 @@ export type PostContentBlock =
 export interface FullContentLayout {
   __typename?: "PostInfoPostContentFullContentLayout";
   fullContent?: string | null;
+}
+
+export interface FullImageLayout {
+  __typename?: "PostInfoPostContentFullWidthImageLayout";
+ fullImage?: SourceImage | null;
 }
 
 // ---------------------------------------------

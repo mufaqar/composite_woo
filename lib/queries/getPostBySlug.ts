@@ -10,12 +10,12 @@ export const GET_POST_BY_SLUG = gql`
           altText
         }
       }
-        author {
+      author {
         node {
           name
         }
       }
-       date 
+      date
       postInfo {
         postContent {
           ... on PostInfoPostContentFullContentLayout {
@@ -33,6 +33,13 @@ export const GET_POST_BY_SLUG = gql`
               node {
                 mediaItemUrl
                 altText
+              }
+            }
+          }
+          ... on PostInfoPostContentFullWidthImageLayout {
+            fullImage {
+              node {
+                mediaItemUrl
               }
             }
           }
