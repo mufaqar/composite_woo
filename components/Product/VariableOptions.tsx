@@ -15,7 +15,12 @@ const ProductVariations = ({
   selectedVariation,
   onVariationChange,
 }: ProductVariationsProps) => {
-  if (!product_variations || product_variations.length === 0) return null;
+  // ✅ Hooks must always be declared first
+  const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
+
+  if (!product_variations || product_variations.length === 0) {
+    return null;
+  }
 
   // ✅ Group attributes by name
   const attributeGroups: Record<string, string[]> = {};
@@ -28,19 +33,15 @@ const ProductVariations = ({
     });
   });
 
-  // ✅ State to track selected attributes
-  const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
-
-  // ✅ Function to handle selecting an attribute option
+  // ✅ Handle attribute selection
   const handleAttributeSelect = (attributeName: string, option: string) => {
     const updated = { ...selectedAttributes, [attributeName]: option };
     setSelectedAttributes(updated);
 
-    // Find variation that matches all selected attributes
+    // Find matching variation
     const matchedVariation = product_variations.find((variation) =>
       variation.attributes.every(
-        (attr) =>
-          updated[attr.name] && updated[attr.name] === attr.option
+        (attr) => updated[attr.name] && updated[attr.name] === attr.option
       )
     );
 
