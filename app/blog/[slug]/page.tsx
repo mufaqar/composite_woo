@@ -26,7 +26,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   //console.log("Content post:", post);
 
   return (
-    <main className="post_content">
+    <main className="">
       <section className="py-16">
         <div className="max-w-[1130px] mx-auto md:px-0 px-4">
           <ul className="flex items-center justify-center gap-2 mb-8">
@@ -60,7 +60,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           case "PostInfoPostContentFullContentLayout":
             return (
               <section className="pb-16" key={i}>
-                <div className="max-w-[1130px] mx-auto md:px-0 px-4 border-t border-[#D2D2D2]">
+                <div className="max-w-[1130px] mx-auto md:px-0 px-4 border-t border-[#D2D2D2] post_content">
                   <div
                     className="md:text-xl text-sm font-normal text-description mt-9 "
                     dangerouslySetInnerHTML={{
@@ -87,7 +87,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             return (
               <section className="py-16" key={i}>
                 <div
-                  className={`max-w-[1130px] mx-auto md:px-0 px-4 ${
+                  className={`max-w-[1130px]  mx-auto md:px-0 px-4 ${
                     block?.imagePosition === "Right"
                       ? "md:flex-row"
                       : "md:flex-row-reverse"
@@ -98,7 +98,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                     dangerouslySetInnerHTML={{ __html: block.content || "" }}
                   />
 
-                  <div className="md:w-2/5 w-full">
+                  <div className="md:w-2/5 w-full post_content">
                     {block?.blockImage?.node?.mediaItemUrl && (
                       <Image
                         src={block.blockImage.node.mediaItemUrl}
