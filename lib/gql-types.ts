@@ -60,7 +60,7 @@ export interface FeaturedImage {
 
 export interface SourceImage {
   node: {
-    sourceUrl: string;
+    mediaItemUrl: string;
     altText?: string;
   };
 }
@@ -135,7 +135,7 @@ export interface ContentWithImageLayout {
   __typename?: "PostInfoPostContentContentWithImageLayout";
   content?: string | null;
   imagePosition?: string | null;
-  image?: SourceImage | null;
+  blockImage?: SourceImage | null;
 }
 
 // -----------------------------------

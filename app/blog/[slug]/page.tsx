@@ -88,8 +88,8 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                 <div
                   className={`max-w-[1130px] mx-auto md:px-0 px-4 ${
                     block?.imagePosition === "Right"
-                      ? "md:flex-row-reverse"
-                      : "md:flex-row "
+                      ? "md:flex-row"
+                      : "md:flex-row-reverse"
                   } flex flex-col gap-6`}
                 >
                   <div
@@ -98,10 +98,10 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                   />
 
                   <div className="md:w-2/5 w-full">
-                    {block?.image?.node?.sourceUrl && (
+                    {block?.blockImage?.node?.mediaItemUrl && (
                       <Image
-                        src={block.image.node.sourceUrl}
-                        alt={block.image.node.altText || "Content image"}
+                        src={block.blockImage.node.mediaItemUrl}
+                        alt={block.blockImage.node.altText || "Content image"}
                         width={493}
                         height={626}
                         className="h-full w-full object-cover"
