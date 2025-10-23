@@ -96,17 +96,18 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                     className="post_content md:w-3/5 w-full"
                     dangerouslySetInnerHTML={{ __html: block.content || "" }}
                   />
-               
+
                   <div className="md:w-2/5 w-full">
-                    <Image
-                      src={block.image?.node?.sourceUrl || ""}
-                      alt="Upper content image"
-                      width={493}
-                      height={626}
-                      className="h-full w-full object-cover"
-                    />
+                    {block?.image?.node?.sourceUrl && (
+                      <Image
+                        src={block.image.node.sourceUrl}
+                        alt={block.image.node.altText || "Content image"}
+                        width={493}
+                        height={626}
+                        className="h-full w-full object-cover"
+                      />
+                    )}
                   </div>
-              
                 </div>
               </section>
             );
