@@ -18,6 +18,8 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
   const rating = data.rating_count || 0;
 
+  console.log("Product Data:", productType);
+
   // Extract WooCommerce price info
   const regularPrice = data.regular_price;
   const salePrice = data.sale_price;

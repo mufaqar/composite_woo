@@ -30,9 +30,8 @@ export interface CategoryNode {
 // ✅ Connection wrapper
 export interface CategoriesConnection {
   nodes: CategoryNode[]; // direct nodes array
-    edges: CategoryNode[]; // direct nodes array
+  edges: CategoryNode[]; // direct nodes array
 }
-
 
 // --------------------
 // Category By Slug Types
@@ -69,7 +68,6 @@ export interface FeaturedImage {
   };
 }
 
-
 export interface GetPostsByCategorySlugQuery {
   category?: {
     id: string;
@@ -80,7 +78,6 @@ export interface GetPostsByCategorySlugQuery {
     } | null;
   } | null;
 }
-
 
 // --------------------
 // Main Post Interface

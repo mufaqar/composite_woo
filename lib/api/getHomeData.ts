@@ -41,7 +41,6 @@ export async function getBlogData(): Promise<Post[]> {
   }
 }
 
-
 export async function getPostByCateSlug(slug: string): Promise<Post[]> {
   try {
     const { data } = await client.query<GetPostsByCategorySlugQuery>({
@@ -56,7 +55,6 @@ export async function getPostByCateSlug(slug: string): Promise<Post[]> {
     return [];
   }
 }
-
 
 export async function getInspirtionData(): Promise<Inspiration[]> {
   try {
