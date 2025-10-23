@@ -21,7 +21,7 @@ export default function ClientLogos({data}:Props) {
               className="flex justify-center grayscale hover:grayscale-0 transition"
             >
               <Image
-                src={logo.featuredImage?.node.sourceUrl || "/images/logo-1.png"}
+                src={logo.featuredImage?.node.mediaItemUrl || "/images/logo-1.png"}
                 alt={logo.title || "Client Logo"}
                 width={150}
                 height={80}

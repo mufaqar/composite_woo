@@ -11,7 +11,7 @@ const PostBox: React.FC<PostBoxProps> = ({ data }) => {
   const { title, slug, featuredImage, date, categories } = data;
   const categoryList = categories?.edges;
   const featureImage =
-    featuredImage?.node?.sourceUrl || "/images/placeholder.png";
+    featuredImage?.node?.mediaItemUrl || "/images/placeholder.png";
   const formattedDate = date
     ? new Date(date).toLocaleDateString()
     : "Unknown date";

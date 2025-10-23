@@ -21,7 +21,7 @@ export default async function Page({ params }: PageProps) {
     <main>
       <Banner
         title={page.title}
-        img={page?.featuredImage?.node?.sourceUrl}
+        img={page?.featuredImage?.node?.mediaItemUrl}
         desc="" />
         {page.content && (
         <section className="py-16">
@@ -33,9 +33,9 @@ export default async function Page({ params }: PageProps) {
           </div>
         </section>
       )}
-      {/* {page.featuredImage?.node?.sourceUrl && (
+      {/* {page.featuredImage?.node?.mediaItemUrl && (
         <img
-          src={page.featuredImage.node.sourceUrl}
+          src={page.featuredImage.node.mediaItemUrl}
           alt={page.featuredImage.node.altText || page.title}
           className="rounded-xl mb-8 w-full max-h-[400px] object-cover"
         />

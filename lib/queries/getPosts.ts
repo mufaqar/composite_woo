@@ -11,7 +11,7 @@ export const GET_POSTS = gql`
         date
         featuredImage {
           node {
-            sourceUrl
+            mediaItemUrl
             altText
           }
         }
@@ -43,7 +43,7 @@ export const GET_INSPIRATIONS = gql`
         excerpt
         featuredImage {
           node {
-            sourceUrl
+            mediaItemUrl
             altText
           }
         }
@@ -61,7 +61,7 @@ export const Query_ClientLogo = gql`
         title
         featuredImage {
           node {
-            sourceUrl
+            mediaItemUrl
             altText
           }
         }
@@ -94,7 +94,7 @@ export const GET_POST_BY_CAT = gql`
           date
           featuredImage {
             node {
-              sourceUrl
+              mediaItemUrl
               altText
             }
           }

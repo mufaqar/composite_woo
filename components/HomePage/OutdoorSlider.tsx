@@ -50,7 +50,7 @@ const OutDoorSlider: React.FC<Props> = ({ data }) => {
     id: item.id,
     images: [
       {
-        src: item.featuredImage?.node?.sourceUrl ?? "/placeholder.jpg",
+        src: item.featuredImage?.node?.mediaItemUrl ?? "/placeholder.jpg",
         title: item.title,
         description: item.excerpt?.replace(/<[^>]*>/g, "") ?? "",
       },

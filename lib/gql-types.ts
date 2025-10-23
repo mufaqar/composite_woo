@@ -15,7 +15,6 @@ export interface Author {
 // Featured Image
 export interface FeaturedImage {
   node: {
-    sourceUrl: string;
     mediaItemUrl: string;
     altText?: string;
   };
@@ -63,8 +62,8 @@ export interface Post {
 
 // Featured Image Type
 export interface FeaturedImage {
-  node: {
-    sourceUrl: string;
+  node: {   
+    mediaItemUrl: string;
     altText?: string;
   };
 }
@@ -98,7 +97,7 @@ export interface Post {
 
 export interface FeaturedImage {
   node: {
-    sourceUrl: string;
+    mediaItemUrl: string;
     altText?: string;
   };
 }
@@ -333,7 +332,7 @@ export interface RegisterUserResponse {
 // ✅ TypeScript Types
 export interface InspirationImage {
   node: {
-    sourceUrl: string;
+    mediaItemUrl: string;
     altText: string;
   };
 }

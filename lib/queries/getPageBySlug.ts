@@ -9,7 +9,7 @@ export const GET_PAGE_BY_SLUG = gql`
       content
       featuredImage {
         node {
-          sourceUrl
+          mediaItemUrl
           altText
         }
       }
