@@ -6,12 +6,18 @@ import {
   Faq,
   GetFaqByCatQuery,
   GetHomeQuery,
+  GetPostsByCategorySlugQuery,
   GetPostsQuery,
   Inspiration,
   InspirationsResponse,
   Post,
 } from "../gql-types";
-import { GET_INSPIRATIONS, GET_POSTS, Query_ClientLogo } from "../queries/getPosts";
+import {
+  GET_INSPIRATIONS,
+  GET_POST_BY_CAT,
+  GET_POSTS,
+  Query_ClientLogo,
+} from "../queries/getPosts";
 import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
 import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
 
@@ -34,6 +40,23 @@ export async function getBlogData(): Promise<Post[]> {
     return [];
   }
 }
+
+
+export async function getPostByCateSlug(slug: string): Promise<Post[]> {
+  try {
+    const { data } = await client.query<GetPostsByCategorySlugQuery>({
+      query: GET_POST_BY_CAT,
+      variables: { id: slug }, // ✅ correct variable name for WPGraphQL
+    });
+
+    const posts = data?.category?.posts?.nodes ?? [];
+    return posts.filter((p): p is Post => !!p);
+  } catch (error) {
+    console.error("Error fetching category posts:", error);
+    return [];
+  }
+}
+
 
 export async function getInspirtionData(): Promise<Inspiration[]> {
   try {

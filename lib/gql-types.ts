@@ -20,21 +20,68 @@ export interface FeaturedImage {
   };
 }
 
-// Category node type
+// ✅ A single category node
 export interface CategoryNode {
+  id: string;
   name: string;
   slug: string;
 }
 
-// Category edge type
-export interface CategoryEdge {
-  node: CategoryNode;
+// ✅ Connection wrapper
+export interface CategoriesConnection {
+  nodes: CategoryNode[]; // direct nodes array
+    edges: CategoryNode[]; // direct nodes array
 }
 
-// Categories connection type (GraphQL style)
-export interface CategoriesConnection {
-  edges: CategoryEdge[];
+
+// --------------------
+// Category By Slug Types
+// --------------------
+
+export interface CategoryBySlugResponse {
+  category?: CategoryBySlug | null;
 }
+
+export interface CategoryBySlug {
+  id: string;
+  name: string;
+  slug: string;
+  posts?: {
+    nodes?: Post[] | null;
+  } | null;
+}
+
+// Reuse your existing Post interface
+export interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  date?: string;
+  featuredImage?: FeaturedImage;
+}
+
+// Featured Image Type
+export interface FeaturedImage {
+  node: {
+    sourceUrl: string;
+    altText?: string;
+  };
+}
+
+
+export interface GetPostsByCategorySlugQuery {
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+    posts?: {
+      nodes?: Post[] | null;
+    } | null;
+  } | null;
+}
+
+
 // --------------------
 // Main Post Interface
 // --------------------

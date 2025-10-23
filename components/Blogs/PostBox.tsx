@@ -9,7 +9,7 @@ interface PostBoxProps {
 
 const PostBox: React.FC<PostBoxProps> = ({ data }) => {
   const { title, slug, featuredImage, date, categories } = data;
-
+  const categoryList = categories?.edges;
   const featureImage =
     featuredImage?.node?.sourceUrl || "/images/placeholder.png";
   const formattedDate = date
@@ -36,10 +36,10 @@ const PostBox: React.FC<PostBoxProps> = ({ data }) => {
         {/* Meta Info (Date + Categories) */}
         <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-3">
           <span>{formattedDate}</span>
-          {categories?.edges?.length ? (
+          {categoryList?.length ? (
             <>
               <span className="text-gray-400">|</span>
-              {categories.edges.map(({ node }: any) => (
+              {categoryList.map(({ node }: any) => (
                 <Link
                   key={node.slug}
                   href={`/category/${node.slug}`}

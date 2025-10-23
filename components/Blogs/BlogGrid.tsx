@@ -1,47 +1,45 @@
 "use client";
+
 import React from "react";
+import Link from "next/link";
 import PostBox from "./PostBox";
-import { Post } from "@/lib/gql-types";
+import { CategoriesConnection, CategoryNode, Post } from "@/lib/gql-types";
 
 interface BlogGridProps {
   posts: Post[];
+  cat?: CategoriesConnection;
 }
 
-const BlogGrid: React.FC<BlogGridProps> = ({ posts }) => {
-  // No posts
+const BlogGrid: React.FC<BlogGridProps> = ({ posts, cat }) => {
   if (!posts?.length) {
     return <p className="text-center text-gray-500">No blog posts found.</p>;
   }
 
-  // const [visibleCount, setVisibleCount] = useState(6);
-
-  // const handleLoadMore = () => {
-  //   setVisibleCount((prev) => prev + 3); // show 3 more on each click
-  // };
-
-  //const hasMoreToShow = posts.length > 6 && visibleCount < posts.length;
-
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        {/* Blog Grid */}
+        {/* 🏷️ Categories */}
+        {cat?.nodes?.length ? (
+          <ul className="flex flex-wrap justify-center mb-10">
+            {cat.nodes.map((category: CategoryNode) => (
+              <li key={category.id}>
+                <Link
+                  href={`/category/${category.slug}`}
+                  className="inline-block bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-full mr-2 mb-2 hover:bg-secondary hover:text-white transition-all duration-300"
+                >
+                  {category.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        {/* 📰 Blog Posts */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((post) => (
             <PostBox key={post.id} data={post} />
           ))}
         </div>
-
-        {/* Load More Button */}
-        {/* {hasMoreToShow && (
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={handleLoadMore}
-              className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out"
-            >
-              Load More
-            </button>
-          </div>
-        )} */}
       </div>
     </section>
   );
