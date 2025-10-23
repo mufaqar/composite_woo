@@ -35,13 +35,13 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
       <div className="container mx-auto px-4">
         <BreadCrumb title={data.name} />
       </div>
-      <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center">
+      <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-start">
         <div className="md:w-1/2 w-full">
           <ProductGallery images={data.images} />
         </div>
         <div className="md:w-1/2 w-full">
           <div className="pb-6 border-b border-[#D2D2D2] mb-10">
-            <h1 className="md:text-[50px] leading-none text-[32px] font-medium text-title font-DM_Sans">
+            <h1 className="md:text-[35px] leading-none text-[32px] font-medium text-title font-DM_Sans">
               {data.name}
             </h1>
             <div className="flex items-center gap-1 text-yellow-500 text-lg mt-5">

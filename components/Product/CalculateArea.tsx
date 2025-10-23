@@ -45,17 +45,17 @@ const CalculateArea = ({ data   }: CalculateAreaProps) => {
     <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
       <div className="md:w-1/2 w-full"></div>
       <div className="md:w-1/2 w-full md:-mt-[129px]">
-        <div
+        {/* <div
           className="md:text-xl text-sm font-normal text-description font-Satoshi"
           dangerouslySetInnerHTML={{ __html: data.short_description }}
-        />
+        /> */}
         <div className="bg-[#F6F6F654] border border-[#E4E4E4] md:px-10 py-11 px-6 mt-8">
           {/* Title */}
           <h3 className="text-[28px] leading-none font-semibold text-title font-DM_Sans mb-5">
             Calculate Your Area
           </h3>
 
-          <div className="grid md:grid-cols-2 grid-cols-1 md:gap-14 gap-5">
+          <div className="grid md:grid-cols-2 grid-cols-1 md:gap-3 gap-5">
             {/* Size Row */}
             <div className="flex justify-between items-center mb-3">
               <p className="md:text-lg text-lg font-normal text-description font-Satoshi">
