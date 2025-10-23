@@ -28,12 +28,12 @@ const ProductGallery: React.FC<{ images: WooImage[] }> = ({ images }) => {
         />
       </div>
       {/* Thumbnails */}
-      <div className="flex flex-row gap-3 w-full h-full">
+      <div className="grid md:grid-cols-5 grid-cols-3 gap-3 w-full h-full">
         {productImages.map((src, index) => (
           <button
             key={index}
             onClick={() => setSelectedImage(src)}
-            className={`relative max-w-1/5 w-full md:h-[131px] h-[80px] border bg-background overflow-hidden 
+            className={`relative  w-full md:h-[131px] h-[80px] border bg-background overflow-hidden 
                         ${selectedImage === src
                 ? "border-secondary"
                 : "border-transparent"
