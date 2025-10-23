@@ -10,7 +10,7 @@ import Link from "next/link";
 
 interface PostPageProps {
   params: { slug: string };
-  post: Post
+  post: Post;
 }
 
 export default async function SingleBlogPage({ params }: PostPageProps) {
@@ -21,9 +21,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   const post = data?.post;
   if (!post) return notFound();
 
-  // ✅ Safely access nested optional fields
-  const upperContent = post.postInfo?.upperContent;
-  const lowerContent = post.postInfo?.lowerContent;
+  const contentBlocks = post?.postInfo?.postContent ?? [];
 
   return (
     <main>
@@ -38,12 +36,14 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
               By: Henry A
             </li>
           </ul>
-          <h1 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans mb-8">{post.title}</h1>
+          <h1 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans mb-8">
+            {post.title}
+          </h1>
 
           {post.featuredImage?.node?.sourceUrl && (
             <div className="mb-8">
               <Image
-                src={post?.featuredImage?.node?.sourceUrl}
+                src={post?.featuredImage?.node?.sourceUrl || ""}
                 alt={post?.featuredImage?.node?.altText || post.title}
                 width={1200}
                 height={600}
@@ -53,75 +53,93 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           )}
         </div>
       </section>
-      {/* post excerpt */}
-      <section className="pb-16">
-        <div className="max-w-[1130px] mx-auto md:px-0 px-4 border-t border-[#D2D2D2]">
-          <div
-            className="md:text-xl text-sm font-normal text-description mt-9 "
-            dangerouslySetInnerHTML={{ __html: post.excerpt || "" }}
-          />
-        </div>
-      </section>
-      {/* Upper Content */}
-      {upperContent?.data && (
-        <section className="py-16">
-          <div className="max-w-[1130px] mx-auto md:px-0 px-4 flex md:flex-row flex-col gap-6">
-            <div className="post_content md:w-3/5 w-full"
-              dangerouslySetInnerHTML={{ __html: upperContent.data }}
-            />
-            {upperContent.dataImage?.node?.mediaItemUrl && (
-              <div className="md:w-2/5 w-full">
-                <Image
-                  src={upperContent.dataImage.node.mediaItemUrl}
-                  alt="Upper content image"
-                  width={493}
-                  height={626}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            )}
-          </div>
-        </section>
-      )}
+      {contentBlocks.map((block, i) => {
+        switch (block.__typename) {
+          case "PostInfoPostContentFullContentLayout":
+            return (
+              <section className="pb-16">
+                <div className="max-w-[1130px] mx-auto md:px-0 px-4 border-t border-[#D2D2D2]">
+                  <div
+                    className="md:text-xl text-sm font-normal text-description mt-9 "
+                    dangerouslySetInnerHTML={{
+                      __html: block.fullContent || "",
+                    }}
+                  />
+                </div>
+              </section>
+            );
 
-      {/* Lower Content */}
-      {lowerContent?.data && (
-        <section className="py-16">
-          <div className="max-w-[1130px] mx-auto md:px-0 px-4">
-            <div
-              className="post_content"
-              dangerouslySetInnerHTML={{ __html: lowerContent.data }}
-            />
-          </div>
-        </section>
-      )}
-      <RequestSample />
-      {/* post Content */}
-      {post.content && (
-        <section className="py-16">
-          <div className="max-w-[1130px] mx-auto md:px-0 px-4">
-            <div
-              className="post_content"
-              dangerouslySetInnerHTML={{ __html: post.content || "" }}
-            />
-          </div>
-        </section>
-      )}
+          // 🧩 CASE 2: Get A Sample From Us Layout
+          case "PostInfoPostContentGetASampleFromUsLayout":
+            return (
+              <RequestSample
+                title={block.title ?? undefined}
+                subtitle={block.subTitle ?? undefined}
+                description={block.description ?? undefined}
+              />
+            );
+
+          // 🧩 CASE 3: Content With Image Layout
+          case "PostInfoPostContentContentWithImageLayout":
+            return (
+              <section className="py-16">
+                <div
+                  className={`max-w-[1130px] mx-auto md:px-0 px-4 ${
+                    block.imagePosition === "Right"
+                      ? "md:flex-row-reverse"
+                      : "md:flex-row "
+                  } flex flex-col gap-6`}
+                >
+                  <div
+                    className="post_content md:w-3/5 w-full"
+                    dangerouslySetInnerHTML={{ __html: block.content || "" }}
+                  />
+
+                  <div className="md:w-2/5 w-full">
+                    <Image
+                      src={block.icon?.node?.mediaItemUrl || ""}
+                      alt="Upper content image"
+                      width={493}
+                      height={626}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </div>
+              </section>
+            );
+
+          // 🧩 DEFAULT fallback
+          default:
+            return null;
+        }
+      })}
+
+      {/* post excerpt */}
+
       <section className="py-16">
         <div className="max-w-[1130px] mx-auto md:px-0 px-4 flex md:flex-row flex-col gap-8 justify-between">
           <ul className="flex items-center justify-start gap-2">
             <li className="">
-              <Link href="#" className="text-xl font-normal text-description hover:text-secondary w-[47px] h-[47px] rounded-full hover:bg-background flex items-center justify-center transition-all ease-in-out duration-300">
+              <Link
+                href="#"
+                className="text-xl font-normal text-description hover:text-secondary w-[47px] h-[47px] rounded-full hover:bg-background flex items-center justify-center transition-all ease-in-out duration-300"
+              >
                 <FaTwitter />
               </Link>
             </li>
             <li className="">
-              <Link href="#" className="text-xl font-normal text-description hover:text-secondary w-[47px] h-[47px] rounded-full hover:bg-background flex items-center justify-center transition-all ease-in-out duration-300">
+              <Link
+                href="#"
+                className="text-xl font-normal text-description hover:text-secondary w-[47px] h-[47px] rounded-full hover:bg-background flex items-center justify-center transition-all ease-in-out duration-300"
+              >
                 <FaLinkedinIn />
               </Link>
             </li>
             <li className="">
-              <Link href="#" className="text-xl font-normal text-description hover:text-secondary w-[47px] h-[47px] rounded-full hover:bg-background flex items-center justify-center transition-all ease-in-out duration-300">
+              <Link
+                href="#"
+                className="text-xl font-normal text-description hover:text-secondary w-[47px] h-[47px] rounded-full hover:bg-background flex items-center justify-center transition-all ease-in-out duration-300"
+              >
                 <FaInstagram />
               </Link>
             </li>

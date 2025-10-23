@@ -64,25 +64,6 @@ export interface Author {
   };
 }
 
-// For postInfo
-export interface PostInfoUpperContent {
-  data?: string;
-  dataImage?: {
-    node?: {
-      mediaItemUrl: string;
-    };
-  };
-}
-
-export interface PostInfoLowerContent {
-  data?: string;
-}
-
-export interface PostInfo {
-  upperContent?: PostInfoUpperContent;
-  lowerContent?: PostInfoLowerContent;
-}
-
 // --------------------
 // Root Query Type
 // --------------------
@@ -90,6 +71,75 @@ export interface GetPostsQuery {
   posts?: {
     nodes?: Maybe<Array<Maybe<Post>>>;
   };
+}
+
+// -----------------------------------
+// Root Query Type
+// -----------------------------------
+export interface GetPostBySlugQuery {
+  post?: PostBySlug | null;
+}
+
+// -----------------------------------
+// Post Interface
+// -----------------------------------
+export interface PostBySlug {
+  title: string;
+  postInfo?: PostInfo | null;
+}
+
+// -----------------------------------
+// PostInfo Interface
+// -----------------------------------
+export interface PostInfo {
+  postContent?: PostContentBlock[] | null;
+}
+
+// -----------------------------------
+// Union Type for Post Content Blocks
+// -----------------------------------
+export type PostContentBlock =
+  | FullContentLayout
+  | GetASampleFromUsLayout
+  | ContentWithImageLayout;
+
+// -----------------------------
+// Content Layout: Full Content
+// -----------------------------
+export interface FullContentLayout {
+  __typename?: "PostInfoPostContentFullContentLayout";
+  fullContent?: string | null;
+}
+
+// ---------------------------------------------
+// Content Layout: Get a Sample From Us
+// ---------------------------------------------
+export interface GetASampleFromUsLayout {
+  __typename?: "PostInfoPostContentGetASampleFromUsLayout";
+  title?: string | null;
+  subTitle?: string | null;
+  description?: string | null;
+}
+
+// ---------------------------------------------
+// Content Layout: Content with Image
+// ---------------------------------------------
+export interface ContentWithImageLayout {
+  __typename?: "PostInfoPostContentContentWithImageLayout";
+  content?: string | null;
+  imagePosition?: string | null;
+  icon?: { node?: { mediaItemUrl?: string | null } } | null;
+}
+
+// -----------------------------------
+// Media Item Connection Edge
+// -----------------------------------
+export interface AcfMediaItemConnectionEdge {
+  node?: MediaItemNode | null;
+}
+
+export interface MediaItemNode {
+  mediaItemUrl?: string | null;
 }
 
 // --------------------
