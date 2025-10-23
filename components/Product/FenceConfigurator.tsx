@@ -326,22 +326,11 @@ export default function FenceConfigurator({ data }: FenceProps) {
   };
 
   return (
-    <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 ">
-      {/* Summary */}
-      <div className="md:w-1/2 w-full">
-        {/* <h3 className="font-semibold mb-2">Your Selection:</h3>
-        {steps.map((step) => (
-          <p key={step.id}>{step.label}</p>
-        ))}
-        <p className="mt-4 font-bold text-lg text-secondary">
-          Total: €{totalPrice.toFixed(2)}
-        </p> */}
-      </div>
-
+    <div className="container mx-auto flex md:flex-row flex-col gap-6 ">  
       {/* Configurator */}
-      <div className="md:w-1/2 w-full space-y-6 md:-mt-[129px]">
-        <div className="py-3.5 bg-background">
-          <h3 className="md:text-3xl text-xl font-medium text-title text-center font-DM_Sans capitalize">
+      <div className="w-full space-y-6 mt-10">
+        <div className="py-3 bg-background">
+          <h3 className="md:text-2xl text-xl font-medium text-title text-center font-DM_Sans capitalize">
             fence configurator
           </h3>
           <p className="md:text-lg text-sm font-normal text-description text-center font-Satoshi">
@@ -357,7 +346,7 @@ export default function FenceConfigurator({ data }: FenceProps) {
           >
             <button
               onClick={() => toggleStep(step.id)}
-              className="w-full flex justify-between items-center bg-[#003D2C] text-white py-4 px-7 text-xs md:text-lg font-Satoshi"
+              className="w-full flex justify-between items-center bg-[#003D2C] text-white py-2 px-4 text-xs md:text-lg font-Satoshi"
             >
               <span>{step.title}</span>
               <p className="text-white">{step.label}</p>

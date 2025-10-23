@@ -35,8 +35,8 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
       <div className="container mx-auto px-4">
         <BreadCrumb title={data.name} />
       </div>
-      <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-start">
-        <div className="md:w-1/2 w-full">
+      <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-start ">
+        <div className="md:w-1/2 w-full   md:sticky top-10">
           <ProductGallery images={data.images} />
         </div>
         <div className="md:w-1/2 w-full">
@@ -86,27 +86,27 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
                   : "Backorder"}
               </span>
             </p>
+
+            {productType === "Calculator" ? (
+              <CalculateArea data={data} />
+            ) : productType === "Fencing" ? (
+              <FenceConfigurator data={data} />
+            ) : productType === "Other" ? (
+              data.type === "variable" ? (
+                <ProductVariations
+                  product_variations={product_variations}
+                  selectedVariation={selectedVariation}
+                  onVariationChange={setSelectedVariation}
+                />
+              ) : (
+                <SimpleCart data={data} />
+              )
+            ) : (
+              <SimpleCart data={data} />
+            )}
           </div>
         </div>
       </div>
-
-      {productType === "Calculator" ? (
-        <CalculateArea data={data} />
-      ) : productType === "Fencing" ? (
-        <FenceConfigurator data={data} />
-      ) : productType === "Other" ? (
-        data.type === "variable" ? (
-          <ProductVariations
-            product_variations={product_variations}
-            selectedVariation={selectedVariation}
-            onVariationChange={setSelectedVariation}
-          />
-        ) : (
-          <SimpleCart data={data} />
-        )
-      ) : (
-        <SimpleCart data={data} />
-      )}
     </section>
   );
 };

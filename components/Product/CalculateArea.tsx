@@ -43,8 +43,8 @@ const CalculateArea = ({ data   }: CalculateAreaProps) => {
 
   return (
     <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
-      <div className="md:w-1/2 w-full"></div>
-      <div className="md:w-1/2 w-full md:-mt-[129px]">
+    
+      <div className="w-full mt-10">
         {/* <div
           className="md:text-xl text-sm font-normal text-description font-Satoshi"
           dangerouslySetInnerHTML={{ __html: data.short_description }}
