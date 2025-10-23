@@ -23,7 +23,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   if (!post) return notFound();
 
   const contentBlocks = post?.postInfo?.postContent ?? [];
-  console.log("Content Blocks:", contentBlocks);
+  //console.log("Content post:", post);
 
   return (
     <main>
@@ -42,10 +42,10 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             {post.title}
           </h1>
 
-          {post.featuredImage?.node?.sourceUrl && (
+          {post.featuredImage?.node?.mediaItemUrl && (
             <div className="mb-8">
               <Image
-                src={post?.featuredImage?.node?.sourceUrl || ""}
+                src={post?.featuredImage?.node?.mediaItemUrl || ""}
                 alt={post?.featuredImage?.node?.altText || post.title}
                 width={1200}
                 height={600}

@@ -16,6 +16,7 @@ export interface Author {
 export interface FeaturedImage {
   node: {
     sourceUrl: string;
+    mediaItemUrl: string;
     altText?: string;
   };
 }
