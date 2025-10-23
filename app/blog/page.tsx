@@ -10,7 +10,7 @@ export default async function BlogPage() {
   // 📰 Fetch posts
   const { data } = await client.query<GetPostsQuery>({
     query: GET_POSTS,
-    variables: { first: 6 },
+    variables: { first: 20 },
   });
 
   // 🏷️ Fetch categories
@@ -18,7 +18,7 @@ export default async function BlogPage() {
     categories: CategoriesConnection;
   }>({
     query: Query_Post_Categories,
-    variables: { first: 6 },
+    variables: { first: 10 },
   });
 
   // ✅ Cleanly filter posts
