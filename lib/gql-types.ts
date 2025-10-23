@@ -58,6 +58,13 @@ export interface FeaturedImage {
   };
 }
 
+export interface SourceImage {
+  node: {
+    sourceUrl: string;
+    altText?: string;
+  };
+}
+
 export interface Author {
   node: {
     name: string;
@@ -128,7 +135,7 @@ export interface ContentWithImageLayout {
   __typename?: "PostInfoPostContentContentWithImageLayout";
   content?: string | null;
   imagePosition?: string | null;
-  icon?: { node?: { mediaItemUrl?: string | null } } | null;
+  image?: SourceImage | null;
 }
 
 // -----------------------------------

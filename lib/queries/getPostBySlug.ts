@@ -6,7 +6,7 @@ export const GET_POST_BY_SLUG = gql`
       title
       featuredImage {
         node {
-          sourceUrl
+          mediaItemUrl
           altText
         }
       }
@@ -23,18 +23,15 @@ export const GET_POST_BY_SLUG = gql`
           ... on PostInfoPostContentContentWithImageLayout {
             content
             imagePosition
-            icon {
-              ...AcfMediaItemConnectionEdgeFragment
+            blockImage {
+              node {
+                mediaItemUrl
+                altText
+              }
             }
           }
         }
       }
-    }
-  }
-
-  fragment AcfMediaItemConnectionEdgeFragment on AcfMediaItemConnectionEdge {
-    node {
-      mediaItemUrl
     }
   }
 `;

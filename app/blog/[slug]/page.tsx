@@ -22,6 +22,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   if (!post) return notFound();
 
   const contentBlocks = post?.postInfo?.postContent ?? [];
+  console.log("Content Blocks:", contentBlocks);
 
   return (
     <main>
@@ -98,7 +99,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                
                   <div className="md:w-2/5 w-full">
                     <Image
-                      src={block.icon?.node?.mediaItemUrl || ""}
+                      src={block.image?.node?.sourceUrl || ""}
                       alt="Upper content image"
                       width={493}
                       height={626}
