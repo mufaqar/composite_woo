@@ -73,6 +73,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           case "PostInfoPostContentGetASampleFromUsLayout":
             return (
               <RequestSample
+                key={i}
                 title={block.title ?? undefined}
                 subtitle={block.subTitle ?? undefined}
                 description={block.description ?? undefined}
@@ -82,10 +83,10 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           // 🧩 CASE 3: Content With Image Layout
           case "PostInfoPostContentContentWithImageLayout":
             return (
-              <section className="py-16">
+              <section className="py-16" key={i}>
                 <div
                   className={`max-w-[1130px] mx-auto md:px-0 px-4 ${
-                    block.imagePosition === "Right"
+                    block?.imagePosition === "Right"
                       ? "md:flex-row-reverse"
                       : "md:flex-row "
                   } flex flex-col gap-6`}
@@ -94,7 +95,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                     className="post_content md:w-3/5 w-full"
                     dangerouslySetInnerHTML={{ __html: block.content || "" }}
                   />
-                  {block.icon?.node?.mediaItemUrl && ( 
+               
                   <div className="md:w-2/5 w-full">
                     <Image
                       src={block.icon?.node?.mediaItemUrl || ""}
@@ -104,7 +105,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  )}
+              
                 </div>
               </section>
             );
