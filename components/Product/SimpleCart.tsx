@@ -32,12 +32,8 @@ const SimpleCart = ({ data }: SimpleCartProps) => {
   };
 
   return (
-    <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
-      {/* Left side (optional image or product details) */}
-      <div className="md:w-1/2 w-full"></div>
-
-      {/* Right side (cart controls) */}
-      <div className="md:w-1/2 w-full md:-mt-[129px]">
+    <div className="container mx-auto flex md:flex-row flex-col gap-6">
+      <div className=" w-full mt-10">
         <div className="bg-[#F6F6F654] border border-[#E4E4E4] md:px-10 py-11 px-6 mt-8">
           {/* Quantity / Boards Selector */}
           <div className="flex justify-between items-center mb-3">
