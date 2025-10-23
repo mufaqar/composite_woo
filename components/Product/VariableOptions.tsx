@@ -16,7 +16,9 @@ const ProductVariations = ({
   onVariationChange,
 }: ProductVariationsProps) => {
   // ✅ Hooks must always be declared first
-  const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
+  const [selectedAttributes, setSelectedAttributes] = useState<
+    Record<string, string>
+  >({});
 
   if (!product_variations || product_variations.length === 0) {
     return null;
@@ -53,9 +55,8 @@ const ProductVariations = ({
     : parseFloat(product_variations[0]?.price || "0");
 
   return (
-    <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
-      <div className="md:w-1/2 w-full" />
-      <div className="md:w-1/2 w-full md:-mt-[129px]">
+    <div className="container mx-auto flex md:flex-row flex-col gap-6">
+      <div className=" w-full mt-10">
         <div className="bg-[#F6F6F654] border border-[#E4E4E4] md:px-10 py-11 px-6 mt-8">
           <h3 className="text-[28px] leading-none font-semibold text-title font-DM_Sans mb-5">
             Options
@@ -69,11 +70,14 @@ const ProductVariations = ({
               </label>
               <div className="flex flex-wrap gap-2">
                 {options.map((option) => {
-                  const isSelected = selectedAttributes[attributeName] === option;
+                  const isSelected =
+                    selectedAttributes[attributeName] === option;
                   return (
                     <button
                       key={option}
-                      onClick={() => handleAttributeSelect(attributeName, option)}
+                      onClick={() =>
+                        handleAttributeSelect(attributeName, option)
+                      }
                       className={`flex items-center border rounded-full px-4 py-2 transition-colors
                         ${
                           isSelected
@@ -92,10 +96,13 @@ const ProductVariations = ({
           {/* ✅ Price Display */}
           <div className="mt-4 mb-6">
             <p className="text-lg font-semibold text-gray-800">
-              Price: <span className="text-primary">£{displayPrice.toFixed(2)}</span>
+              Price:{" "}
+              <span className="text-primary">£{displayPrice.toFixed(2)}</span>
             </p>
             {selectedVariation?.sku && (
-              <p className="text-sm text-gray-500">SKU: {selectedVariation.sku}</p>
+              <p className="text-sm text-gray-500">
+                SKU: {selectedVariation.sku}
+              </p>
             )}
           </div>
 
