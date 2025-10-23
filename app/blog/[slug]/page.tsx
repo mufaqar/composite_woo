@@ -7,6 +7,7 @@ import client from "@/lib/apollo-client";
 import { Post } from "@/lib/gql-types";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import formatDate from "@/lib/extra";
 
 interface PostPageProps {
   params: { slug: string };
@@ -30,7 +31,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
         <div className="max-w-[1130px] mx-auto md:px-0 px-4">
           <ul className="flex items-center justify-center gap-2 mb-8">
             <li className="text-sm font-normal text-description hover:text-secondary">
-             {post.date}
+                 {formatDate(post.date)}
             </li>
             <li>/</li>
             <li className="text-sm font-normal text-description hover:text-secondary">
@@ -150,7 +151,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           </ul>
           <ul className="flex items-center justify-end gap-2">
             <li className="text-sm font-normal text-description hover:text-secondary">
-             {post.date}
+             {formatDate(post.date)}
             </li>
             <li>/</li>
             <li className="text-sm font-normal text-description hover:text-secondary">
