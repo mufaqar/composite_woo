@@ -10,6 +10,12 @@ export const GET_POST_BY_SLUG = gql`
           altText
         }
       }
+        author {
+        node {
+          name
+        }
+      }
+       date 
       postInfo {
         postContent {
           ... on PostInfoPostContentFullContentLayout {

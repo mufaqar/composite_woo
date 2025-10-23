@@ -30,11 +30,11 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
         <div className="max-w-[1130px] mx-auto md:px-0 px-4">
           <ul className="flex items-center justify-center gap-2 mb-8">
             <li className="text-sm font-normal text-description hover:text-secondary">
-              July 2, 2020
+             {post.date}
             </li>
             <li>/</li>
             <li className="text-sm font-normal text-description hover:text-secondary">
-              By: Henry A
+              By: {post.author?.node?.name}
             </li>
           </ul>
           <h1 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans mb-8">
@@ -150,11 +150,11 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
           </ul>
           <ul className="flex items-center justify-end gap-2">
             <li className="text-sm font-normal text-description hover:text-secondary">
-              July 2, 2020
+             {post.date}
             </li>
             <li>/</li>
             <li className="text-sm font-normal text-description hover:text-secondary">
-              By: Henry A
+            By: {post.author?.node?.name}
             </li>
           </ul>
         </div>
