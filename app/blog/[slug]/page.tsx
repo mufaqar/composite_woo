@@ -57,7 +57,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
         switch (block.__typename) {
           case "PostInfoPostContentFullContentLayout":
             return (
-              <section className="pb-16">
+              <section className="pb-16" key={i}>
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4 border-t border-[#D2D2D2]">
                   <div
                     className="md:text-xl text-sm font-normal text-description mt-9 "
@@ -94,7 +94,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                     className="post_content md:w-3/5 w-full"
                     dangerouslySetInnerHTML={{ __html: block.content || "" }}
                   />
-
+                  {block.icon?.node?.mediaItemUrl && ( 
                   <div className="md:w-2/5 w-full">
                     <Image
                       src={block.icon?.node?.mediaItemUrl || ""}
@@ -104,6 +104,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                       className="h-full w-full object-cover"
                     />
                   </div>
+                  )}
                 </div>
               </section>
             );
