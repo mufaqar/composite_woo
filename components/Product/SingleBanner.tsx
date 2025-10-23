@@ -92,14 +92,18 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
 
       {productType === "Calculator" ? (
         <CalculateArea data={data} />
-      ) : productType === "Other" ? (
-        <ProductVariations
-          product_variations={product_variations}
-          selectedVariation={selectedVariation}
-          onVariationChange={setSelectedVariation}
-        />
       ) : productType === "Fencing" ? (
         <FenceConfigurator data={data} />
+      ) : productType === "Other" ? (
+        data.type === "variable" ? (
+          <ProductVariations
+            product_variations={product_variations}
+            selectedVariation={selectedVariation}
+            onVariationChange={setSelectedVariation}
+          />
+        ) : (
+          <SimpleCart data={data} />
+        )
       ) : (
         <SimpleCart data={data} />
       )}

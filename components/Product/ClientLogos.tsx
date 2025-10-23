@@ -7,7 +7,7 @@ interface Props {
   data?: Inspiration[];
 }
 
-export default function ClientLogos({data}:Props) {
+export default function ClientLogos({ data }: Props) {
   return (
     <section className="py-10 bg-white">
       <div className="container mx-auto px-4">
@@ -21,7 +21,9 @@ export default function ClientLogos({data}:Props) {
               className="flex justify-center grayscale hover:grayscale-0 transition"
             >
               <Image
-                src={logo.featuredImage?.node.mediaItemUrl || "/images/logo-1.png"}
+                src={
+                  logo.featuredImage?.node.mediaItemUrl || "/images/logo-1.png"
+                }
                 alt={logo.title || "Client Logo"}
                 width={150}
                 height={80}

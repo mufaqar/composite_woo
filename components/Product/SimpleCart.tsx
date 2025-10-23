@@ -3,41 +3,72 @@
 import { WooProduct } from "@/lib/woocommerce-types";
 import Link from "next/link";
 import React, { useState } from "react";
-import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/slices/cartSlice";
-import { title } from "process";
 
-interface CalculateAreaProps {
+interface SimpleCartProps {
   data: WooProduct;
 }
-const SimpleCart = ({ data }: CalculateAreaProps) => {
-  const dispatch = useDispatch();
 
-  // Example price per board (adjust as needed)
-  const pricePerBoard = parseFloat(data.price);
-  const totalPrice = pricePerBoard.toFixed(2);
+const SimpleCart = ({ data }: SimpleCartProps) => {
+  const dispatch = useDispatch();
+  const [boards, setBoards] = useState(1); // ✅ Add quantity state
+
+  // Convert WooCommerce price to number safely
+  const pricePerBoard = parseFloat(data.price || "0");
+  const totalPrice = (boards * pricePerBoard).toFixed(2);
 
   const handleAddToCart = () => {
-    const total = parseFloat(totalPrice);
-
     const productData = {
       id: data.id.toString(),
       title: data.name,
-      price: total,
-      quantity: 1,
+      price: parseFloat(totalPrice),
+      quantity: boards,
       image: data.images?.[0]?.src || "/images/placeholder.png",
     };
+
     dispatch(addToCart(productData));
-    alert(`✅ Added Prooduct. Total: £${total.toFixed(2)}`);
+    alert(`✅ ${boards} ${data.name} added to cart. Total: £${totalPrice}`);
   };
 
   return (
     <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
+      {/* Left side (optional image or product details) */}
       <div className="md:w-1/2 w-full"></div>
+
+      {/* Right side (cart controls) */}
       <div className="md:w-1/2 w-full md:-mt-[129px]">
         <div className="bg-[#F6F6F654] border border-[#E4E4E4] md:px-10 py-11 px-6 mt-8">
-          {/* Buttons */}
+          {/* Quantity / Boards Selector */}
+          <div className="flex justify-between items-center mb-3">
+            <p className="md:text-lg text-lg font-normal text-description font-Satoshi">
+              Quantity
+            </p>
+            <div className="flex items-center border border-[#E4E4E4] bg-white rounded-full px-4 py-2">
+              <button
+                onClick={() => setBoards(Math.max(1, boards - 1))}
+                className="px-2 md:text-lg text-sm font-normal text-description font-Satoshi"
+              >
+                -
+              </button>
+              <span className="px-3 w-6 text-center md:text-lg text-sm font-normal text-description font-Satoshi">
+                {boards}
+              </span>
+              <button
+                onClick={() => setBoards(boards + 1)}
+                className="px-2 md:text-lg text-sm font-normal text-description font-Satoshi"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          {/* Total Price */}
+          <p className="mb-4 md:text-lg text-base font-semibold text-gray-700">
+            Total: £{totalPrice}
+          </p>
+
+          {/* Action Buttons */}
           <div className="flex items-center gap-4">
             <button
               onClick={handleAddToCart}
