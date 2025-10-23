@@ -26,7 +26,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   //console.log("Content post:", post);
 
   return (
-    <main>
+    <main className="post_content">
       <section className="py-16">
         <div className="max-w-[1130px] mx-auto md:px-0 px-4">
           <ul className="flex items-center justify-center gap-2 mb-8">

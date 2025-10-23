@@ -42,7 +42,7 @@ const CalculateArea = ({ data   }: CalculateAreaProps) => {
   };
 
   return (
-    <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6">
+    <div className="container mx-auto flex md:flex-row flex-col gap-6">
     
       <div className="w-full mt-10">
         {/* <div
