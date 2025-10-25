@@ -129,7 +129,6 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                 </div>
               </section>
             );
-
           // 🧩 DEFAULT fallback
           default:
             return null;
@@ -137,7 +136,6 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
       })}
 
       {/* post excerpt */}
-
       <section className="py-16">
         <div className="max-w-[1130px] mx-auto md:px-0 px-4 flex md:flex-row flex-col gap-8 justify-between">
           <ul className="flex items-center justify-start gap-2">
