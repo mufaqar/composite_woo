@@ -9,9 +9,10 @@ import { Post } from "@/lib/gql-types";
 
 interface Props {
   data: Post[];
+  cat_info: any;
 }
 
-const ProBlog = ({ data }: Props) => {
+const ProBlog = ({ data, cat_info }: Props) => {
   return (
     <section className="py-16 bg-[#F0FAF7] relative ">
       <Image
@@ -23,15 +24,15 @@ const ProBlog = ({ data }: Props) => {
       />
       {/* Heading + Read More */}
       <HeadingSection
-        title="Latest Blog"
-        desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua "
+        title={cat_info?.blog_title || "From Our Pro Blog"}
+        desc={cat_info?.blog_description || "Short "}
         readMore
       />
 
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-16">
         <div className="md:w-1/2 w-full">
           <Image
-            src="/images/pro-blog.png"
+            src={cat_info.blog_banner || "/images/pro-blog.png"}
             alt="pro-blog"
             width={509}
             height={598}

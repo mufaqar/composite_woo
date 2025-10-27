@@ -75,7 +75,7 @@ export default async function CategoryPage({
         categoryTitle={category.name}
         categoryDescription={category.description}
       />
-      <ProBlog data={blogs}/>
+      <ProBlog data={blogs} cat_info={category.acf.blog_info} />
       <ClientLogos data={client_logos} />
       <section className="bg-background">
         <ProductSection
