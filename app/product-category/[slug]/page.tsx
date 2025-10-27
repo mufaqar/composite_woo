@@ -19,7 +19,7 @@ import client from "@/lib/apollo-client";
 import { GetFaqByCatQuery } from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 import SaleSection from "@/components/Product/SaleSection";
-import { getClientLogoData } from "@/lib/api/getHomeData";
+import { getBlogData, getClientLogoData } from "@/lib/api/getHomeData";
 
 export default async function CategoryPage({
   params,
@@ -31,6 +31,8 @@ export default async function CategoryPage({
   const category = await getCategoryBySlug(slug);
   const cat_sub_title = category.acf.sub_title;
   const sale_offer = category.acf.cat_sales_off;
+
+  const blogs = await getBlogData();
 
 
   const { data } = await client.query<GetFaqByCatQuery>({
@@ -56,12 +58,13 @@ export default async function CategoryPage({
     image: p.images?.[0]?.src || "",
     ...p,
   }));
+  console.log(category, "category");
 
   return (
     <main>
       <Banner
         title={category?.name}
-        img={category?.image || "/images/fencing.png"}
+        img={category?.image.src || "/images/fencing.png"}
         desc={cat_sub_title}
       />
       <FeaturedIcons />
@@ -72,7 +75,7 @@ export default async function CategoryPage({
         categoryTitle={category.name}
         categoryDescription={category.description}
       />
-      <ProBlog />
+      <ProBlog data={blogs}/>
       <ClientLogos data={client_logos} />
       <section className="bg-background">
         <ProductSection
