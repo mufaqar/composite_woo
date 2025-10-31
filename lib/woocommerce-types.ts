@@ -88,6 +88,13 @@ export interface WooDimensions {
   height: string;
 }
 
+export interface RelatedData {
+  title: string;
+  sub_title: string;
+  description: string;
+  image?: string;
+}
+
 /**
  * Product Category
  */
@@ -98,9 +105,15 @@ export interface WooCategory {
   parent: number;
   description: string;
   display: string;
-  image: WooImage | null;
   menu_order: number;
   count: number;
+  // Blog-related custom ACF fields
+  blog_title?: string;
+  blog_description?: string;
+  blog_banner?: string;
+
+  // Should be an array (since you map over it)
+  related_data?: RelatedData[];
 }
 
 /**
@@ -114,6 +127,61 @@ export interface WooImage {
   name: string;
   alt: string;
 }
+
+
+/**
+ * Each feature row’s option values for the 3 product types
+ */
+export interface FeatureOptions {
+  col1: string; // Essential Grooved
+  col2: string; // Essential Wood Grain
+  col3: string; // Capped Dual Colour
+}
+
+/**
+ * A single feature item in the comparison table
+ */
+export interface Feature {
+  title: string;          // e.g. "Finish" or "Slip Resistance"
+  options: FeatureOptions; // contains col1, col2, col3
+}
+
+/**
+ * Props expected by the Compare component
+ */
+export interface CompareProps {
+  cat_info: {
+    features: Feature[];
+  };
+}
+
+
+/**
+ * Each accordion option inside the Composite Panel
+ */
+export interface CompositeOption {
+  icon: string;         // icon image URL (e.g. "/images/shield.png")
+  title: string;        // heading for each accordion item
+  description: string;  // text revealed when active
+}
+
+/**
+ * Main category information for the Composite Panel
+ */
+export interface CompositeCategory {
+  image: string;               // main banner image
+  title: string;               // section heading
+  description: string;         // short paragraph below title
+  options: CompositeOption[];  // accordion-style options
+}
+
+/**
+ * Props for the CompositPanel component
+ */
+export interface CompositPanelProps {
+  cat_info: CompositeCategory;
+}
+
 
 /**
  * Product Attribute
@@ -173,11 +241,11 @@ export interface Options {
 }
 
 export interface WooReview {
- id: number;
+  id: number;
   date_created: string;
   date_created_gmt: string;
   product_id: number;
-  product:number;
+  product: number;
   reviewer: string;
   reviewer_email: string;
   review: string;
@@ -188,14 +256,13 @@ export interface WooReview {
   };
 }
 
-
 export interface WooVariation {
   id: number;
   name: string;
   regular_price: string;
   sale_price: string;
   price: string;
-  stock_status: 'instock' | 'outofstock' | 'onbackorder';
+  stock_status: "instock" | "outofstock" | "onbackorder";
   in_stock: boolean;
   sku: string;
   attributes: Array<{

@@ -3,16 +3,14 @@
 import Image from "next/image";
 import React from "react";
 import HeadingSection from "../HeadingSection";
-import PostBox from "../Blogs/PostBox";
-import { blogsData } from "@/data/blogData";
-import { Post } from "@/lib/gql-types";
+import { WooCategory } from "@/lib/woocommerce-types";
 
 interface Props {
-  data: Post[];
-  cat_info: any;
+  cat_info: WooCategory;
 }
 
-const ProBlog = ({ data, cat_info }: Props) => {
+const ProBlog = ({ cat_info }: Props) => {
+  const related_data = cat_info.related_data;
   return (
     <section className="py-16 bg-[#F0FAF7] relative ">
       <Image
@@ -24,15 +22,15 @@ const ProBlog = ({ data, cat_info }: Props) => {
       />
       {/* Heading + Read More */}
       <HeadingSection
-        title={cat_info?.blog_title || "From Our Pro Blog"}
-        desc={cat_info?.blog_description || "Short "}
+        title={cat_info.blog_title}
+        desc={cat_info.blog_description}
         readMore
       />
 
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-16">
         <div className="md:w-1/2 w-full">
           <Image
-            src={cat_info.blog_banner || "/images/pro-blog.png"}
+            src={cat_info.blog_banner || ""}
             alt="pro-blog"
             width={509}
             height={598}
@@ -40,10 +38,25 @@ const ProBlog = ({ data, cat_info }: Props) => {
           />
         </div>
         <div className="md:w-1/2 w-full flex md:flex-row flex-col gap-5">
-          {data.slice(0, 2).map((item, idx) => {
+          {related_data?.map((item, idx) => {
             return (
               <div key={idx} className="pt-5 border-t border-secondary w-full">
-                <PostBox data={item} />
+                <h3 className="md:text-[22px] text-lg leading-none font-bold font-DM_Sans">
+                  {item.title}
+                </h3>
+                <p className="md:text-base text-sm font-normal text-description font-Satoshi mt-2 mb-11">
+                  {item.sub_title}
+                </p>
+                <Image
+                  src={item?.image || ""}
+                  alt="pro-blog"
+                  width={260}
+                  height={200}
+                  className="object-cover w-full h-full max-h-[260px]"
+                />
+                <p className="md:text-base text-sm font-normal text-description font-Satoshi mt-2 mb-11">
+                  {item.description}
+                </p>
               </div>
             );
           })}
