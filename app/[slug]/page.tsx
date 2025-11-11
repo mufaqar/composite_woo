@@ -8,9 +8,10 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
   const { data } = await client.query<{ page: any }>({
     query: GET_PAGE_BY_SLUG,
-    variables: { slug: params.slug },
+    variables: { slug },
   });
 
   const page = data?.page;
@@ -33,18 +34,6 @@ export default async function Page({ params }: PageProps) {
           </div>
         </section>
       )}
-      {/* {page.featuredImage?.node?.mediaItemUrl && (
-        <img
-          src={page.featuredImage.node.mediaItemUrl}
-          alt={page.featuredImage.node.altText || page.title}
-          className="rounded-xl mb-8 w-full max-h-[400px] object-cover"
-        />
-      )}
-      <h1 className="text-3xl font-bold mb-6">{page.title}</h1>
-      <article
-        className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: page.content }}
-      /> */}
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import BlogsSection from "@/components/BlogSection";
+import { CalculatorHome } from "@/components/Calculator";
 import FaqsSection from "@/components/FaqSection";
 import Advanteges from "@/components/HomePage/Advanteges";
 import ClientLogos from "@/components/HomePage/ClientLogos";
@@ -53,6 +54,8 @@ export default async function Home() {
         data={featuredsProducts}
         info={homeInfo?.trendingProducts ?? ({} as HomeInfoSection)}
       />
+      <div className="w-full h-px bg-white/10"/>
+      <CalculatorHome />
       <Advanteges data={homeInfo?.advantages} />
       <ClientLogos data={client_logos} />
       <CustomerInnovate data={homeInfo?.customersInnovate} />

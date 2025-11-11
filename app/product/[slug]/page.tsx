@@ -17,9 +17,10 @@ import {
 export default async function ProductDetail({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const product = await getProductBySlug(params.slug);
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
   if (!product) {
     return <div className="p-10">Product not found.</div>;
   }

@@ -7,6 +7,7 @@ import { WooImage, WooProduct, WooVariation } from "@/lib/woocommerce-types";
 import CalculateArea from "./CalculateArea";
 import ProductVariations from "./VariableOptions";
 import SimpleCart from "./SimpleCart";
+import DeckingCalculator from "./DeckingCalculator";
 
 interface SingleBannerProps {
   data: WooProduct;
@@ -18,7 +19,19 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
   const rating = data.rating_count || 0;
 
-  console.log("Product Data:", productType);
+  // Check if product is decking/cladding based on multiple criteria
+  const productName = data.name?.toLowerCase() || "";
+  const isDecking =
+    productType === "Decking" ||
+    productName.includes("decking") ||
+    data.categories?.some(cat => cat.name?.toLowerCase().includes("decking"));
+
+  const isCladding =
+    productType === "Cladding" ||
+    productName.includes("cladding") ||
+    data.categories?.some(cat => cat.name?.toLowerCase().includes("cladding"));
+
+  console.log("Product Data:", { productType, isDecking, isCladding, name: data.name });
 
   // Extract WooCommerce price info
   const regularPrice = data.regular_price;
@@ -86,8 +99,10 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
                   : "Backorder"}
               </span>
             </p>
-
-            {productType === "Calculator" ? (
+            
+            {isDecking || isCladding ? (
+              <DeckingCalculator data={data} />
+            ) : productType === "Calculator" ? (
               <CalculateArea data={data} />
             ) : productType === "Fencing" ? (
               <FenceConfigurator data={data} />

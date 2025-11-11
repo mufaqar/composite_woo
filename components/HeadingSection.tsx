@@ -8,7 +8,7 @@ const HeadingSection = ({ title, desc, readMore }: any) => {
     const text = desc;
     return (
 
-        <div className="md:max-w-[804px] max-w-[389px] mx-auto px-4">
+        <div className="md:max-w-[804px] max-w-[389px] mx-auto px-4 bg-0">
             <AnimateOnScroll type="fade-up" delay={getDelay()}>  
             <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title text-center font-DM_Sans">
                 {title}
