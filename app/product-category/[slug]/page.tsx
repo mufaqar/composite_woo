@@ -58,13 +58,13 @@ export default async function CategoryPage({
     image: p.images?.[0]?.src || "",
     ...p,
   }));
-  console.log(category, "category");
+
 
   return (
     <main>
       <Banner
         title={category?.name}
-        img={category?.image.src || "/images/fencing.png"}
+        img={category?.image?.src || "/images/fencing.png"}
         desc={cat_sub_title}
       />
       <FeaturedIcons />

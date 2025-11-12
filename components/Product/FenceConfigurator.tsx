@@ -161,7 +161,7 @@ export default function FenceConfigurator({ data }: FenceProps) {
     gridCols = "grid-cols-4"
   ) => (
     <div className={`grid ${gridCols} gap-4 mt-3`}>
-      {options.map((opt) => (
+      {options?.map((opt) => (
         <div
           key={opt.id}
           onClick={() => setSelected(opt.id)}

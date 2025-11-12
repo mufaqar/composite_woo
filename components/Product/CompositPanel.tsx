@@ -5,7 +5,11 @@ import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
 const CompositPanel = ({ cat_info }: CompositPanelProps) => {
-  const { image, title, description, options } = cat_info;
+
+  const options = cat_info?.options;
+
+  console.log("cat_info:", cat_info);
+ 
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
@@ -23,7 +27,7 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
         {/* Left Side */}
         <div className="md:w-1/2 w-full md:ml-12">
           <Image
-            src={image}
+            src={cat_info?.image || "/images/fence-panel.png"}
             alt="fence-panel"
             width={509}
             height={598}
@@ -34,15 +38,15 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
         {/* Right Side */}
         <div className="md:w-1/2 w-full">
           <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
-            {title}
+            {cat_info?.title}
           </h2>
           <p className="md:text-xl text-sm font-normal text-description">
-            {description}
+            {cat_info?.description}
           </p>
 
           <div className="mt-6 divide-y divide-[#D6D6D6]">
-            {options.map((item, index) => (
-              <div
+            {options?.map((item, index) => (
+              <div 
                 key={index}
                 className="flex items-start gap-2 py-3 cursor-pointer"
                 onClick={() =>
@@ -51,8 +55,8 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
               >
                 <div className="relative w-[22px] md:w-[48px]">
                   <Image
-                    src={item.icon}
-                    alt={item.title}
+                    src={item.icon || "/images/shield.png"}
+                    alt={item.title || "icon"}
                     width={48}
                     height={48}
                     className="min-w-[22px] min-h-[22px] md:min-w-[48px] md:min-h-[48px]"

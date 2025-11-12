@@ -69,7 +69,7 @@ const ProductVariations = ({
                 {attributeName}:
               </label>
               <div className="flex flex-wrap gap-2">
-                {options.map((option) => {
+                {options?.map((option) => {
                   const isSelected =
                     selectedAttributes[attributeName] === option;
                   return (

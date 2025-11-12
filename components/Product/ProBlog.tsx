@@ -10,7 +10,10 @@ interface Props {
 }
 
 const ProBlog = ({ cat_info }: Props) => {
-  const related_data = cat_info.related_data;
+  const related_data = Array.isArray(cat_info?.related_data)
+    ? cat_info.related_data
+    : [];
+
   return (
     <section className="py-16 bg-[#F0FAF7] relative ">
       <Image
@@ -22,15 +25,15 @@ const ProBlog = ({ cat_info }: Props) => {
       />
       {/* Heading + Read More */}
       <HeadingSection
-        title={cat_info.blog_title}
-        desc={cat_info.blog_description}
+        title={cat_info?.blog_title}
+        desc={cat_info?.blog_description}
         readMore
       />
 
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-16">
         <div className="md:w-1/2 w-full">
           <Image
-            src={cat_info.blog_banner || ""}
+            src={cat_info?.blog_banner || "/images/pro-blog.png"}
             alt="pro-blog"
             width={509}
             height={598}
@@ -42,20 +45,20 @@ const ProBlog = ({ cat_info }: Props) => {
             return (
               <div key={idx} className="pt-5 border-t border-secondary w-full">
                 <h3 className="md:text-[22px] text-lg leading-none font-bold font-DM_Sans">
-                  {item.title}
+                  {item?.title}
                 </h3>
                 <p className="md:text-base text-sm font-normal text-description font-Satoshi mt-2 mb-11">
-                  {item.sub_title}
+                  {item?.sub_title}
                 </p>
                 <Image
-                  src={item?.image || ""}
+                  src={item?.image || "/images/pro-blog-1.png"}
                   alt="pro-blog"
                   width={260}
                   height={200}
                   className="object-cover w-full h-full max-h-[260px]"
                 />
                 <p className="md:text-base text-sm font-normal text-description font-Satoshi mt-2 mb-11">
-                  {item.description}
+                  {item?.description}
                 </p>
               </div>
             );

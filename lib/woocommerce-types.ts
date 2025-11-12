@@ -66,7 +66,7 @@ export interface WooProduct {
   has_options?: boolean;
   _links?: WooLinks;
   acf?: WooACF;
-  options: Options;
+  options?: Options;
 }
 
 /** Woo ACF Fields */
@@ -89,9 +89,9 @@ export interface WooDimensions {
 }
 
 export interface RelatedData {
-  title: string;
-  sub_title: string;
-  description: string;
+  title?: string;
+  sub_title?: string;
+  description?: string;
   image?: string;
 }
 
@@ -100,19 +100,17 @@ export interface RelatedData {
  */
 export interface WooCategory {
   id: number;
-  name: string;
-  slug: string;
-  parent: number;
-  description: string;
-  display: string;
-  menu_order: number;
-  count: number;
+  name?: string;
+  slug?: string;
+  parent?: number;
+  description?: string;
+  display?: string;
+  menu_order?: number;
+  count?: number;
   // Blog-related custom ACF fields
   blog_title?: string;
   blog_description?: string;
   blog_banner?: string;
-
-  // Should be an array (since you map over it)
   related_data?: RelatedData[];
 }
 
@@ -121,11 +119,11 @@ export interface WooCategory {
  */
 export interface WooImage {
   id: number;
-  date_created: string;
-  date_modified: string;
-  src: string;
-  name: string;
-  alt: string;
+  date_created?: string;
+  date_modified?: string;
+  src?: string;
+  name?: string;
+  alt?: string;
 }
 
 
@@ -142,16 +140,16 @@ export interface FeatureOptions {
  * A single feature item in the comparison table
  */
 export interface Feature {
-  title: string;          // e.g. "Finish" or "Slip Resistance"
-  options: FeatureOptions; // contains col1, col2, col3
+  title?: string;          // e.g. "Finish" or "Slip Resistance"
+  options?: FeatureOptions; // contains col1, col2, col3
 }
 
 /**
  * Props expected by the Compare component
  */
 export interface CompareProps {
-  cat_info: {
-    features: Feature[];
+  cat_info?: {
+    features?: Feature[];
   };
 }
 
@@ -160,26 +158,26 @@ export interface CompareProps {
  * Each accordion option inside the Composite Panel
  */
 export interface CompositeOption {
-  icon: string;         // icon image URL (e.g. "/images/shield.png")
-  title: string;        // heading for each accordion item
-  description: string;  // text revealed when active
+  icon?: string;         // icon image URL (e.g. "/images/shield.png")
+  title?: string;        // heading for each accordion item
+  description?: string;  // text revealed when active
 }
 
 /**
  * Main category information for the Composite Panel
  */
 export interface CompositeCategory {
-  image: string;               // main banner image
-  title: string;               // section heading
-  description: string;         // short paragraph below title
-  options: CompositeOption[];  // accordion-style options
+  image?: string;               // main banner image
+  title?: string;               // section heading
+  description?: string;         // short paragraph below title
+  options?: CompositeOption[];  // accordion-style options
 }
 
 /**
  * Props for the CompositPanel component
  */
 export interface CompositPanelProps {
-  cat_info: CompositeCategory;
+  cat_info?: CompositeCategory;
 }
 
 
