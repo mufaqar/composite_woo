@@ -4,7 +4,7 @@ import { CompareProps } from "@/lib/woocommerce-types";
 import React from "react";
 
 const Compare = ({ cat_info }: CompareProps) => {
-  const features = cat_info.features || [];
+  const features = cat_info?.features || [];
 
 
   return (

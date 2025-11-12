@@ -8,7 +8,6 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
 
   const options = cat_info?.options;
 
-  console.log("cat_info:", cat_info);
  
   const [activeIndex, setActiveIndex] = useState<number>(0);
 

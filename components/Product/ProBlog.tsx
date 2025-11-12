@@ -11,7 +11,7 @@ interface Props {
 
 const ProBlog = ({ cat_info }: Props) => {
   const related_data = Array.isArray(cat_info?.related_data)
-    ? cat_info.related_data
+    ? cat_info?.related_data
     : [];
 
   return (
