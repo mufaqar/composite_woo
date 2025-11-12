@@ -191,7 +191,7 @@ function CalculatorContent() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto w-full max-w-2xl overflow-y-scroll">
       <DrawerHeader>
         <div className="flex items-center gap-2">
           {step !== "type" && (
