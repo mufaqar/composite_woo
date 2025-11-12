@@ -11,16 +11,16 @@ import DeckingCalculator from "./DeckingCalculator";
 
 interface SingleBannerProps {
   data: WooProduct;
-  images: WooImage[];
+   images?: WooImage[];
   product_variations: WooVariation[];
 }
 
 const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
   const productType = data?.acf?.product_type;
-  const rating = data.rating_count || 0;
+  const rating = data?.rating_count || 0;
 
   // Check if product is decking/cladding based on multiple criteria
-  const productName = data.name?.toLowerCase() || "";
+  const productName = data?.name?.toLowerCase() || "";
   const isDecking =
     productType === "Decking" ||
     productName.includes("decking") ||
@@ -29,9 +29,8 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
   const isCladding =
     productType === "Cladding" ||
     productName.includes("cladding") ||
-    data.categories?.some(cat => cat.name?.toLowerCase().includes("cladding"));
+    data.categories?.some(cat => cat?.name?.toLowerCase().includes("cladding"));
 
-  console.log("Product Data:", { productType, isDecking, isCladding, name: data.name });
 
   // Extract WooCommerce price info
   const regularPrice = data.regular_price;
@@ -50,7 +49,7 @@ const SingleBanner = ({ data, product_variations }: SingleBannerProps) => {
       </div>
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-start ">
         <div className="md:w-1/2 w-full   md:sticky top-10">
-          <ProductGallery images={data.images} />
+          <ProductGallery images={data.images ?? []} />
         </div>
         <div className="md:w-1/2 w-full">
           <div className="pb-6 border-b border-[#D2D2D2] mb-10">

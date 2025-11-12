@@ -100,13 +100,13 @@ export interface RelatedData {
  */
 export interface WooCategory {
   id: number;
-  name?: string;
-  slug?: string;
-  parent?: number;
-  description?: string;
-  display?: string;
-  menu_order?: number;
-  count?: number;
+  name: string;
+  slug: string;
+  parent: number;
+  description: string;
+  display: string;
+  menu_order: number;
+  count: number;
   // Blog-related custom ACF fields
   blog_title?: string;
   blog_description?: string;
@@ -119,11 +119,11 @@ export interface WooCategory {
  */
 export interface WooImage {
   id: number;
-  date_created?: string;
-  date_modified?: string;
-  src?: string;
-  name?: string;
-  alt?: string;
+  date_created: string;
+  date_modified: string;
+  src: string;
+  name: string;
+  alt: string;
 }
 
 
@@ -140,16 +140,16 @@ export interface FeatureOptions {
  * A single feature item in the comparison table
  */
 export interface Feature {
-  title?: string;          // e.g. "Finish" or "Slip Resistance"
-  options?: FeatureOptions; // contains col1, col2, col3
+  title: string;          // e.g. "Finish" or "Slip Resistance"
+  options: FeatureOptions; // contains col1, col2, col3
 }
 
 /**
  * Props expected by the Compare component
  */
 export interface CompareProps {
-  cat_info?: {
-    features?: Feature[];
+  cat_info: {
+    features: Feature[];
   };
 }
 
