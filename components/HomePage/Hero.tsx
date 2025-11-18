@@ -39,11 +39,8 @@ const Hero = ({ data }: Props) => {
             >
               Explore Composite Decking
             </Link>
-            <Link
-              href="/product-category/composite-fencing"
-              className="secondary_btn"
-            >
-              Discover Composite Fencing
+            <Link href="/sample-product" className="secondary_btn">
+              Order Sample
             </Link>
           </div>
         </AnimateOnScroll>

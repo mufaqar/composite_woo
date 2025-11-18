@@ -18,7 +18,6 @@ const products = [
 
 const information = [
   { name: "About Us", href: "/about" },
-  { name: "Advice Centre", href: "/contact-us/" },
   { name: "FAQ", href: "/faqs" },
   { name: "Privacy Policy", href: "/privacy-policy" },
   { name: "Terms & Conditions", href: "/terms-and-conditions/" },
