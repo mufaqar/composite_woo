@@ -74,7 +74,7 @@ const Header = () => {
             <ul className="flex md:flex-row flex-col gap-6">
               {menuItems.map((item, index) => (
                 <li key={index}>
-                  <Link
+                  <Link   onClick={() => setMblMenu(false)}
                     href={item.href}
                     className={`${
                       pathname === "/"
