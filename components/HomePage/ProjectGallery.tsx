@@ -12,9 +12,9 @@ interface Props {
   data?: HomeInfoSection;
   post: Inspiration[];
 }
-const Outdoor = ({ data, post }: Props) => {
+const ProjectGallery = ({ data, post }: Props) => {
 
-  console.log("Outdoor posts:", post);
+
   const getDelay = useAutoDelay();
   return (
     <section className="py-16 bg-[#F0FAF7] relative ">
@@ -29,15 +29,9 @@ const Outdoor = ({ data, post }: Props) => {
       <AnimateOnScroll type="fade-up" delay={getDelay()}>
         <OutDoorSlider data={post}/>
       </AnimateOnScroll>
-      <AnimateOnScroll type="fade-up" delay={getDelay()}>
-        <div className="w-fit mx-auto flex md:flex-row flex-col gap-5 mt-5">
-          <Link href="/project-gallery" className="primary_btn">
-            View Our Project Gallery
-          </Link>
-        </div>
-      </AnimateOnScroll>
+      
     </section>
   );
 };
 
-export default Outdoor;
+export default ProjectGallery;
