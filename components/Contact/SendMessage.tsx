@@ -31,9 +31,9 @@ import React from "react";
 // ];
 
 const iconList = [
-  <FaMapPin className="w-6 h-6" />,
-  <FaPhone className="w-6 h-6" />,
-  <FaMailBulk className="w-6 h-6" />,
+  <FaMapPin key="map" className="w-6 h-6" />,
+  <FaPhone key="phone" className="w-6 h-6" />,
+  <FaMailBulk key="mail" className="w-6 h-6" />,
 ];
 
 interface props {
@@ -56,7 +56,7 @@ function Contact({ data }: props) {
               className="border border-[#E4E4E4] rounded-lg p-6 flex flex-col items-start text-left"
             >
               <div className="bg-[#00DFA21C] text-[#00DFA2] p-3 rounded-full">
-                  {iconList[idx]} {/* STATIC ICONS */}
+                  {iconList[idx]}
               </div>
               <h3 className="mt-4 font-semibold  text-[28px] text-title font-DM_Sans">
                 {item.title}
