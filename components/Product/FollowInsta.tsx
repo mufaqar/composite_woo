@@ -13,10 +13,10 @@ const FollowInsta = () => {
                     <Image src="/images/gallery1.png" alt='gallery1' width={610} height={450} />
                 </div>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-5'>
-                    <Image src="/images/gallery2.png" alt='gallery2' width={295} height={212} />
-                    <Image src="/images/gallery3.png" alt='gallery3' width={295} height={212} />
-                    <Image src="/images/gallery4.png" alt='gallery4' width={295} height={212} />
-                    <Image src="/images/gallery5.png" alt='gallery5' width={295} height={212} />
+                    <Image src="/images/gallery2.png" alt='gallery2' width={295} height={212} className='w-full md:w-auto' />
+                    <Image src="/images/gallery3.png" alt='gallery3' width={295} height={212} className='w-full md:w-auto' />
+                    <Image src="/images/gallery4.png" alt='gallery4' width={295} height={212} className='w-full md:w-auto' />
+                    <Image src="/images/gallery5.png" alt='gallery5' width={295} height={212} className='w-full md:w-auto' />
                 </div>
             </div>
             <div className='w-fit mx-auto flex md:flex-row flex-col gap-5 mt-10'>

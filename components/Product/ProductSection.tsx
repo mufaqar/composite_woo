@@ -61,7 +61,7 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
 
             <div className="container mx-auto px-4 mt-16">
                 {/* Product Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3  space-y-12 space-x-6">
+                <div className="grid grid-cols-1 md:grid-cols-3  space-y-12 md:space-x-6">
                     {data.slice(0, visibleCount).map((item) => (
                         <ProductBox key={item.id} data={item} />
                     ))}
