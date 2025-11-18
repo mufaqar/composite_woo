@@ -20,6 +20,8 @@ import {
 } from "../queries/getPosts";
 import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
 import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
+import { GET_SAMPLE, SamplePageQuery } from "../queries/GetSamples";
+import { ContactPageQuery, GET_Contact } from "../queries/GetContact";
 
 export async function getHomeData() {
   const { data } = await client.query<GetHomeQuery>({ query: GET_HOME });
@@ -140,6 +142,53 @@ export async function getAboutPageData() {
     };
   } catch (error) {
     console.error("Error fetching About Page:", error);
+    return null;
+  }
+}
+
+export async function getContactPageData() {
+  try {
+    const { data } = await client.query<ContactPageQuery>({
+      query: GET_Contact,
+    });
+
+    const page = data?.page;
+    const contactUs = page?.contactInfo;
+
+    return contactUs;
+  } catch (error) {
+    console.error("Error fetching About Page:", error);
+    return null;
+  }
+}
+
+// =======================
+// SAMPLE PAGE DATA (NEW)
+// =======================
+export async function getSamplePageData() {
+  try {
+    const { data } = await client.query<SamplePageQuery>({
+      query: GET_SAMPLE,
+    });
+
+    const page = data?.page;
+
+    return {
+      title: page?.title ?? "",
+
+      sampleInfo: page?.productSampleInfo?.sampleInfo
+        ? {
+            title: page.productSampleInfo.sampleInfo.title ?? "",
+            description: page.productSampleInfo.sampleInfo.description ?? "",
+            image:
+              page.productSampleInfo.sampleInfo.image?.node?.mediaItemUrl ?? "",
+          }
+        : null,
+
+      samplesType: page?.productSampleInfo?.samplesType,
+    };
+  } catch (error) {
+    console.error("Error fetching Sample Page:", error);
     return null;
   }
 }
