@@ -41,7 +41,14 @@ const accordionData = [
   },
 ];
 
-export default function SampleRequestForm() {
+export default function SampleRequestForm({RequestInfo}:any) {
+
+  console.log("RequestInfo",RequestInfo);
+
+
+
+
+
   const [expanded, setExpanded] = useState<string[]>([]);
   const [selectedSamples, setSelectedSamples] = useState<string[]>([]); // ✅ now stores NAMES
   const [formData, setFormData] = useState({
@@ -127,16 +134,16 @@ export default function SampleRequestForm() {
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-10">
         {/* Left - Accordions */}
         <div className="md:w-3/5">
-          {accordionData.map((section) => (
+          {RequestInfo.map((section:any,idx:number) => (
             <AccordionSection
-              key={section.title}
+              key={idx}
               title={section.title}
               description={section.description}
-              products={section.products}
+              products={section.samples}
               expanded={expanded.includes(section.title)}
               onToggle={() => handleAccordionToggle(section.title)}
               selectedSamples={selectedSamples}
-              onSampleSelect={(name) => handleSampleSelect(name)}
+              onSampleSelect={(title) => handleSampleSelect(title)}
             />
           ))}
         </div>

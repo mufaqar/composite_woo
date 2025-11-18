@@ -5,8 +5,8 @@ import ProductCard from "./ProductCard";
 
 interface Product {
   id: number;
-  name: string;
-  image: string;
+  title: string;
+  sampleimage:any;
   category: string;
 }
 
@@ -29,6 +29,9 @@ export default function AccordionSection({
   selectedSamples,
   onSampleSelect,
 }: AccordionSectionProps) {
+
+console.log(products);
+
   return (
     <div className="md:mb-10 mb-6 md:pb-10 pb-6 border-b border-[#C6C6C6]">
       <h2 className="md:text-3xl text-2xl leading-none font-semibold text-title font-DM_Sans mb-5 flex justify-between items-start"
@@ -47,11 +50,11 @@ export default function AccordionSection({
             <ProductCard
               key={product.id}
               id={product.id}
-              name={product.name}
-              image={product.image}
+              name={product.title}
+              image={product?.sampleimage?.node.mediaItemUrl}
               category={product.category}
-              isSelected={selectedSamples.includes(product.name)}
-              onSelect={() => onSampleSelect(product.name)}
+              isSelected={selectedSamples.includes(product.title)}
+              onSelect={() => onSampleSelect(product.title)}
             />
           ))}
         </div>

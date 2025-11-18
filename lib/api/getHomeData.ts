@@ -171,22 +171,9 @@ export async function getSamplePageData() {
       query: GET_SAMPLE,
     });
 
-    const page = data?.page;
+    const SampleData = data?.page?.productSampleInfo;
 
-    return {
-      title: page?.title ?? "",
-
-      sampleInfo: page?.productSampleInfo?.sampleInfo
-        ? {
-            title: page.productSampleInfo.sampleInfo.title ?? "",
-            description: page.productSampleInfo.sampleInfo.description ?? "",
-            image:
-              page.productSampleInfo.sampleInfo.image?.node?.mediaItemUrl ?? "",
-          }
-        : null,
-
-      samplesType: page?.productSampleInfo?.samplesType,
-    };
+    return SampleData;
   } catch (error) {
     console.error("Error fetching Sample Page:", error);
     return null;
