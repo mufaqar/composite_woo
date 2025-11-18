@@ -4,10 +4,9 @@ import { FaChevronDown } from "react-icons/fa";
 import ProductCard from "./ProductCard";
 
 interface Product {
-  id: number;
-  title: string;
-  sampleimage:any;
-  category: string;
+  name: string;
+  image?: string;
+  category?: string;
 }
 
 interface AccordionSectionProps {
@@ -17,7 +16,7 @@ interface AccordionSectionProps {
   expanded: boolean;
   onToggle: () => void;
   selectedSamples: string[];
-  onSampleSelect: (id: string) => void;
+  onSampleSelect: (name: string) => void;
 }
 
 export default function AccordionSection({
@@ -29,32 +28,37 @@ export default function AccordionSection({
   selectedSamples,
   onSampleSelect,
 }: AccordionSectionProps) {
-
-console.log(products);
-
   return (
     <div className="md:mb-10 mb-6 md:pb-10 pb-6 border-b border-[#C6C6C6]">
-      <h2 className="md:text-3xl text-2xl leading-none font-semibold text-title font-DM_Sans mb-5 flex justify-between items-start"
+      <h2
+        className="md:text-3xl text-2xl leading-none font-semibold text-title font-DM_Sans mb-5 flex justify-between items-start cursor-pointer"
         onClick={onToggle}
       >
         {title}
-        <span className={`min-w-11 min-h-11 text-sm flex items-center justify-center rounded-full bg-primary text-title transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
-        ><FaChevronDown />
+        <span
+          className={`min-w-11 min-h-11 text-sm flex items-center justify-center rounded-full bg-primary text-title transition-transform duration-300 ${
+            expanded ? "rotate-180" : ""
+          }`}
+        >
+          <FaChevronDown />
         </span>
       </h2>
-      <p className="md:text-xl text-sm font-normal text-description mb-2">{description}</p>
+
+      <p className="md:text-xl text-sm font-normal text-description mb-2">
+        {description}
+      </p>
 
       {expanded && (
         <div className="grid sm:grid-cols-3 gap-4 mt-12">
-          {products.map((product) => (
+          {products.map((product, idx) => (
             <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.title}
-              image={product?.sampleimage?.node.mediaItemUrl}
-              category={product.category}
-              isSelected={selectedSamples.includes(product.title)}
-              onSelect={() => onSampleSelect(product.title)}
+              key={idx} // use idx since GraphQL data doesn't have id
+              id={idx}
+              name={product.name}
+              image={product.image || "/images/sample.png"}
+              category={product.category || ""}
+              isSelected={selectedSamples.includes(product.name)}
+              onSelect={() => onSampleSelect(product.name)}
             />
           ))}
         </div>
