@@ -10,15 +10,16 @@ export default async function SamplePage() {
   const BannerInfo = data?.sampleInfo;
 
   const RequestInfo =
-  data?.samplesType?.map((section: any) => ({
-    title: section.title,
-    description: section.description,
-    products:   // <-- changed from samples
-      section.samples?.map((sample: any) => ({
-        name: sample.title,
-        image: sample.sampleImage?.node?.mediaItemUrl,
-      })) || [],
-  })) || [];
+    (Array.isArray(data?.samplesType) ? data.samplesType : data?.samplesType ? [data.samplesType] : [])
+      .map((section: any) => ({
+        title: section.title,
+        description: section.description,
+        products:   // <-- changed from samples
+          section.samples?.map((sample: any) => ({
+            name: sample.title,
+            image: sample.sampleImage?.node?.mediaItemUrl,
+          })) || [],
+      }));
   return (
     <main>
       <Banner
