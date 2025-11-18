@@ -49,7 +49,7 @@ function Contact() {
                 {item.icon}
               </div>
               <h3 className="mt-4 font-semibold  text-[28px] text-title font-DM_Sans">{item.title}</h3>
-              <p className="mt-2 text-xl text-description font-Satoshi">{item.description}</p>
+              <p className="mt-2 text-xl text-description font-Satoshi break-all">{item.description}</p>
             </div>
           ))}
         </div>
