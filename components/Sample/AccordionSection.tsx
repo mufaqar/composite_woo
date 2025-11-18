@@ -30,8 +30,8 @@ export default function AccordionSection({
   onSampleSelect,
 }: AccordionSectionProps) {
   return (
-    <div className="md:mb-20 mb-10 md:pb-20 pb-10 border-b border-[#C6C6C6]">
-      <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans mb-5 flex justify-between items-start"
+    <div className="md:mb-10 mb-6 md:pb-10 pb-6 border-b border-[#C6C6C6]">
+      <h2 className="md:text-3xl text-2xl leading-none font-semibold text-title font-DM_Sans mb-5 flex justify-between items-start"
         onClick={onToggle}
       >
         {title}
