@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import AccordionSection from "./AccordionSection";
 import SampleForm from "./SampleForm";
 
@@ -18,21 +18,31 @@ export default function SampleRequestForm({ RequestInfo }: any) {
     terms: false,
   });
 
-  const handleAccordionToggle = (title: string) => {
+  // ⭐ GENERATE UNIQUE IDS ONLY ONCE
+  const sectionsWithUniqueIds = useMemo(() => {
+    return RequestInfo.map((section: any, idx: number) => ({
+      ...section,
+      uid: section.id || `accordion-${idx}`,
+      products: section.products.map((p: any) => ({
+        ...p,
+        uniqueId: crypto.randomUUID(), // ⭐ stable per product
+      })),
+    }));
+  }, [RequestInfo]);
+
+  const handleAccordionToggle = (id: string) => {
     setExpanded((prev) =>
-      prev.includes(title)
-        ? prev.filter((t) => t !== title)
-        : [...prev, title]
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
   };
 
-  const handleSampleSelect = (sampleName: string) => {
+  const handleSampleSelect = (productUniqueId: string) => {
     setSelectedSamples((prev) => {
-      if (prev.includes(sampleName)) {
-        return prev.filter((name) => name !== sampleName);
+      if (prev.includes(productUniqueId)) {
+        return prev.filter((id) => id !== productUniqueId);
       }
       if (prev.length < 4) {
-        return [...prev, sampleName];
+        return [...prev, productUniqueId];
       }
       alert("You can select up to 4 samples total.");
       return prev;
@@ -53,10 +63,11 @@ export default function SampleRequestForm({ RequestInfo }: any) {
     e.preventDefault();
 
     try {
-      const selectedSampleNames = selectedSamples.map((sampleName) => {
-        const found = RequestInfo.flatMap((s: any) => s.products).find(
-          (p: any) => p.name === sampleName
-        );
+      const selectedSampleNames = selectedSamples.map((uid) => {
+        const found = sectionsWithUniqueIds
+          .flatMap((s: any) => s.products)
+          .find((p: any) => p.uniqueId === uid);
+
         return found ? found.name : "";
       });
 
@@ -70,6 +81,7 @@ export default function SampleRequestForm({ RequestInfo }: any) {
       });
 
       const result = await response.json();
+
       if (result.success) {
         alert("✅ Your sample request has been sent!");
         setSelectedSamples([]);
@@ -85,19 +97,19 @@ export default function SampleRequestForm({ RequestInfo }: any) {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-10">
-
         {/* Left side - Accordions */}
         <div className="md:w-3/5">
-          {RequestInfo.map((section: any, idx: number) => (
+          {sectionsWithUniqueIds.map((section: any) => (
             <AccordionSection
-              key={idx}
+              key={section.uid}
+              id={section.uid}
               title={section.title}
               description={section.description}
-              products={section.products}   // <-- FIXED
-              expanded={expanded.includes(section.title)}
-              onToggle={() => handleAccordionToggle(section.title)}
+              products={section.products}
+              expanded={expanded.includes(section.uid)}
+              onToggle={() => handleAccordionToggle(section.uid)}
               selectedSamples={selectedSamples}
-              onSampleSelect={(title) => handleSampleSelect(title)}
+              onSampleSelect={handleSampleSelect}
             />
           ))}
         </div>
@@ -108,12 +120,11 @@ export default function SampleRequestForm({ RequestInfo }: any) {
             formData={formData}
             onChange={handleChange}
             onSubmit={handleSubmit}
-            accordionData={RequestInfo}  // now contains products
+            accordionData={sectionsWithUniqueIds}
             selectedSamples={selectedSamples}
             onRemoveSample={handleRemoveSample}
           />
         </div>
-
       </div>
     </section>
   );
