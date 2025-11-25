@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import PostBox from "./PostBox";
 import { CategoriesConnection, CategoryNode, Post } from "@/lib/gql-types";
 
@@ -11,6 +12,8 @@ interface BlogGridProps {
 }
 
 const BlogGrid: React.FC<BlogGridProps> = ({ posts, cat }) => {
+  const pathname = usePathname(); // ⭐ Current URL path
+
   if (!posts?.length) {
     return <p className="text-center text-gray-500">No blog posts found.</p>;
   }
@@ -18,19 +21,45 @@ const BlogGrid: React.FC<BlogGridProps> = ({ posts, cat }) => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
+
         {/* 🏷️ Categories */}
         {cat?.nodes?.length ? (
           <ul className="flex flex-wrap justify-center mb-10">
+
+            {/* ALL link */}
+            <li>
+              <Link
+                href={`/blog`}
+                className={`inline-block text-sm px-5 py-2 rounded-sm mr-2 mb-2 transition-all duration-300
+                  ${
+                    pathname === "/blog"
+                      ? "bg-secondary text-white" // ⭐ Active state
+                      : "bg-primary/20 text-gray-800 hover:bg-secondary hover:text-white"
+                  }
+                `}
+              >
+                All
+              </Link>
+            </li>
+
+            {/* Category List */}
             {cat.nodes.map((category: CategoryNode) => (
               <li key={category.id}>
                 <Link
                   href={`/category/${category.slug}`}
-                  className="inline-block bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-full mr-2 mb-2 hover:bg-secondary hover:text-white transition-all duration-300"
+                  className={`inline-block text-sm px-5 py-2 rounded-sm mr-2 mb-2 transition-all duration-300
+                    ${
+                      pathname === `/category/${category.slug}`
+                        ? "bg-secondary text-white" // ⭐ Active link style
+                        : "bg-primary/20 text-gray-800 hover:bg-secondary hover:text-white"
+                    }
+                  `}
                 >
                   {category.name}
                 </Link>
               </li>
             ))}
+
           </ul>
         ) : null}
 
