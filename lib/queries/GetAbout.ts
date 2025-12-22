@@ -18,13 +18,11 @@ query AboutPage {
 fragment MediaItemFragment on MediaItem {
   mediaItemUrl
 }
-
 fragment AcfMediaItemConnectionEdgeFragment on AcfMediaItemConnectionEdge {
   node {
     ...MediaItemFragment
   }
 }
-
 fragment AboutInfoAboutUsFragment on AboutInfoAboutUs {
   title
   description
