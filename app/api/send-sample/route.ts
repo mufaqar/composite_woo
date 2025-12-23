@@ -44,7 +44,7 @@ Terms Accepted: ${formData.terms ? "Yes" : "No"}
     // 2️⃣ INSERT INTO WORDPRESS
     // ======================
     await fetch(
-      `${process.env.WP_URL}/wp-json/custom/v1/sample-request`,
+      `https://woocommerce-1531534-5907732.cloudwaysapps.com/wp-json/custom/v1/sample-request`,
       {
         method: "POST",
         headers: {
