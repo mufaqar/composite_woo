@@ -6,7 +6,9 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { formData, selectedSamples } = body;
 
-    // Create transporter
+    // ======================
+    // 1️⃣ SEND EMAIL
+    // ======================
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -15,44 +17,61 @@ export async function POST(req: Request) {
       },
     });
 
-    // Format selected samples
     const samplesList = selectedSamples
       .map((sample: any, i: number) => `${i + 1}. ${sample.name}`)
       .join("\n");
 
-    const mailOptions = {
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO,
       subject: "🧾 New Sample Request",
       text: `
-              A new sample request has been submitted:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Address: ${formData.address}, ${formData.city}, ${formData.country}, ${formData.postcode}
+Project Start Date: ${formData.startdate}
 
-              🧍 Name: ${formData.name}
-              📧 Email: ${formData.email}
-              📞 Phone: ${formData.phone}
-              🏠 Address: ${formData.address}, ${formData.city}, ${formData.country}, ${
-                      formData.postcode
-                    }
-              📅 Project Start Date: ${formData.startdate}
+Selected Samples:
+${samplesList || "No samples selected"}
 
-              Selected Samples:
-              ${samplesList || "No samples selected"}
-
-              Fitters Quote: ${formData.filters ? "Yes" : "No"}
-              Terms Accepted: ${formData.terms ? "Yes" : "No"}
+Fitters Quote: ${formData.filters ? "Yes" : "No"}
+Terms Accepted: ${formData.terms ? "Yes" : "No"}
       `,
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
+    // ======================
+    // 2️⃣ INSERT INTO WORDPRESS
+    // ======================
+    await fetch(
+      `${process.env.WP_URL}/wp-json/custom/v1/sample-request`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.WP_API_KEY || "", // optional
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: `${formData.address}, ${formData.city}, ${formData.country}, ${formData.postcode}`,
+          startdate: formData.startdate,
+          filters: formData.filters,
+          terms: formData.terms,
+          samples: samplesList,
+        }),
+      }
+    );
 
     return NextResponse.json({
       success: true,
-      message: "Email sent successfully!",
+      message: "Email sent & data saved successfully!",
     });
-  } catch (error: any) {
-    console.error("Email send error:", error);
+  } catch (error) {
+    console.error("Error:", error);
     return NextResponse.json(
-      { success: false, message: "Failed to send email." },
+      { success: false, message: "Something went wrong" },
       { status: 500 }
     );
   }
