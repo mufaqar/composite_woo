@@ -40,15 +40,14 @@ const ProBlog = ({ cat_info }: Props) => {
             className="object-cover w-full h-full"
           /> */}
 
-         
-      <iframe
-        src="https://www.youtube.com/embed/bEevRgEKqEw?si=VL36W6XOr6Aaw7Pd"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="absolute top-0 left-0 w-full h-full rounded-lg"
-      />
-   </div>
+          <iframe
+            src="https://www.youtube.com/embed/bEevRgEKqEw?si=VL36W6XOr6Aaw7Pd"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute top-0 left-0 w-full h-full rounded-lg"
+          />
+        </div>
         <div className="md:w-1/2 w-full flex md:flex-row flex-col gap-5">
           {related_data?.map((item, idx) => {
             return (
