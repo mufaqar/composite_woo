@@ -78,16 +78,11 @@ export default async function CategoryPage({
       <ProBlog cat_info={category.acf.blog_info} />
       <ClientLogos data={client_logos} />
       <section className="bg-background">
-        <ProductSection
-          data={mappedProducts}
-          readMore
-          categoryTitle={category.name}
-          categoryDescription={category.description}
-        />
+         <Compare cat_info={category.acf} />
       </section>
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
       <CompositPanel cat_info={category.acf.standards}/>
-      <Compare cat_info={category.acf} />
+     
       <div className="relative ">
         <Image
           src="/images/boxes-right.png"
