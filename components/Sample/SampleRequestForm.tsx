@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import AccordionSection from "./AccordionSection";
 import SampleForm from "./SampleForm";
 
@@ -35,6 +35,12 @@ export default function SampleRequestForm({ RequestInfo }: any) {
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
   };
+
+  useEffect(() => {
+    if (sectionsWithUniqueIds.length > 0) {
+      setExpanded([sectionsWithUniqueIds[0].uid]);
+    }
+  }, [sectionsWithUniqueIds]);
 
   const handleSampleSelect = (productUniqueId: string) => {
     setSelectedSamples((prev) => {
