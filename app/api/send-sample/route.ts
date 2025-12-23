@@ -1,59 +1,58 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { formData, selectedSamples, token } = body;
+    const { formData, selectedSamples } = body;
 
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // Format selected samples
     const samplesList = selectedSamples
-      .map((s: any, i: number) => `${i + 1}. ${s.name}`)
+      .map((sample: any, i: number) => `${i + 1}. ${sample.name}`)
       .join("\n");
 
-    const wpRes = await fetch(
-      `${process.env.NEXT_PUBLIC_WP_URL}/wp-json/wp/v2/sample_requests`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: `Sample Request – ${formData.name}`,
-          status: "publish",
-          content: `
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_TO,
+      subject: "🧾 New Sample Request",
+      text: `
+A new sample request has been submitted:
 
-Address:
-${formData.address}, ${formData.city}, ${formData.country}, ${formData.postcode}
+🧍 Name: ${formData.name}
+📧 Email: ${formData.email}
+📞 Phone: ${formData.phone}
+🏠 Address: ${formData.address}, ${formData.city}, ${formData.country}, ${
+        formData.postcode
+      }
+📅 Project Start Date: ${formData.startdate}
 
-Start Date: ${formData.startdate}
-
-Samples:
-${samplesList || "None"}
+Selected Samples:
+${samplesList || "No samples selected"}
 
 Fitters Quote: ${formData.filters ? "Yes" : "No"}
 Terms Accepted: ${formData.terms ? "Yes" : "No"}
-          `,
-          meta: {
-            email: formData.email,
-            phone: formData.phone,
-          },
-        }),
-      }
-    );
+      `,
+    };
 
-    if (!wpRes.ok) {
-      const err = await wpRes.json();
-      throw new Error(err.message || "WP insert failed");
-    }
+    await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      message: "Email sent successfully!",
+    });
   } catch (error: any) {
-    console.error(error);
+    console.error("Email send error:", error);
     return NextResponse.json(
-      { success: false, message: error.message },
+      { success: false, message: "Failed to send email." },
       { status: 500 }
     );
   }
