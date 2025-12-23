@@ -30,6 +30,7 @@ export default async function CategoryPage({
 
   const category = await getCategoryBySlug(slug);
   const cat_sub_title = category.acf.sub_title;
+   const cat_title = category.acf.title;
   const sale_offer = category.acf.cat_sales_off;
 
   const blogs = await getBlogData();
@@ -63,7 +64,7 @@ export default async function CategoryPage({
   return (
     <main>
       <Banner
-        title={category?.name}
+        title={cat_title || category.name}
         img={category?.image?.src || "/images/fencing.png"}
         desc={cat_sub_title}
       />

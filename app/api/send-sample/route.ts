@@ -25,21 +25,21 @@ export async function POST(req: Request) {
       to: process.env.EMAIL_TO,
       subject: "🧾 New Sample Request",
       text: `
-A new sample request has been submitted:
+              A new sample request has been submitted:
 
-🧍 Name: ${formData.name}
-📧 Email: ${formData.email}
-📞 Phone: ${formData.phone}
-🏠 Address: ${formData.address}, ${formData.city}, ${formData.country}, ${
-        formData.postcode
-      }
-📅 Project Start Date: ${formData.startdate}
+              🧍 Name: ${formData.name}
+              📧 Email: ${formData.email}
+              📞 Phone: ${formData.phone}
+              🏠 Address: ${formData.address}, ${formData.city}, ${formData.country}, ${
+                      formData.postcode
+                    }
+              📅 Project Start Date: ${formData.startdate}
 
-Selected Samples:
-${samplesList || "No samples selected"}
+              Selected Samples:
+              ${samplesList || "No samples selected"}
 
-Fitters Quote: ${formData.filters ? "Yes" : "No"}
-Terms Accepted: ${formData.terms ? "Yes" : "No"}
+              Fitters Quote: ${formData.filters ? "Yes" : "No"}
+              Terms Accepted: ${formData.terms ? "Yes" : "No"}
       `,
     };
 
