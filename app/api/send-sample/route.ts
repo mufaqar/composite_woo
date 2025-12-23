@@ -49,7 +49,7 @@ Terms Accepted: ${formData.terms ? "Yes" : "No"}
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": process.env.WP_API_KEY || "", // optional
+          "x-api-key": process.env.WC_CONSUMER_SECRET || "", // optional
         },
         body: JSON.stringify({
           name: formData.name,
