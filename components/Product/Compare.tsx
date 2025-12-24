@@ -4,7 +4,9 @@ import { CompareProps } from "@/lib/woocommerce-types";
 import React from "react";
 
 const Compare = ({ cat_info }: CompareProps) => {
-  const features = cat_info?.features || [];
+  const features = cat_info?.compair_table?.features || [];
+  const ch = cat_info?.compair_table?.head_info;
+
 
 
   return (
@@ -15,16 +17,16 @@ const Compare = ({ cat_info }: CompareProps) => {
             <thead>
               <tr>
                 <th className="bg-[#003D2C] border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center text-white px-4 py-4 rounded-t-[20px]">
-                  Features & Appearance
+                  {ch?.head_1}
                 </th>
                 <th className="border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center text-title px-4 py-4">
-                  Essential Grooved
+                  {ch?.head_2}
                 </th>
                 <th className="border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center text-title px-4 py-4">
-                  Essential Wood Grain
+                  {ch?.head_3}
                 </th>
                 <th className="border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center text-title px-4 py-4">
-                  Capped Dual Colour
+                  {ch?.head_4}
                 </th>
               </tr>
             </thead>

@@ -114,7 +114,15 @@ export interface WooCategory {
   related_data?: RelatedData[];
   blog_video?: string;
   video_image?: string;
-
+  compair_table?: {
+  head_info?: {
+    head_1?: string;
+    head_2?: string;
+    head_3?: string;
+    head_4?: string;
+  };
+  features?: Feature[];
+};
 }
 
 /**
@@ -129,7 +137,6 @@ export interface WooImage {
   alt: string;
 }
 
-
 /**
  * Each feature row’s option values for the 3 product types
  */
@@ -143,7 +150,7 @@ export interface FeatureOptions {
  * A single feature item in the comparison table
  */
 export interface Feature {
-  title: string;          // e.g. "Finish" or "Slip Resistance"
+  title: string; // e.g. "Finish" or "Slip Resistance"
   options: FeatureOptions; // contains col1, col2, col3
 }
 
@@ -151,29 +158,26 @@ export interface Feature {
  * Props expected by the Compare component
  */
 export interface CompareProps {
-  cat_info: {
-    features: Feature[];
-  };
+   cat_info?: WooCategory;
 }
-
 
 /**
  * Each accordion option inside the Composite Panel
  */
 export interface CompositeOption {
-  icon?: string;         // icon image URL (e.g. "/images/shield.png")
-  title?: string;        // heading for each accordion item
-  description?: string;  // text revealed when active
+  icon?: string; // icon image URL (e.g. "/images/shield.png")
+  title?: string; // heading for each accordion item
+  description?: string; // text revealed when active
 }
 
 /**
  * Main category information for the Composite Panel
  */
 export interface CompositeCategory {
-  image?: string;               // main banner image
-  title?: string;               // section heading
-  description?: string;         // short paragraph below title
-  options?: CompositeOption[];  // accordion-style options
+  image?: string; // main banner image
+  title?: string; // section heading
+  description?: string; // short paragraph below title
+  options?: CompositeOption[]; // accordion-style options
 }
 
 /**
@@ -182,7 +186,6 @@ export interface CompositeCategory {
 export interface CompositPanelProps {
   cat_info?: CompositeCategory;
 }
-
 
 /**
  * Product Attribute
