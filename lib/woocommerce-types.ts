@@ -112,6 +112,9 @@ export interface WooCategory {
   blog_description?: string;
   blog_banner?: string;
   related_data?: RelatedData[];
+  blog_video?: string;
+  video_image?: string;
+
 }
 
 /**

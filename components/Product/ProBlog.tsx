@@ -32,21 +32,26 @@ const ProBlog = ({ cat_info }: Props) => {
 
       <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-16">
         <div className="md:w-1/2 w-full relative aspect-video">
-          {/* <Image
-            src={cat_info?.blog_banner || "/images/pro-blog.png"}
-            alt="pro-blog"
-            width={509}
-            height={598}
-            className="object-cover w-full h-full"
-          /> */}
-
-          <iframe
-            src="https://www.youtube.com/embed/bEevRgEKqEw?si=VL36W6XOr6Aaw7Pd"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute top-0 left-0 w-full h-full rounded-lg"
-          />
+          {cat_info?.video_image === 'Image' ? (
+              <Image
+                src={cat_info?.blog_banner || "/images/pro-blog.png"}
+                alt="pro-blog"
+                width={509}
+                height={598}
+                priority
+                className="w-full h-full object-cover rounded-lg"
+              />
+            ) : (
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                <iframe
+                  src={`https://www.youtube.com/embed/${cat_info?.blog_video}`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute top-0 left-0 w-full h-full"
+                />
+              </div>
+            )}
         </div>
         <div className="md:w-1/2 w-full flex md:flex-row flex-col gap-5">
           {related_data?.map((item, idx) => {
