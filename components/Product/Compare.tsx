@@ -5,7 +5,7 @@ import React from "react";
 
 const Compare = ({ cat_info }: CompareProps) => {
   const features = cat_info?.compair_table?.features || [];
-  const ch = cat_info?.compair_table?.head_info;
+  const ch = cat_info?.compair_table?.header_info;
 
 
 

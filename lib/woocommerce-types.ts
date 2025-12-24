@@ -115,7 +115,7 @@ export interface WooCategory {
   blog_video?: string;
   video_image?: string;
   compair_table?: {
-  head_info?: {
+  header_info?: {
     head_1?: string;
     head_2?: string;
     head_3?: string;
