@@ -1,14 +1,10 @@
 "use client";
-
 import { CompareProps } from "@/lib/woocommerce-types";
 import React from "react";
 
 const Compare = ({ cat_info }: CompareProps) => {
   const features = cat_info?.compair_table?.features || [];
   const ch = cat_info?.compair_table?.header_info;
-
-
-
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">

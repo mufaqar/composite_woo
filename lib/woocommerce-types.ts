@@ -115,14 +115,14 @@ export interface WooCategory {
   blog_video?: string;
   video_image?: string;
   compair_table?: {
-  header_info?: {
-    head_1?: string;
-    head_2?: string;
-    head_3?: string;
-    head_4?: string;
+    header_info?: {
+      head_1?: string;
+      head_2?: string;
+      head_3?: string;
+      head_4?: string;
+    };
+    features?: Feature[];
   };
-  features?: Feature[];
-};
 }
 
 /**
@@ -158,7 +158,7 @@ export interface Feature {
  * Props expected by the Compare component
  */
 export interface CompareProps {
-   cat_info?: WooCategory;
+  cat_info?: WooCategory;
 }
 
 /**
