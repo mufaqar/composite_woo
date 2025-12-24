@@ -28,19 +28,19 @@ const Compare = ({ cat_info }: CompareProps) => {
             </thead>
 
             <tbody className="text-description text-sm md:text-base">
-              {features.map((item, index) => (
+              {features?.map((item, index) => (
                 <tr key={index} className="border-b border-[#E5E5E5]">
                   <td className="bg-[#003D2C] md:text-lg text-sm font-normal text-white text-center px-4 py-4">
-                    {item.title}
+                    {item?.title}
                   </td>
                   <td className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
-                    {item.options?.col1 || "-"}
+                    {item?.options?.col1 || "-"}
                   </td>
                   <td className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
                     {item.options?.col2 || "-"}
                   </td>
                   <td className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
-                    {item.options?.col3 || "-"}
+                    {item?.options?.col3 || "-"}
                   </td>
                 </tr>
               ))}
