@@ -5,12 +5,8 @@ import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
 const CompositPanel = ({ cat_info }: CompositPanelProps) => {
-
   const options = cat_info?.options || [];
-
-  //console.log("CompositPanel options:", options);
-
- 
+  //console.log("CompositPanel options:", options); 
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
@@ -35,7 +31,6 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
             className="w-full h-full object-cover"
           />
         </div>
-
         {/* Right Side */}
         <div className="md:w-1/2 w-full">
           <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
