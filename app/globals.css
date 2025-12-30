@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+:root {
+  --background: #f6f6f6;
+  --foreground: #171717;
+  --primary: #00dfa2;
+  --secondary: #f06f38;
+  --title: #1c1c1c;
+  --description: #5e5e5e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-title: var(--title);
+  --color-description: var(--description);
+  --font-DM_Sans: var(--font-sans);
+  --font-Satoshi: var(--font-satoshi);
+}
+
+body,
+p,
+a,
+span {
+  font-family: var(--font-Satoshi);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-DM_Sans);
+}
+
+.container {
+  width: 100%;
+}
+
+.secondary_btn {
+  @apply md:text-lg text-sm font-bold text-title inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 bg-white rounded-4xl hover:bg-primary hover:text-white transition-all duration-300 ease-in-out;
+}
+
+.primary_btn {
+  @apply md:text-lg text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 bg-secondary rounded-4xl hover:bg-primary hover:text-white transition-all duration-300 ease-in-out;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+.post_content p {
+  @apply mb-5;
+}
+
+.post_content p,
+.post_content li,
+.post_content span {
+  @apply md:text-lg text-sm font-normal text-description;
+}
+
+.post_content a {
+  @apply text-primary hover:text-secondary;
+}
+
+.post_content ul {
+  @apply flex flex-col gap-3 list-disc list-inside mb-5;
+}
+
+.post_content h2 {
+  @apply md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans capitalize mb-8;
+}
+.post_content h3{
+  @apply md:text-xl text-xs font-bold text-title font-DM_Sans capitalize mb-5;
+}
+.post_content h4{
+  @apply md:text-lg text-xs font-bold text-title font-DM_Sans capitalize mb-5;
+}
+
+.test_Scroll ::-webkit-scrollbar {
+  width: 2px;
+  /* Width for vertical scrollbar */
+  height: 10px;
+  /* Height for horizontal scrollbar */
+}
+
+.test_Scroll ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.test_Scroll ::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+@media (min-width: 96rem) {
+
+  /* 1536px */
+  .container {
+    max-width: 1280px;
+  }
+}
