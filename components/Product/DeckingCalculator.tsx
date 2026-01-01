@@ -66,6 +66,13 @@ const DeckingCalculator = ({ data }: DeckingCalculatorProps) => {
     };
 
     dispatch(addToCart(productData));
+    // ✅ Smooth scroll to top (Mini Cart location)
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
     // alert(
     //   `✅ Added ${boardsNeeded} board(s) to cart. Total: £${totalPrice.toFixed(
     //     2

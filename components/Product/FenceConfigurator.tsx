@@ -169,9 +169,8 @@ export default function FenceConfigurator({ data }: FenceProps) {
         >
           {opt.image && (
             <div
-              className={`relative mb-2 border-3 ${
-                selected === opt.id ? "border-secondary" : "border-transparent"
-              }`}
+              className={`relative mb-2 border-3 ${selected === opt.id ? "border-secondary" : "border-transparent"
+                }`}
             >
               {selected === opt.id && (
                 <span className="absolute -top-2 -right-2 w-7 h-7 flex items-center justify-center rounded-full bg-secondary text-white">
@@ -208,17 +207,15 @@ export default function FenceConfigurator({ data }: FenceProps) {
           <div className="flex gap-2 mt-4 divide-x divide-[#E4E4E4]">
             <button
               onClick={() => setUnit("cm")}
-              className={`${
-                unit === "cm" ? "text-secondary" : "text-description"
-              } md:text-lg text-sm font-normal hover:text-secondary px-4`}
+              className={`${unit === "cm" ? "text-secondary" : "text-description"
+                } md:text-lg text-sm font-normal hover:text-secondary px-4`}
             >
               CM
             </button>
             <button
               onClick={() => setUnit("ft")}
-              className={`${
-                unit === "ft" ? "text-secondary" : "text-description"
-              } md:text-lg text-sm font-normal hover:text-secondary px-4`}
+              className={`${unit === "ft" ? "text-secondary" : "text-description"
+                } md:text-lg text-sm font-normal hover:text-secondary px-4`}
             >
               FT
             </button>
@@ -228,11 +225,10 @@ export default function FenceConfigurator({ data }: FenceProps) {
               <button
                 key={h.id}
                 onClick={() => setHeight(h.id)}
-                className={`md:text-lg text-sm font-normal px-4 py-2 rounded-full border hover:bg-primary hover:text-white ${
-                  height === h.id
+                className={`md:text-lg text-sm font-normal px-4 py-2 rounded-full border hover:bg-primary hover:text-white ${height === h.id
                     ? "bg-primary text-white"
                     : "bg-white text-description border-transparent"
-                }`}
+                  }`}
               >
                 {h.label}
               </button>
@@ -320,13 +316,20 @@ export default function FenceConfigurator({ data }: FenceProps) {
     };
 
     dispatch(addToCart(productData));
+    // ✅ Smooth scroll to top (Mini Cart location)
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
     // alert(
     //   `✅ Added ${quantity} item(s) to cart. Total: €${totalPrice.toFixed(2)}`
     // );
   };
 
   return (
-    <div className="container mx-auto flex md:flex-row flex-col gap-6 ">  
+    <div className="container mx-auto flex md:flex-row flex-col gap-6 ">
       {/* Configurator */}
       <div className="w-full space-y-6 mt-10">
         <div className="py-3 bg-background">
@@ -340,9 +343,8 @@ export default function FenceConfigurator({ data }: FenceProps) {
         {steps.map((step) => (
           <div
             key={step.id}
-            className={`border border-[#E4E4E4] p-2 ${
-              openSteps.includes(step.id) ? "pb-9" : ""
-            }`}
+            className={`border border-[#E4E4E4] p-2 ${openSteps.includes(step.id) ? "pb-9" : ""
+              }`}
           >
             <button
               onClick={() => toggleStep(step.id)}
@@ -353,18 +355,17 @@ export default function FenceConfigurator({ data }: FenceProps) {
               <span>{openSteps.includes(step.id) ? "−" : "+"}</span>
             </button>
             <div
-              className={`transition-all duration-300 overflow-hidden ${
-                openSteps.includes(step.id) ? "max-h-full" : "max-h-0 "
-              }`}
+              className={`transition-all duration-300 overflow-hidden ${openSteps.includes(step.id) ? "max-h-full" : "max-h-0 "
+                }`}
             >
               {step.content
                 ? step.content
                 : step.options &&
-                  renderOptions(
-                    step.options,
-                    step.selected || "",
-                    step.setSelected!
-                  )}
+                renderOptions(
+                  step.options,
+                  step.selected || "",
+                  step.setSelected!
+                )}
             </div>
           </div>
         ))}

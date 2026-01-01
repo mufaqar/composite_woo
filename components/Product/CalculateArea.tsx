@@ -9,10 +9,10 @@ import { addToCart } from "@/redux/slices/cartSlice";
 
 
 interface CalculateAreaProps {
-  data : WooProduct;
-  
+  data: WooProduct;
+
 }
-const CalculateArea = ({ data   }: CalculateAreaProps) => {
+const CalculateArea = ({ data }: CalculateAreaProps) => {
   const [length, setLength] = useState(1);
   const [boards, setBoards] = useState(2);
   const dispatch = useDispatch();
@@ -38,12 +38,19 @@ const CalculateArea = ({ data   }: CalculateAreaProps) => {
     };
 
     dispatch(addToCart(productData));
+    // ✅ Smooth scroll to top (Mini Cart location)
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
     // alert(`✅ Added ${boards} board(s) to cart. Total: £${total.toFixed(2)}`);
   };
 
   return (
     <div className="container mx-auto flex md:flex-row flex-col gap-6">
-    
+
       <div className="w-full mt-10">
         {/* <div
           className="md:text-xl text-sm font-normal text-description font-Satoshi"

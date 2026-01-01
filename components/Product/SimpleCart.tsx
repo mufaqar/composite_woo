@@ -28,6 +28,13 @@ const SimpleCart = ({ data }: SimpleCartProps) => {
     };
 
     dispatch(addToCart(productData));
+    // ✅ Smooth scroll to top (Mini Cart location)
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
     // alert(`✅ ${boards} ${data.name} added to cart. Total: £${totalPrice}`);
   };
 
