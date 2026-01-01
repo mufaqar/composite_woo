@@ -34,7 +34,7 @@ type CalculatorStep = "type" | "variant" | "size" | "product" | "calculate";
 
 export function CalculatorHome() {
   return (
-    <section className="pt-16 bg-white">
+    <section className="pt-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <HeadingSection
           title="Composite Decking & Cladding Calculator"
@@ -229,9 +229,8 @@ function CalculatorContent() {
               disabled={isFetchingProducts}
             >
               <RefreshCw
-                className={`w-5 h-5 ${
-                  isFetchingProducts ? "animate-spin" : ""
-                }`}
+                className={`w-5 h-5 ${isFetchingProducts ? "animate-spin" : ""
+                  }`}
               />
             </button>
           )}
@@ -363,11 +362,10 @@ function CalculatorContent() {
                             £{parseFloat(product.price).toFixed(2)}
                           </span>
                           <span
-                            className={`px-2 py-0.5 rounded text-xs ${
-                              product.stock_status === "instock"
+                            className={`px-2 py-0.5 rounded text-xs ${product.stock_status === "instock"
                                 ? "bg-green-100 text-green-700"
                                 : "bg-red-100 text-red-700"
-                            }`}
+                              }`}
                           >
                             {product.stock_status === "instock"
                               ? "In Stock"
@@ -405,11 +403,10 @@ function CalculatorContent() {
                               £{parseFloat(product.price).toFixed(2)}
                             </span>
                             <span
-                              className={`px-2 py-0.5 rounded text-xs ${
-                                product.stock_status === "instock"
+                              className={`px-2 py-0.5 rounded text-xs ${product.stock_status === "instock"
                                   ? "bg-green-100 text-green-700"
                                   : "bg-red-100 text-red-700"
-                              }`}
+                                }`}
                             >
                               {product.stock_status === "instock"
                                 ? "In Stock"

@@ -54,11 +54,11 @@ export default async function Home() {
         data={featuredsProducts}
         info={homeInfo?.trendingProducts ?? ({} as HomeInfoSection)}
       />
-      <div className="w-full h-px bg-white/10"/>
-      <CalculatorHome />
-      <Advanteges data={homeInfo?.advantages} />
+      <div className="w-full h-px bg-white/10" />
       <ClientLogos data={client_logos} />
+      <Advanteges data={homeInfo?.advantages} />
       <CustomerInnovate data={homeInfo?.customersInnovate} />
+      <CalculatorHome />
       <Outdoor data={homeInfo?.dreamOutdoor} post={inpirtations} />
       <Testimonials data={reviews} />
       <FaqsSection title="Frequently Asked Questions" faqs={faqs_Cat} />

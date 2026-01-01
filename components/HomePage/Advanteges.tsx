@@ -23,41 +23,33 @@ const faqs = [
 ];
 
 interface Props {
-  data?: HomeInfoAdvanteges;
+    data?: HomeInfoAdvanteges;
 }
 
 
-const Advanteges = ({data}:Props) => {
+const Advanteges = ({ data }: Props) => {
     const getDelay = useAutoDelay();
     const [activeIndex, setActiveIndex] = useState(0);
-     const options = data?.options ?? [];
-     console.log("Advanteges data:", data);
+    const options = data?.options ?? [];
+    console.log("Advanteges data:", data);
 
     return (
-        <section className="pt-16 bg-background relative flex mb-20 ">
-            <Image
-                src="/images/boxes2.png"
-                alt="boxes2"
-                width={232}
-                height={155}
-                className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 md:-ml-10 md:-mt-6 md:block hidden"
-            />
-
-            <div className="flex md:flex-row flex-col gap-6 mt-10">
+        <section className="bg-background relative ">
+            <div className="flex md:flex-row flex-col gap-0">
                 {/* Left Side */}
-                <div className="2xl:w-[45%] md:w-[55%] w-full md:px-0 px-4 md:pb-16 pb-8">
+                <div className="md:w-1/2 w-full 2xl:px-[100px] px-4 md:py-16 py-8">
                     <AnimateOnScroll type="fade-up" delay={getDelay()}>
                         <h4 className="text-lg font-bold text-primary font-DM_Sans md:block hidden mb-4">
-                           {data?.subTitle}
+                            {data?.subTitle}
                         </h4>
                     </AnimateOnScroll>
                     <AnimateOnScroll type="fade-up" delay={getDelay()}>
                         <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
-                           {data?.title}
+                            {data?.title}
                         </h2>
                     </AnimateOnScroll>
                     <div className="mt-6 divide-y divide-[#D6D6D6]">
-                        {options?.map((item:any, index:number) => (
+                        {options?.map((item: any, index: number) => (
                             <AnimateOnScroll key={index} type="fade-up" delay={getDelay()}>
                                 <div className="flex items-start gap-2 py-3 cursor-pointer"
                                     onClick={() =>
@@ -91,20 +83,13 @@ const Advanteges = ({data}:Props) => {
                 </div>
 
                 {/* Right Side */}
-                <div className="2xl:w-[55%] md:w-[45%] w-full flex ">
-                    <Image
-                        src="/images/boxes2.png"
-                        alt="boxes2"
-                        width={232}
-                        height={155}
-                        className="md:w-[232px] md:h-[155px] w-[87.5px] h-[58.33] -rotate-90 -ml-5 md:hidden block"
-                    />
+                <div className="md:w-1/2 w-full">
                     <Image
                         src={data?.icon?.node.mediaItemUrl || "/images/advantage.png"}
                         alt="advantage"
                         width={605}
                         height={627}
-                        className="md:w-full w-fit -mb-20 overflow-x-hidden"
+                        className="h-full w-full object-cover object-center"
                     />
                 </div>
             </div>

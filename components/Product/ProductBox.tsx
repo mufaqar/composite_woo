@@ -108,9 +108,9 @@ const ProductBox = ({ data }: any) => {
         </div>
         {/* Price */}
         <div className="mt-3 flex items-center gap-2">
-          <span className="text-description line-through">{data.price}</span>
+          <span className="text-description line-through">£{data.price}</span>
           <span className="text-title font-semibold text-xl">
-            {data.sale_price}
+            £{data.sale_price}
           </span>
         </div>
         <div className="flex md:flex-row flex-col items-center justify-center gap-3 py-4 ">
