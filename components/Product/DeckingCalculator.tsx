@@ -66,11 +66,11 @@ const DeckingCalculator = ({ data }: DeckingCalculatorProps) => {
     };
 
     dispatch(addToCart(productData));
-    alert(
-      `✅ Added ${boardsNeeded} board(s) to cart. Total: £${totalPrice.toFixed(
-        2
-      )}`
-    );
+    // alert(
+    //   `✅ Added ${boardsNeeded} board(s) to cart. Total: £${totalPrice.toFixed(
+    //     2
+    //   )}`
+    // );
   };
 
   const incrementValue = (

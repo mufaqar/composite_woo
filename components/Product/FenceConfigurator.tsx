@@ -320,9 +320,9 @@ export default function FenceConfigurator({ data }: FenceProps) {
     };
 
     dispatch(addToCart(productData));
-    alert(
-      `✅ Added ${quantity} item(s) to cart. Total: €${totalPrice.toFixed(2)}`
-    );
+    // alert(
+    //   `✅ Added ${quantity} item(s) to cart. Total: €${totalPrice.toFixed(2)}`
+    // );
   };
 
   return (

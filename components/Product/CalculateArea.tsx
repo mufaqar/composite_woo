@@ -38,7 +38,7 @@ const CalculateArea = ({ data   }: CalculateAreaProps) => {
     };
 
     dispatch(addToCart(productData));
-    alert(`✅ Added ${boards} board(s) to cart. Total: £${total.toFixed(2)}`);
+    // alert(`✅ Added ${boards} board(s) to cart. Total: £${total.toFixed(2)}`);
   };
 
   return (

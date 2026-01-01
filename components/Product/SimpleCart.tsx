@@ -28,7 +28,7 @@ const SimpleCart = ({ data }: SimpleCartProps) => {
     };
 
     dispatch(addToCart(productData));
-    alert(`✅ ${boards} ${data.name} added to cart. Total: £${totalPrice}`);
+    // alert(`✅ ${boards} ${data.name} added to cart. Total: £${totalPrice}`);
   };
 
   return (
