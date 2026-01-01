@@ -55,8 +55,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dm_Sans.className} ${satoshi.variable} antialiased`}>
-        <Header />
-        <ClientProvider>{children}</ClientProvider>
+        <ClientProvider>
+          <Header />
+          {children}
+        </ClientProvider>
         <Footer />
       </body>
     </html>

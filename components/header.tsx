@@ -5,6 +5,11 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { FaBars, FaPhoneVolume } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import CartMini from "./CartMini";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { FaShoppingCart } from "react-icons/fa";
+import { closeCart, openCart } from "@/redux/slices/cartSlice";
 
 type MenuItem = {
   label: string;
@@ -28,6 +33,10 @@ const menuItems: MenuItem[] = [
 const Header = () => {
   const [mblMenu, setMblMenu] = useState(false);
   const pathname = usePathname();
+  const dispatch = useDispatch();
+  const isCartOpen = useSelector(
+    (state: any) => state.cart.isCartOpen
+  );
 
   return (
     <header
@@ -48,9 +57,9 @@ const Header = () => {
           <button
             onClick={() => setMblMenu(!mblMenu)}
             className={`${pathname === "/"
-                ? "text-white border-white/30 bg-white/20 "
-                : "text-[#003D2C] border-black/65 hover:text-white bg-white"
-              } hover:bg-primary hover:border-primary text-2xl md:hidden  inline-flex w-[59px] h-[59px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
+              ? "text-white border-white/30 bg-white/20 "
+              : "text-[#003D2C] border-black/65 hover:text-white bg-white"
+              } hover:bg-primary hover:border-primary text-2xl md:hidden  inline-flex w-[49px] h-[49px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
           >
             {mblMenu ? <IoMdClose /> : <FaBars />}
           </button>
@@ -99,26 +108,39 @@ const Header = () => {
 
         {/* Right side buttons */}
         <div className="md:flex gap-2.5 hidden">
+          <button
+            onClick={() =>
+              dispatch(openCart())
+            }
+            className={`${pathname === "/"
+              ? "text-white border-white/30 bg-white/20 "
+              : "text-[#003D2C] border-black/65 hover:text-white bg-white"
+              } hover:bg-primary hover:border-primary text-2xl inline-flex w-[49px] h-[49px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
+
+          >
+            <FaShoppingCart size={20} />
+          </button>
           <Link
             href="#"
             className={`${pathname === "/"
-                ? "text-white border-white/30 bg-white/20 "
-                : "text-[#003D2C] border-black/65 hover:text-white bg-white"
-              } hover:bg-primary hover:border-primary text-2xl inline-flex w-[59px] h-[59px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
+              ? "text-white border-white/30 bg-white/20 "
+              : "text-[#003D2C] border-black/65 hover:text-white bg-white"
+              } hover:bg-primary hover:border-primary text-2xl inline-flex w-[49px] h-[49px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
           >
             <FaPhoneVolume />
           </Link>
           <Link
             href="/sample-product"
             className={`${pathname === "/"
-                ? "bg-white hover:text-white text-title"
-                : "bg-secondary text-white"
+              ? "bg-white hover:text-white text-title"
+              : "bg-secondary text-white"
               } hover:bg-primary text-lg font-bold  inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out`}
           >
             Request a Free Sample
           </Link>
         </div>
       </div>
+      {isCartOpen && <CartMini />}
     </header>
   );
 };

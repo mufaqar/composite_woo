@@ -11,6 +11,7 @@ type CartItem = {
 
 type CartState = {
   items: CartItem[];
+  isCartOpen: boolean;
 };
 
 // ✅ Load cart from localStorage if available
@@ -24,6 +25,7 @@ const loadCart = (): CartItem[] => {
 
 const initialState: CartState = {
   items: loadCart(),
+  isCartOpen: false,
 };
 
 export const cartSlice = createSlice({
@@ -31,7 +33,6 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      // Check if the same product (with same options) exists
       const existing = state.items.find(
         (i) =>
           i.id === action.payload.id &&
@@ -44,7 +45,9 @@ export const cartSlice = createSlice({
         state.items.push(action.payload);
       }
 
-      // ✅ Save updated cart to localStorage
+      // ✅ AUTO OPEN MINI CART
+      state.isCartOpen = true;
+
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
@@ -53,7 +56,6 @@ export const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
 
-      // ✅ Save updated cart
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
@@ -64,11 +66,8 @@ export const cartSlice = createSlice({
       action: PayloadAction<{ id: string; quantity: number }>
     ) => {
       const item = state.items.find((i) => i.id === action.payload.id);
-      if (item) {
-        item.quantity = action.payload.quantity;
-      }
+      if (item) item.quantity = action.payload.quantity;
 
-      // ✅ Save updated cart
       if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
@@ -76,18 +75,34 @@ export const cartSlice = createSlice({
 
     clearCart: (state) => {
       state.items = [];
+      state.isCartOpen = false;
 
-      // ✅ Clear from localStorage
       if (typeof window !== "undefined") {
         localStorage.removeItem("cart");
       }
     },
+
+    // ✅ NEW ACTIONS
+    openCart: (state) => {
+      state.isCartOpen = true;
+    },
+
+    closeCart: (state) => {
+      state.isCartOpen = false;
+    },
   },
 });
 
+
 // ✅ Export actions
-export const { addToCart, removeFromCart, updateQuantity, clearCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+  openCart,
+  closeCart,
+} = cartSlice.actions;
 
 // ✅ Export reducer
 export default cartSlice.reducer;
