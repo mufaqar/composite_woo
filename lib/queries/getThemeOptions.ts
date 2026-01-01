@@ -16,7 +16,6 @@ export const GET_ThemeOption = gql`
 }
 `;
 
-
 export interface ThemeOptionQuery {
   themeOptions: {
     footerInfo: FooterInfo;
@@ -34,3 +33,4 @@ export interface ProductMenuItem {
   title: string;
   link: string;
 }
+

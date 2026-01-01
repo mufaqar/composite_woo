@@ -22,6 +22,7 @@ import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
 import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
 import { GET_SAMPLE, SamplePageQuery } from "../queries/GetSamples";
 import { ContactPageQuery, GET_Contact } from "../queries/GetContact";
+import { GET_ThemeOption, ThemeOptionQuery } from "../queries/getThemeOptions";
 
 export async function getHomeData() {
   const { data } = await client.query<GetHomeQuery>({ query: GET_HOME });
@@ -179,3 +180,12 @@ export async function getSamplePageData() {
     return null;
   }
 }
+
+
+export const getThemeOptions = async () => {
+  const { data } = await client.query<ThemeOptionQuery>({
+    query: GET_ThemeOption,
+  });
+
+  return data?.themeOptions.footerInfo;
+};
