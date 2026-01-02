@@ -1,5 +1,6 @@
 "use client";
 
+import { getThemeOptions } from "@/lib/api/getHomeData";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
@@ -30,7 +31,10 @@ const socials = [
   { name: "YouTube", href: "#", icon: FaYoutube },
 ];
 
-const Footer = () => {
+const Footer = async () => {
+
+   const footerInfo = await getThemeOptions();
+   console.log("Footer Info:", footerInfo);
   return (
     <footer className="bg-black ">
       <Image src="/images/square.png" alt="aquare" width={77} height={77} />
@@ -46,9 +50,7 @@ const Footer = () => {
               />
             </Link>
             <p className="md:text-lg text-sm font-normal text-white mt-5">
-              Unit 11 Grosvenor Garage,
-              <br />
-              Woolston, Warrington WA1 4SF
+             {footerInfo?.address}
             </p>
           </div>
         </div>
@@ -60,13 +62,13 @@ const Footer = () => {
               PRODUCTS
             </h6>
             <ul className="space-y-4">
-              {products.map((item, i) => (
+              {footerInfo?.productMenu.map((item, i) => (
                 <li key={i}>
                   <Link
-                    href={item.href}
+                    href={item.link}
                     className="text-base font-normal text-white hover:text-primary"
                   >
-                    {item.name}
+                    {item.title}
                   </Link>
                 </li>
               ))}
@@ -100,24 +102,24 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <Link
-                  href="mailto:support@compositewarehouse.co.uk"
+                  href={`mailto:${footerInfo?.emailAddress}`}
                   className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center"
                 >
                   <span className="text-secondary">
                     <FaEnvelope />
                   </span>
-                  support@compositewarehouse.co.uk
+                 {footerInfo?.emailAddress}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="tel:01925407884"
+                  href={`tel:${footerInfo?.tel}`}
                   className="text-sm font-normal text-white hover:text-primary inline-flex gap-2 items-center"
                 >
                   <span className="text-secondary">
                     <FaPhoneVolume />
                   </span>
-                  01925 407884
+                {footerInfo?.tel}
                 </Link>
               </li>
             </ul>
@@ -153,3 +155,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
