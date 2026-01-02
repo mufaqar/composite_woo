@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import Image from "next/image";
 import Banner from "@/components/Banner";
 import FeaturedIcons from "@/components/HomePage/FeaturedIcons";
@@ -20,6 +19,7 @@ import { GetFaqByCatQuery } from "@/lib/gql-types";
 import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 import SaleSection from "@/components/Product/SaleSection";
 import { getBlogData, getClientLogoData } from "@/lib/api/getHomeData";
+import CompositPanel2 from "@/components/Product/CompositPanel2";
 
 export default async function CategoryPage({
   params,
@@ -29,8 +29,9 @@ export default async function CategoryPage({
   const { slug } = await params; // ✅ Await here
 
   const category = await getCategoryBySlug(slug);
+  // console.log("category", category)
   const cat_sub_title = category.acf.sub_title;
-   const cat_title = category.acf.title;
+  const cat_title = category.acf.title;
   const sale_offer = category.acf.cat_sales_off;
 
   const blogs = await getBlogData();
@@ -49,7 +50,7 @@ export default async function CategoryPage({
     );
   }
 
-    const client_logos = await getClientLogoData();
+  const client_logos = await getClientLogoData();
 
   const products = await getProductsByCategory(category.id);
   const reviews = await getAllProductReviews();
@@ -79,11 +80,11 @@ export default async function CategoryPage({
       <ProBlog cat_info={category.acf.blog_info} />
       <ClientLogos data={client_logos} />
       <section className="bg-background">
-         <Compare cat_info={category.acf} />
+        <Compare cat_info={category.acf} />
       </section>
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
-      <CompositPanel cat_info={category.acf.standards}/>
-     
+      <CompositPanel cat_info={category.acf.standards} />
+      <CompositPanel2 cat_info={category.acf.standard_two} />
       <div className="relative ">
         <Image
           src="/images/boxes-right.png"
@@ -97,7 +98,7 @@ export default async function CategoryPage({
           faqs={faqs_Cat}
         />
       </div>
-      <FollowInsta />
+      <FollowInsta cat_info={category.acf.social_media} />
     </main>
   );
 }

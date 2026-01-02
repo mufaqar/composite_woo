@@ -2,12 +2,16 @@ import React from 'react'
 import HeadingSection from '../HeadingSection'
 import Image from 'next/image'
 import Link from 'next/link'
+import { WooCategory } from '@/lib/woocommerce-types'
 
-const FollowInsta = () => {
+interface Props {
+    cat_info: WooCategory;
+}
+const FollowInsta = ({ cat_info }: Props) => {
     return (
         <section className="md:py-20 py-16">
             {/* Heading + Read More */}
-            <HeadingSection title="Composite warehouse Are On Social Media" desc="Need more decking inspiration? Follow us on Instagram for our very latest decking design ideas and case studies." />
+            <HeadingSection title={cat_info?.social_title} desc={cat_info?.social_desc} />
             <div className='container mx-auto px-4 flex md:flex-row flex-col gap-6 mt-10'>
                 <div>
                     <Image src="/images/gallery1.png" alt='gallery1' width={610} height={450} />

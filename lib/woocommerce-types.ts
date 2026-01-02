@@ -123,6 +123,8 @@ export interface WooCategory {
     };
     features?: Feature[];
   };
+  social_title?: string;
+  social_desc?: string;
 }
 
 /**

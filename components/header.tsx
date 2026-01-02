@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars, FaPhoneVolume } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import CartMini from "./CartMini";
@@ -32,18 +32,28 @@ const menuItems: MenuItem[] = [
 
 const Header = () => {
   const [mblMenu, setMblMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // ✅ NEW
   const pathname = usePathname();
   const dispatch = useDispatch();
   const isCartOpen = useSelector(
     (state: any) => state.cart.isCartOpen
   );
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <header
-      className={`${pathname === "/" ? "border-transparent " : "border-[#D2D2D2]"
-        } border-b py-3.5 relative z-50`}
+      className={` ${pathname === "/" && !isScrolled ? "bg-transparent border-transparent" : "bg-white border-[#D2D2D2]"
+        } border-b py-3.5 sticky top-0 z-50`}
     >
-      <div className="container mx-auto px-4 flex flex-row gap-5 items-center justify-between">
+      <div className="container mx-auto px-4 flex flex-row gap-5 items-center justify-between relative">
         {/* Logo */}
         <div>
           <Link href="/">
@@ -52,11 +62,11 @@ const Header = () => {
         </div>
 
         {/* Menu */}
-        <div>
+        <div className="md:order-none order-2">
           {/* Mobile menu button */}
           <button
             onClick={() => setMblMenu(!mblMenu)}
-            className={`${pathname === "/"
+            className={`${pathname === "/" && !isScrolled
               ? "text-white border-white/30 bg-white/20 "
               : "text-[#003D2C] border-black/65 hover:text-white bg-white"
               } hover:bg-primary hover:border-primary text-2xl md:hidden  inline-flex w-[49px] h-[49px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
@@ -70,7 +80,7 @@ const Header = () => {
               md:static absolute top-20 left-0 right-0 
               
               md:p-0 p-4 transition-all duration-300 ease-in-out
-              ${pathname === "/"
+              ${pathname === "/" && !isScrolled
                 ? "md:bg-transparent  bg-title"
                 : "md:bg-transparent bg-white "
               }
@@ -90,7 +100,7 @@ const Header = () => {
           text-sm font-medium md:p-0 transition-all duration-300 ease-in-out
           ${isActive
                           ? "text-primary"
-                          : pathname === "/"
+                          : pathname === "/" && !isScrolled
                             ? "text-white hover:text-white/70"
                             : "text-title hover:text-primary"
                         }
@@ -107,12 +117,12 @@ const Header = () => {
         </div>
 
         {/* Right side buttons */}
-        <div className="md:flex gap-2.5 hidden">
+        <div className="flex gap-2.5 items-center">
           <button
             onClick={() =>
               dispatch(openCart())
             }
-            className={`${pathname === "/"
+            className={`${pathname === "/" && !isScrolled
               ? "text-white border-white/30 bg-white/20 "
               : "text-[#003D2C] border-black/65 hover:text-white bg-white"
               } hover:bg-primary hover:border-primary text-2xl inline-flex w-[49px] h-[49px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
@@ -122,7 +132,7 @@ const Header = () => {
           </button>
           <Link
             href="#"
-            className={`${pathname === "/"
+            className={`${pathname === "/" && !isScrolled
               ? "text-white border-white/30 bg-white/20 "
               : "text-[#003D2C] border-black/65 hover:text-white bg-white"
               } hover:bg-primary hover:border-primary text-2xl inline-flex w-[49px] h-[49px] items-center justify-center rounded-full border-2 transition-all duration-300 ease-in-out`}
@@ -131,16 +141,16 @@ const Header = () => {
           </Link>
           <Link
             href="/sample-product"
-            className={`${pathname === "/"
+            className={`${pathname === "/" && !isScrolled
               ? "bg-white hover:text-white text-title"
               : "bg-secondary text-white"
-              } hover:bg-primary text-lg font-bold  inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out`}
+              } hover:bg-primary text-lg font-bold  md:inline-flex w-fit md:px-7 md:py-[18px] px-5 py-2.5 rounded-4xl transition-all duration-300 ease-in-out hidden`}
           >
             Request a Free Sample
           </Link>
         </div>
+        {isCartOpen && <CartMini />}
       </div>
-      {isCartOpen && <CartMini />}
     </header>
   );
 };

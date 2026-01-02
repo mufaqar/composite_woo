@@ -10,19 +10,10 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <section className="py-16 bg-[#F0FAF7] relative">
-      {/* Decorative image */}
-      <Image
-        src="/images/boxes-right.png"
-        alt="boxes-right"
-        width={232}
-        height={155}
-        className="md:w-[100px] md:h-[155px] w-[87.5px] h-[58.33px] absolute top-0"
-      />
-
-      <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 mt-10">
+    <section className="bg-[#F0FAF7]">
+      <div className="flex md:flex-row flex-col">
         {/* Left Side */}
-        <div className="md:w-1/2 w-full md:ml-12">
+        <div className="md:w-1/2 w-full">
           <Image
             src={cat_info?.image || "/images/fence-panel.png"}
             alt="fence-panel"
@@ -32,8 +23,8 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
           />
         </div>
         {/* Right Side */}
-        <div className="md:w-1/2 w-full">
-          <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans">
+        <div className="md:w-1/2 w-full 2xl:px-[100px] px-4 md:py-16 py-8 flex flex-col justify-center">
+          <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans mb-6">
             {cat_info?.title}
           </h2>
           <p className="md:text-xl text-sm font-normal text-description">
@@ -42,7 +33,7 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
 
           <div className="mt-6 divide-y divide-[#D6D6D6]">
             {options?.map((item, index) => (
-              <div 
+              <div
                 key={index}
                 className="flex items-start gap-2 py-3 cursor-pointer"
                 onClick={() =>
@@ -73,9 +64,8 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
 
                 <div className="text-primary w-[22px] md:w-[48px] flex justify-end">
                   <FaChevronDown
-                    className={`${
-                      activeIndex === index ? "rotate-180" : ""
-                    } transition-all ease-in-out duration-300`}
+                    className={`${activeIndex === index ? "rotate-180" : ""
+                      } transition-all ease-in-out duration-300`}
                   />
                 </div>
               </div>

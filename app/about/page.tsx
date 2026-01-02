@@ -10,7 +10,7 @@ export default async function About() {
   const aboutData = await getAboutPageData();
   if (!aboutData) return <p>Failed to load About page</p>;
 
-  console.log(aboutData);
+  // console.log(aboutData);
 
   return (
     <main>
