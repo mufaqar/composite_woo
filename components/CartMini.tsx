@@ -80,16 +80,16 @@ export default function CartMini() {
       <div className="space-y-3">
         <Link
           href="/cart"
-          className="block text-center bg-title text-white py-3 text-sm font-bold hover:bg-primary transition"
+          className="block rounded-full text-center bg-title text-white py-3 text-sm font-bold hover:bg-primary transition"
         >
-          VIEW BASKET
+          View Basket
         </Link>
 
         <Link
           href="/checkout"
-          className="block text-center bg-secondary text-white py-3 text-sm font-bold hover:bg-primary transition"
+          className="block rounded-full text-center bg-secondary text-white py-3 text-sm font-bold hover:bg-primary transition"
         >
-          CHECKOUT
+          Checkout
         </Link>
       </div>
     </div>
