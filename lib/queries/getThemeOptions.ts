@@ -9,6 +9,10 @@ export const GET_ThemeOption = gql`
         title
         link
       }
+       informationMenu {
+        link
+        title
+      }
       emailAddress
       tel
     }
@@ -27,9 +31,15 @@ export interface FooterInfo {
   emailAddress: string;
   tel: string;
   productMenu: ProductMenuItem[];
+  informationMenu: InformationMenuItem[];
 }
 
 export interface ProductMenuItem {
+  title: string;
+  link: string;
+}
+
+export interface InformationMenuItem {
   title: string;
   link: string;
 }
