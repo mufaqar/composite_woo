@@ -19,6 +19,12 @@ export default function CartMini() {
   if (items.length === 0) {
     return (
       <div className="absolute right-2 top-full w-[360px] bg-white shadow-xl border border-[#E4E4E4] p-5 z-50">
+        <button
+          onClick={() => dispatch(closeCart())}
+          className="text-title hover:text-primary transition absolute top-2 right-2"
+        >
+          <IoClose size={24} />
+        </button>
         <p className="text-sm text-title font-medium">Your basket is empty.</p>
       </div>
     );
