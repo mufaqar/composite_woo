@@ -10,10 +10,10 @@ const CompositPanel2 = ({ cat_info }: CompositPanelProps) => {
 
   return (
     <section className="bg-[#F0FAF7]">
-      <div className="flex md:flex-row flex-col">
+      <div className="container mx-auto flex md:flex-row flex-col">
         {/* Left Side */}
-        <div className="md:w-1/2 w-full 2xl:px-[100px] px-4 md:py-16 py-8 flex flex-col justify-center">
-          <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans mb-6">
+        <div className="md:w-1/2 w-full  px-4 md:py-16 py-8 flex flex-col justify-center">
+          <h2 className="md:text-5xl text-[34px] leading-none font-semibold text-title font-DM_Sans mb-6">
             {cat_info?.title}
           </h2>
           <p className="md:text-xl text-sm font-normal text-description">

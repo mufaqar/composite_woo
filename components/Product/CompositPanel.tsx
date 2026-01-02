@@ -11,7 +11,7 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
 
   return (
     <section className="bg-[#F0FAF7]">
-      <div className="flex md:flex-row flex-col">
+      <div className="container mx-auto flex md:flex-row flex-col">
         {/* Left Side */}
         <div className="md:w-1/2 w-full">
           <Image
@@ -23,8 +23,8 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
           />
         </div>
         {/* Right Side */}
-        <div className="md:w-1/2 w-full 2xl:px-[100px] px-4 md:py-16 py-8 flex flex-col justify-center">
-          <h2 className="md:text-6xl text-[34px] leading-none font-semibold text-title font-DM_Sans mb-6">
+        <div className="md:w-1/2 w-full  px-4 md:py-16 py-8 flex flex-col justify-center">
+          <h2 className="md:text-5xl text-[34px] leading-none font-semibold text-title font-DM_Sans mb-6">
             {cat_info?.title}
           </h2>
           <p className="md:text-xl text-sm font-normal text-description">
@@ -46,13 +46,13 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
                     alt={item.title || "icon"}
                     width={48}
                     height={48}
-                    className="min-w-[22px] min-h-[22px] md:min-w-[48px] md:min-h-[48px]"
+                    className="min-w-[22px] min-h-[22px] md:min-w-[32px] md:min-h-[32px]"
                   />
                   <span className="absolute md:w-10 md:h-10 w-[22px] h-[22px] bg-primary/20 rounded-full -bottom-2"></span>
                 </div>
 
                 <div className="w-full">
-                  <h3 className="md:text-[28px] text-lg font-semibold text-title font-DM_Sans">
+                  <h3 className="md:text-2xl text-lg font-semibold text-title font-DM_Sans">
                     {item.title}
                   </h3>
                   {activeIndex === index && (
