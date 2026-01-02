@@ -32,7 +32,7 @@ export default async function FAQPage() {
         />
         <FaqsSection title="Composite Fencing FAQ" faqs={faqs_Cat} />
       </div>
-      <FollowInsta />
+       {/* <FollowInsta cat_info={category.acf.social_media} /> */}
     </main>
   );
 }
