@@ -50,7 +50,6 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
                   />
                   <span className="absolute md:w-10 md:h-10 w-[22px] h-[22px] bg-primary/20 rounded-full -bottom-2"></span>
                 </div>
-
                 <div className="w-full">
                   <h3 className="md:text-2xl text-lg font-semibold text-title font-DM_Sans">
                     {item.title}
@@ -61,7 +60,6 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
                     </p>
                   )}
                 </div>
-
                 <div className="text-primary w-[22px] md:w-[48px] flex justify-end">
                   <FaChevronDown
                     className={`${activeIndex === index ? "rotate-180" : ""
