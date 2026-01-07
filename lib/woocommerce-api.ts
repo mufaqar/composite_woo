@@ -5,7 +5,7 @@ import { WooProduct, WooReview, WooVariation } from "./woocommerce-types";
 /**
  * Fetch all products
  */
-export async function getAllProducts(perPage = 20): Promise<WooProduct[]> {
+export async function getAllProducts(perPage = 70): Promise<WooProduct[]> {
   try {
     const { data } = await wooApi.get("products", { per_page: perPage });
     return data;
