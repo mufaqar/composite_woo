@@ -4,7 +4,10 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 
 const ProductBox = ({ data }: any) => {
-  //console.log("Product Box",data);
+ console.log("Product Box",data);
+
+  const regularPrice = data.regular_price || data.price;
+  const salePrice = data.sale_price;
   return (
     <div className="bg-background">
       <div className="group ">
@@ -107,12 +110,23 @@ const ProductBox = ({ data }: any) => {
           </button>
         </div>
         {/* Price */}
-        <div className="mt-3 flex items-center gap-2">
-          <span className="text-description line-through">£{data.price}</span>
-          <span className="text-title font-semibold text-xl">
-            £{data.sale_price}
-          </span>
-        </div>
+       <div className="mt-3 flex items-center gap-2">
+  {salePrice ? (
+    <>
+      <span className="text-description line-through">
+        £{regularPrice}
+      </span>
+      <span className="text-title font-semibold text-xl">
+        £{salePrice}
+      </span>
+    </>
+  ) : (
+    <span className="text-title font-semibold text-xl">
+      £{regularPrice}
+    </span>
+  )}
+</div>
+
         <div className="flex md:flex-row flex-col items-center justify-center gap-3 py-4 ">
           <Link
             href={`/product/${data.slug}`}
