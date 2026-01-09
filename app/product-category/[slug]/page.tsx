@@ -44,6 +44,8 @@ export default async function CategoryPage({
 
   const faqs_Cat = data?.faqtype?.faqs?.nodes;
 
+
+
   if (!category) {
     return (
       <div className="p-10 text-center text-gray-600">Category not found.</div>

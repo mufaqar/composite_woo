@@ -125,6 +125,8 @@ export interface WooCategory {
   };
   social_title?: string;
   social_desc?: string;
+ social_gallery?: string[]
+
 }
 
 /**
