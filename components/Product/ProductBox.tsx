@@ -10,7 +10,7 @@ const ProductBox = ({ data }: any) => {
   const salePrice = data.sale_price;
 
   const badges = data.acf.product_badges || [];
-  console.log("Badges:", badges);
+  //console.log("Badges:", badges);
   return (
     <div className="bg-background">
       <div className="group ">

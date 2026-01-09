@@ -31,7 +31,7 @@ const Advanteges = ({ data }: Props) => {
     const getDelay = useAutoDelay();
     const [activeIndex, setActiveIndex] = useState(0);
     const options = data?.options ?? [];
-    console.log("Advanteges data:", data);
+   // console.log("Advanteges data:", data);
 
     return (
         <section className="bg-background relative ">

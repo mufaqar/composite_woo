@@ -30,7 +30,7 @@ interface FenceProps {
 }
 
 export default function FenceConfigurator({ data }: FenceProps) {
-  console.log("FenchConfigure", data);
+ // console.log("FenchConfigure", data);
   const dispatch = useDispatch();
   const [openSteps, setOpenSteps] = useState<number[]>([1]);
 

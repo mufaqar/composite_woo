@@ -72,7 +72,7 @@ export async function POST(req: Request) {
 
     const { data } = await wooApi.post("orders", orderPayload);
 
-    console.log("✅ WooCommerce Order Created:", data);
+   // console.log("✅ WooCommerce Order Created:", data);
 
     return NextResponse.json({ success: true, order: data }, { status: 201 });
   } catch (error: any) {

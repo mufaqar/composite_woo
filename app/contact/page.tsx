@@ -13,7 +13,7 @@ export default async function Contact() {
     const contactUs = data?.contactUs;
     const contactdetails = data?.contactDetails;
 
-    console.log(data);
+   // console.log(data);
     return (
         <main>
             <Banner

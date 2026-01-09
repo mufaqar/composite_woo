@@ -19,7 +19,7 @@ interface SingleBannerProps {
 const ProductTabs = ({ data }: SingleBannerProps) => {
   const [activeTab, setActiveTab] = useState("description");
 
-  console.log(data);
+  //console.log(data);
 
   return (
     <section className="md:py-20 py-16">

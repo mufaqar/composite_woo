@@ -50,7 +50,7 @@ function ContactForm() {
   // ✅ Handle form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("📝 Form Data Submitted:", formData);
+   // console.log("📝 Form Data Submitted:", formData);
 
     // Optional: clear form
     setFormData({ name: "", email: "", subject: "", message: "" });

@@ -23,7 +23,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
   if (!post) return notFound();
 
   const contentBlocks = post?.postInfo?.postContent ?? [];
-  console.log("Content contentBlocks:", contentBlocks);
+ // console.log("Content contentBlocks:", contentBlocks);
 
   return (
     <main className="">
