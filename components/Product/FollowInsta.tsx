@@ -11,6 +11,8 @@ interface Props {
 const FollowInsta = ({ cat_info }: Props) => {
   const gallery: string[] = cat_info?.social_gallery || [];
 
+
+
   if (!gallery.length) return null;
 
   return (
@@ -52,8 +54,8 @@ const FollowInsta = ({ cat_info }: Props) => {
 
       {/* CTA */}
       <div className="w-fit mx-auto flex md:flex-row flex-col gap-5 mt-10">
-        <Link href="#" className="primary_btn capitalize">
-          follow us on instagram
+        <Link href={cat_info?.social_link || "#"} target="_blank" className="primary_btn capitalize">
+         {cat_info?.social_text || "Follow Us on Instagram"}
         </Link>
       </div>
     </section>

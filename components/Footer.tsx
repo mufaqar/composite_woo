@@ -91,7 +91,7 @@ const Footer = async () => {
         {" "}
         <p className="md:text-base text-sm font-normal text-white">
           {" "}
-          © 2025 Copyright CompositeWarehouse – Composite Supplier. All Rights
+          © 2026 Copyright CompositeWarehouse – Composite Supplier. All Rights
           Reserved.{" "}
         </p>{" "}
         {/* Social Icons */}{" "}
