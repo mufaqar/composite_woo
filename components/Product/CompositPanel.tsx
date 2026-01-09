@@ -55,9 +55,10 @@ const CompositPanel = ({ cat_info }: CompositPanelProps) => {
                     {item.title}
                   </h3>
                   {activeIndex === index && (
-                    <p className="md:text-xl text-sm font-normal text-description mt-3">
-                      {item.description}
-                    </p>
+                     <div
+              className="post_content"
+              dangerouslySetInnerHTML={{ __html: item.description || "" }}
+            />
                   )}
                 </div>
                 <div className="text-primary w-[22px] md:w-[48px] flex justify-end">

@@ -40,23 +40,29 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
                 )}
 
                 {/* Category Description */}
-                {categoryDescription && (
-                    <p className="md:text-xl text-sm font-normal text-description">
-                        {readMore ? (
-                            <>
-                                {isExpanded ? categoryDescription : `${categoryDescription.substring(0, 122)}... `}
-                                <button
-                                    onClick={() => setIsExpanded(!isExpanded)}
-                                    className="font-bold text-secondary hover:underline transition"
-                                >
-                                    {isExpanded ? "SHOW LESS" : "READ MORE"}
-                                </button>
-                            </>
-                        ) : (
-                            categoryDescription
-                        )}
-                    </p>
-                )}
+                <div>
+                    {categoryDescription && (
+                        <div
+                            className="md:text-xl text-sm font-normal text-description post_content"
+                            dangerouslySetInnerHTML={{
+                                __html: readMore
+                                    ? isExpanded
+                                        ? categoryDescription
+                                        : `${categoryDescription.substring(0, 122)}...`
+                                    : categoryDescription,
+                            }}
+                        />
+                    )}
+
+                    {readMore && (
+                        <span
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="mt-2 font-bold text-secondary hover:underline transition cursor-pointer"
+                        >
+                            {isExpanded ? "SHOW LESS" : "READ MORE"}
+                        </span>
+                    )}
+                </div>
             </div>
 
             <div className="container mx-auto px-4 mt-16">
