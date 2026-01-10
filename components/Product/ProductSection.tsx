@@ -53,7 +53,6 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
                             }}
                         />
                     )}
-
                     {readMore && (
                         <span
                             onClick={() => setIsExpanded(!isExpanded)}
@@ -64,7 +63,6 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
                     )}
                 </div>
             </div>
-
             <div className="container mx-auto px-4 mt-16">
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3  space-y-12 md:space-x-6">
