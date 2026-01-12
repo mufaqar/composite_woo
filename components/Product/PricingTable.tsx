@@ -7,7 +7,7 @@ const PricingTable = ({ cat_info }: CompareProps) => {
   const [selected, setSelected] = useState("");
 
   return (
-    <div className="w-full border rounded-xl overflow-hidden">
+    <div className="container mx-auto border rounded-xl overflow-hidden">
 
       <table className="w-full border-collapse">
         <thead>

@@ -82,9 +82,9 @@ export default async function CategoryPage({
       />
       <ProBlog cat_info={category.acf.blog_info} />
       <ClientLogos data={client_logos} />
-      <section className="bg-background">
+      {/* <section className="bg-background">
         <Compare cat_info={category.acf} />
-      </section>
+      </section> */}
       <section className="bg-background">
         <PricingTable cat_info={category.acf} />
       </section>
