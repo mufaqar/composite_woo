@@ -70,7 +70,6 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
                         <ProductBox key={item.id} data={item} />
                     ))}
                 </div>
-
                 {/* Load More Button */}
                 {visibleCount < data.length && (
                     <div className="flex justify-center mt-8">
