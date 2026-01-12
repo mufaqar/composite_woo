@@ -20,6 +20,7 @@ import { GET_FAQ_BY_CAT } from "@/lib/queries/getFaqsbyCat";
 import SaleSection from "@/components/Product/SaleSection";
 import { getBlogData, getClientLogoData } from "@/lib/api/getHomeData";
 import CompositPanel2 from "@/components/Product/CompositPanel2";
+import PricingTable from "@/components/Product/PricingTable";
 
 export default async function CategoryPage({
   params,
@@ -83,6 +84,9 @@ export default async function CategoryPage({
       <ClientLogos data={client_logos} />
       <section className="bg-background">
         <Compare cat_info={category.acf} />
+      </section>
+      <section className="bg-background">
+        <PricingTable cat_info={category.acf} />
       </section>
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
       <CompositPanel cat_info={category.acf.standards} />
