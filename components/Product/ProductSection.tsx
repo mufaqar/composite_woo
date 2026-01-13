@@ -30,8 +30,8 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
     }
 
     return (
-        <section className="py-20">
-            <div className="container mx-auto px-4 mt-16">
+        <section className="py-16">
+            <div className="container mx-auto px-4">
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-6">
                     {data.slice(0, visibleCount).map((item, index) => (
@@ -89,7 +89,7 @@ function CategoryHeader({
     if (!categoryTitle && !categoryDescription) return null
 
     return (
-        <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-20">
+        <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-8">
             {categoryTitle && (
                 <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans">
                     {categoryTitle}
