@@ -1,143 +1,166 @@
 "use client";
+
 import { CompareProps } from "@/lib/woocommerce-types";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import Slider from "react-slick";
+
+const SLIDES = [
+  { key: "finish", title: "Finish" },
+  { key: "colour", title: "Colour" },
+  { key: "maintenance", title: "Maintenance" },
+];
 
 const PricingTable = ({ cat_info }: CompareProps) => {
-  const [selected, setSelected] = useState("");
+  const sliderRef = useRef<any>(null);
+  const [selected, setSelected] = useState("finish");
+
+  const goToSlide = (key: string) => {
+    const index = SLIDES.findIndex((s) => s.key === key);
+    if (index !== -1) {
+      sliderRef.current?.slickGoTo(index);
+      setSelected(key);
+    }
+  };
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 600,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    afterChange: (index: number) => {
+      setSelected(SLIDES[index].key);
+    },
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 1 },
+      },
+    ],
+  };
 
   return (
     <div className="container mx-auto px-4">
-      <div className="overflow-x-auto">
-        <div className="md:w-2/3 w-full mx-auto flex md:flex-row flex-row items-center bg-[#F0FAF7] rounded-t-[20px] px-3 pt-3">
-          <h3 className="md:w-1/3 w-full md:text-xl text-base font-bold text-center text-title px-4 py-3">
-            Maintenance Type
-          </h3>
-          <select
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-            className="md:w-2/3 w-full px-4 py-3 border border-[#E5E5E5] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
-          >
-            <option value="finish">Finish</option>
-            <option value="colour">Colour</option>
-            <option value="maintenance">Maintenance</option>
-          </select>
+      {/* Header */}
+      <div className="flex flex-wrap items-center bg-[#F0FAF7] rounded-t-[20px] px-3 pt-3 gap-4">
+        <h3 className="md:w-1/4 w-full text-xl font-bold text-center text-title">
+          Maintenance Type
+        </h3>
+
+        {/* Select */}
+        <select
+          value={selected}
+          onChange={(e) => goToSlide(e.target.value)}
+          className="md:w-1/3 w-full px-4 py-3 border rounded-full bg-white"
+        >
+          {SLIDES.map((s) => (
+            <option key={s.key} value={s.key}>
+              {s.title}
+            </option>
+          ))}
+        </select>
+
+        {/* Click Buttons */}
+        <div className="flex gap-2 flex-wrap justify-center">
+          {SLIDES.map((s) => (
+            <button
+              key={s.key}
+              onClick={() => goToSlide(s.key)}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition
+                ${selected === s.key
+                  ? "bg-secondary text-white"
+                  : "bg-white border"
+                }`}
+            >
+              {s.title}
+            </button>
+          ))}
         </div>
-        <div className="md:w-2/3 w-full mx-auto flex md:flex-row flex-row bg-[#F0FAF7] rounded-b-[20px] px-3 pb-3">
-          {selected !== "" && (
-            <div className="md:w-1/3 w-full bg-[#003D2C] rounded-t-[20px]">
-              <ul className="divide-y divide-[#E5E5E5]">
-                <li className="md:text-xl text-base font-bold text-center text-white px-4 py-4 min-h-[70px]">
-                  Features
-                </li>
-                <li className="md:text-lg text-xs font-normal text-center text-white px-4 py-4 min-h-[70px]">
-                  Finish
-                </li>
-                <li className="md:text-lg text-xs font-normal text-center text-white px-4 py-4 min-h-[70px]">
-                  Colour
-                </li>
-                <li className="md:text-lg text-xs font-normal text-center text-white px-4 py-4 min-h-[70px]">
-                  Maintenance
-                </li>
-                <li className="md:text-lg text-xs font-normal text-center text-white px-4 py-4 min-h-[70px]">
-                  Scratch Resistance
-                </li>
-                <li className="md:text-lg text-xs font-normal text-center text-white px-4 py-4 min-h-[70px]">
-                  Slip Resistance
-                </li>
-              </ul>
-            </div>
-          )}
-          <div className="md:w-2/3 w-full text-center">
-            {selected === "finish" && (
-              <ul className="divide-y divide-[#E5E5E5]">
-                <li className="md:text-xl text-base font-bold text-center text-title px-4 py-4 min-h-[70px]">
-                  Finish
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li>
-                  <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
-                    View Product
-                  </Link>
-                </li>
-              </ul>
-            )}
+      </div>
 
-            {selected === "colour" && (
-              <ul className="divide-y divide-[#E5E5E5]">
-                <li className="md:text-xl text-base font-bold text-center text-title px-4 py-4 min-h-[70px]">
-                  Color
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li>
-                  <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
-                    View Product
-                  </Link>
-                </li>
-              </ul>
-            )}
+      {/* Table */}
+      <div className="flex bg-[#F0FAF7] rounded-b-[20px] px-3 pb-6">
+        {/* Left Column */}
+        <div className="md:w-1/4 bg-[#003D2C] rounded-t-[20px]">
+          <ul className="divide-y divide-[#E5E5E5]">
+            {[
+              "Features",
+              "Finish",
+              "Colour",
+              "Maintenance",
+              "Scratch Resistance",
+              "Slip Resistance",
+            ].map((item, i) => (
+              <li
+                key={i}
+                className="text-white text-center py-4 min-h-[70px]"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-            {selected === "maintenance" && (
-              <ul className="divide-y divide-[#E5E5E5]">
-                <li className="md:text-xl text-base font-bold text-center text-title px-4 py-4 min-h-[70px]">
-                  Maintenance
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li className="md:text-lg text-xs font-normal text-description text-center px-4 py-4 min-h-[70px]">
-                  Wood Grain/ Thin Grooved
-                </li>
-                <li>
-                  <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
-                    View Product
-                  </Link>
-                </li>
-              </ul>
-            )}
+        {/* Slider */}
+        <div className="md:w-3/4 w-full">
+          <Slider ref={sliderRef} {...settings}>
+            {SLIDES.map((s) => (
+              <Slide key={s.key} title={s.title} />
+            ))}
+          </Slider>
+
+          {/* Arrows */}
+          <div className="flex justify-center gap-6 mt-10">
+            <button
+              onClick={() => sliderRef.current?.slickPrev()}
+              className="w-10 h-10 rounded-full border flex items-center justify-center"
+            >
+              <FaChevronLeft size={14} />
+            </button>
+
+            <button
+              onClick={() => sliderRef.current?.slickNext()}
+              className="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center"
+            >
+              <FaChevronRight size={14} />
+            </button>
           </div>
         </div>
-
       </div>
     </div>
   );
 };
 
 export default PricingTable;
+
+/* ---------------- SLIDE ---------------- */
+
+const Slide = ({ title }: { title: string }) => (
+  <div className="px-2">
+    <ul className="divide-y divide-[#E5E5E5] text-center">
+      <li className="text-xl font-bold text-title py-4 min-h-[70px]">
+        {title}
+      </li>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <li key={i} className="py-4 text-description min-h-[70px]">
+          Wood Grain / Thin Grooved
+        </li>
+      ))}
+      <li className="py-6 text-center">
+        <Link
+          href="#"
+          className="px-6 py-2 bg-secondary text-white rounded-full font-bold inline-block"
+        >
+          View Product
+        </Link>
+      </li>
+    </ul>
+  </div>
+);

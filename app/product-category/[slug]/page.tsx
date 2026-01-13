@@ -86,7 +86,7 @@ export default async function CategoryPage({
         <Compare cat_info={category.acf} />
       </section> */}
       <section className="py-16">
-        <PricingTable cat_info={category.acf} />
+        <PricingTable  />
       </section>
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
       <CompositPanel cat_info={category.acf.standards} />
