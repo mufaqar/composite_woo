@@ -85,7 +85,7 @@ export default async function CategoryPage({
       {/* <section className="bg-background">
         <Compare cat_info={category.acf} />
       </section> */}
-      <section className="bg-background py-16">
+      <section className="py-16">
         <PricingTable cat_info={category.acf} />
       </section>
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />

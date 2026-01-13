@@ -7,178 +7,112 @@ const PricingTable = ({ cat_info }: CompareProps) => {
   const [selected, setSelected] = useState("");
 
   return (
-    <div className="container mx-auto border rounded-xl overflow-hidden">
-
-      <table className="w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="bg-[#003D2C] border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center text-white px-4 py-4">
+    <div className="container mx-auto px-4">
+      <div className="overflow-x-auto bg-[#F0FAF7] rounded-[20px] p-3 flex md:flex-row flex-row">
+        <div className="md:w-1/3 w-full bg-[#003D2C] rounded-t-[20px]">
+          <ul className="divide-y divide-[#E5E5E5]">
+            <li className="md:text-xl text-base font-bold text-center text-white px-4 py-4">
               Features
-            </th>
-            <th className="border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center px-4 py-4">
-              Select
-            </th>
-            <th className="border-b border-[#E5E5E5] md:text-xl text-base font-bold text-center px-4 py-4">
-              Details
-            </th>
-          </tr>
-        </thead>
-
-        <tbody className="text-description text-sm md:text-base">
-          <tr className="border-b border-[#E5E5E5]">
-            {/* FEATURE */}
-            <td className="bg-[#003D2C] text-white text-center px-4 py-4">
-              Feature
-            </td>
-
-            {/* SELECT */}
-            <td className="text-center px-4 py-4">
-              <select
-                value={selected}
-                onChange={(e) => setSelected(e.target.value)}
-                className="p-2 rounded-md text-black w-full max-w-[180px]"
-              >
-                <option value="finish">Finish</option>
-                <option value="colour">Colour</option>
-                <option value="maintenance">Maintenance</option>
-              </select>
-            </td>
-
-            {/* DYNAMIC CONTENT (ONE TD ONLY) */}
-            <td className="text-center px-4 py-4">
-              {selected === "finish" && (
-                  <h3 className="font-semibold">Finish</h3>
-                 
-              )}
-
-              {selected === "colour" && (
-                  <h3 className="font-semibold">Colour</h3>
-                
-              )}
-
-              {selected === "maintenance" && (
-                  <h3 className="font-semibold">Maintenance</h3>
-                  
-              )}
-            </td>
-
-          </tr>
-          <tr className="border-b border-[#E5E5E5]">
-            {/* FEATURE */}
-            <td className="bg-[#003D2C] text-white text-center px-4 py-4">
-              Feature
-            </td>
-
-            {/* SELECT */}
-            <td className="text-center px-4 py-4">
-            </td>
-
-            {/* DYNAMIC CONTENT (ONE TD ONLY) */}
-            <td className="text-center px-4 py-4">
-              {selected === "finish" && (
-                <p className="font-semibold">Finish</p>
-
-              )}
-
-              {selected === "colour" && (
-               <p className="font-semibold">colour</p>
-              )}
-
-              {selected === "maintenance" && (
-               <p className="font-semibold">maintenance</p>
-              )}
-            </td>
-
-          </tr>
-           <tr className="border-b border-[#E5E5E5]">
-            {/* FEATURE */}
-            <td className="bg-[#003D2C] text-white text-center px-4 py-4">
-              Feature
-            </td>
-
-            {/* SELECT */}
-            <td className="text-center px-4 py-4">
-            </td>
-
-            {/* DYNAMIC CONTENT (ONE TD ONLY) */}
-            <td className="text-center px-4 py-4">
-              {selected === "finish" && (
-                <p className="font-semibold">Finish</p>
-
-              )}
-
-              {selected === "colour" && (
-               <p className="font-semibold">colour</p>
-              )}
-
-              {selected === "maintenance" && (
-               <p className="font-semibold">maintenance</p>
-              )}
-            </td>
-
-          </tr>
-          <tr className="border-b border-[#E5E5E5]">
-            {/* FEATURE */}
-            <td className="bg-[#003D2C] text-white text-center px-4 py-4">
-              Feature
-            </td>
-
-            {/* SELECT */}
-            <td className="text-center px-4 py-4">
-            </td>
-
-            {/* DYNAMIC CONTENT (ONE TD ONLY) */}
-            <td className="text-center px-4 py-4">
-              {selected === "finish" && (
-                <p className="font-semibold">Finish</p>
-
-              )}
-
-              {selected === "colour" && (
-               <p className="font-semibold">colour</p>
-              )}
-
-              {selected === "maintenance" && (
-               <p className="font-semibold">maintenance</p>
-              )}
-            </td>
-
-          </tr>
-          <tr className="border-b border-[#E5E5E5]">
-            {/* FEATURE */}
-            <td className="bg-[#003D2C] text-white text-center px-4 py-4">
-              Feature
-            </td>
-
-            {/* SELECT */}
-            <td className="text-center px-4 py-4">
-            </td>
-
-            {/* DYNAMIC CONTENT (ONE TD ONLY) */}
-            <td className="text-center px-4 py-4">
-              {selected === "finish" && (
-               <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
-                    View Product
-                  </Link>
-
-              )}
-
-              {selected === "colour" && (
-               <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
-                    View Product
-                  </Link>
-              )}
-
-              {selected === "maintenance" && (
+            </li>
+            <li className="md:text-lg text-sm font-normal text-center text-white px-4 py-4">
+              Finish
+            </li>
+            <li className="md:text-lg text-sm font-normal text-center text-white px-4 py-4">
+              Colour
+            </li>
+            <li className="md:text-lg text-sm font-normal text-center text-white px-4 py-4">
+              Maintenance
+            </li>
+            <li className="md:text-lg text-sm font-normal text-center text-white px-4 py-4">
+              Scratch Resistance
+            </li>
+            <li className="md:text-lg text-sm font-normal text-center text-white px-4 py-4">
+              Slip Resistance
+            </li>
+          </ul>
+        </div>
+        <div className="md:w-1/3 w-full text-center px-4 py-4">
+          <h3 className="md:text-xl text-base font-bold text-center text-title px-4 py-4">
+            Maintenance Type
+          </h3>
+          <select
+            value={selected}
+            onChange={(e) => setSelected(e.target.value)}
+            className="w-full px-4 py-3 border border-[#E5E5E5] rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            <option value="finish">Finish</option>
+            <option value="colour">Colour</option>
+            <option value="maintenance">Maintenance</option>
+          </select>
+        </div>
+        <div className="md:w-1/3 w-full text-center px-4 py-4">
+          {selected === "finish" && (
+            <ul className="divide-y divide-[#E5E5E5]">
+              <li className="md:text-xl text-base font-bold text-center text-title px-4 py-4">
+                Finish
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li>
                 <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
-                    View Product
-                  </Link>
-              )}
-            </td>
+                  View Product
+                </Link>
+              </li>
+            </ul>
+          )}
 
-          </tr>
-        </tbody>
-      </table>
+          {selected === "colour" && (
+            <ul className="divide-y divide-[#E5E5E5]">
+              <li className="md:text-xl text-base font-bold text-center text-title px-4 py-4">
+                Color
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li>
+                <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
+                  View Product
+                </Link>
+              </li>
+            </ul>
+          )}
+
+          {selected === "maintenance" && (
+            <ul className="divide-y divide-[#E5E5E5]">
+             <li className="md:text-xl text-base font-bold text-center text-title px-4 py-4">
+              Maintenance
+            </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li className="md:text-lg text-sm font-normal text-description text-center px-4 py-4">
+                Wood Grain/ Thin Grooved
+              </li>
+              <li>
+                <Link href="#" className="md:text-base text-sm font-bold text-white inline-flex w-fit md:px-7 md:py-3 px-5 py-2 bg-secondary rounded-4xl hover:bg-primary border border-secondary hover:border-primary hover:text-white transition-all duration-300 ease-in-out mt-5">
+                  View Product
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
