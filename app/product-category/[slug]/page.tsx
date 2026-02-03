@@ -21,6 +21,7 @@ import SaleSection from "@/components/Product/SaleSection";
 import { getBlogData, getClientLogoData } from "@/lib/api/getHomeData";
 import CompositPanel2 from "@/components/Product/CompositPanel2";
 import PricingTable from "@/components/Product/PricingTable";
+import StepsForm from "@/components/Product/StepsForm";
 
 export default async function CategoryPage({
   params,
@@ -88,6 +89,7 @@ export default async function CategoryPage({
       <section className="py-16">
         <PricingTable  />
       </section>
+      <StepsForm />
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
       <CompositPanel cat_info={category.acf.standards} />
       <CompositPanel2 cat_info={category.acf.standard_two} />
