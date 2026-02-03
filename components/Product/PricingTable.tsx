@@ -1,6 +1,7 @@
 "use client";
 
 import { CompareProps } from "@/lib/woocommerce-types";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
@@ -8,7 +9,7 @@ import Slider from "react-slick";
 
 const SLIDES = [
   { key: "finish", title: "Finish" },
-  { key: "colour", title: "Colour" },
+  { key: "Products", title: "Products" },
   { key: "maintenance", title: "Maintenance" },
 ];
 
@@ -139,28 +140,31 @@ export default PricingTable;
 
 const Slide = ({ title }: { title: string }) => (
   <div className="px-2">
-    <div className="bg-white rounded-[20px] border border-[#E4E4E4] md:py-6 md:px-7 p-6">
-      <h3 className="md:text-[40px] text-xl font-medium text-title mb-2">
-        {title}
-      </h3>
-      <p className="text-sm font-bold text-title mb-2">Features</p>
-      <ul className="space-y-4">
-        {Array.from({ length: 5 }).map((_, i) => (
+    <div className="bg-white rounded-[20px] border border-[#E4E4E4] md:p-4 p-6">
+      <div className="relative h-[189px] w-full rounded-[20px] overflow-hidden">
+        <Image src="/images/deck-table.png" alt="deck-table" className="object-cover w-full h-full" width={486} height={189} />
+        <h3 className="md:text-[40px] text-xl font-normal text-white mb-2 absolute left-2 bottom-2">
+          {title}
+        </h3>
+      </div>
+      <p className="text-sm font-bold text-title my-5">Features</p>
+      <ul className="grid md:grid-cols-2 grid-cols-1 gap-4">
+        {Array.from({ length: 6 }).map((_, i) => (
           <li key={i} className="relative pl-6 text-sm font-normal text-title
                  before:absolute before:left-0 before:top-0
-                 before:content-['✔'] before:text-secondary">
-            <strong>Finish</strong> Grain / Thin Grooved
+                 before:content-['✔'] before:text-secondary flex flex-col">
+            <strong>Finish:</strong> Grain / Thin Grooved
           </li>
         ))}
-        <li className="py-2">
-          <Link
-            href="#"
-            className="px-6 py-3 bg-secondary text-white rounded-full font-bold inline-block"
-          >
-            View Product
-          </Link>
-        </li>
       </ul>
+      <div className="mt-5">
+        <Link
+          href="#"
+          className="text-base px-6 py-3 bg-secondary hover:bg-primary text-white rounded-full font-bold inline-block transition-all duration-300 ease-in-out"
+        >
+          View Product
+        </Link>
+      </div>
     </div>
   </div>
 );
