@@ -49,7 +49,9 @@ export default function StepsForm() {
         material?: string;
         posts?: string;
     }>({});
-    const [selectedItems, setSelectedItems] = useState(steps[5].selected_items);
+const [selectedItems, setSelectedItems] = useState<
+  { name: string; image: string; items: number }[]
+>(steps[5].selected_items || []);
 
     const material = steps[3].choose_material;
     const clading_posts = steps[4].choose_posts;
