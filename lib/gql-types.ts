@@ -154,7 +154,7 @@ export type PostContentBlock =
   | FullImageLayout
   | GetASampleFromUsLayout
   | ContentWithImageLayout
-   | PostInfoPostContentLineBoxLayout
+   | PostInfoPostContentLeftBorderBoxLayout
      | PostInfoPostContentBgBoxLayout;
 
   
@@ -166,7 +166,15 @@ export interface PostInfoPostContentLineBoxLayout {
   __typename?: "PostInfoPostContentLineBoxLayout";
   lineboxContent?: string | null;
 }
-
+export interface PostInfoPostContentLeftBorderBoxLayout {
+  __typename?: "PostInfoPostContentLeftBorderBoxLayout";
+  title: string;
+  box?: {
+    content?: string | null;
+    layout?: string | null;
+    type?: string | null;
+  }[] | null;
+}
 export interface PostInfoPostContentBgBoxLayout {
   __typename?: "PostInfoPostContentBgBoxLayout";
   title: string;

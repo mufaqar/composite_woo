@@ -129,26 +129,33 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                 </div>
               </section>
             );
-          case "PostInfoPostContentLineBoxLayout":
+          case "PostInfoPostContentLeftBorderBoxLayout":
+            if (!block?.box?.length) return null;
+
             return (
               <section key={i}>
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4">
-                  {/* <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans mb-8">
-                    Practicality: Fading & Heat
-                  </h2>
-                  <p className="md:text-xl text-sm font-normal text-description mb-6">
-                    It is important to know that cladding colours behave differently
-                    depending on the type of board you choose.
-                  </p> */}
-                  <div className={`grid grid-cols-1 gap-6 mb-6`}>
-                    {block?.lineboxContent && (
-                      <div className="line_box" dangerouslySetInnerHTML={{
-                        __html: block.lineboxContent || "",
-                      }}
+
+                  {/* Optional title */}
+                  {block.title && (
+                    <div className="post_content"
+                      dangerouslySetInnerHTML={{ __html: block.title }} />
+                  )}
+
+                  <div className="grid grid-cols-1 gap-6 mb-6">
+
+                    {block.box.map((item, i) => (
+                      <div
+                        key={i}
+                        className="line_box"
+                        dangerouslySetInnerHTML={{
+                          __html: item.content || "",
+                        }}
                       />
-                    )}
+                    ))}
 
                   </div>
+
                 </div>
               </section>
             );
@@ -158,7 +165,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             return (
               <section key={i} className="py-16">
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4 space-y-6">
-                  <div className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans mb-8"
+                  <div className="post_content "
                     dangerouslySetInnerHTML={{ __html: block.title }} />
                   <div className={`${layout === "Half" ? "md:grid-cols-2" : "grid-cols-1"} grid gap-6`}>
                     {block.box.map((item: any, i: number) => {

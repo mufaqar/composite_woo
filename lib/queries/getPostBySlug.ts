@@ -55,6 +55,13 @@ export const GET_POST_BY_SLUG = gql`
             type
           }
         }
+        ... on PostInfoPostContentLeftBorderBoxLayout {
+          title
+          box {
+            layout
+            content
+          }
+        }
             
         }
       }
