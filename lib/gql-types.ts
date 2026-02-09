@@ -169,6 +169,7 @@ export interface PostInfoPostContentLineBoxLayout {
 
 export interface PostInfoPostContentBgBoxLayout {
   __typename?: "PostInfoPostContentBgBoxLayout";
+  title: string;
   box?: {
     content?: string | null;
     layout?: string | null;

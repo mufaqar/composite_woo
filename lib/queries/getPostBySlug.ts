@@ -48,7 +48,7 @@ export const GET_POST_BY_SLUG = gql`
           lineboxContent
         }
            ... on PostInfoPostContentBgBoxLayout {
-          
+          title
           box {
             content
             layout

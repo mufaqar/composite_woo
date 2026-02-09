@@ -158,9 +158,8 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             return (
               <section key={i} className="py-16">
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4 space-y-6">
-                  <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans mb-8">
-                    3 Pro-Tips for Choosing
-                  </h2>
+                  <div className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans mb-8"
+                    dangerouslySetInnerHTML={{ __html: block.title }} />
                   <div className={`${layout === "Half" ? "md:grid-cols-2" : "grid-cols-1"} grid gap-6`}>
                     {block.box.map((item: any, i: number) => {
                       const type = Array.isArray(item.type) ? item.type[0] : item.type;
