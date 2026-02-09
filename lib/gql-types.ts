@@ -173,7 +173,7 @@ export interface PostInfoPostContentBgBoxLayout {
     content?: string | null;
     layout?: string | null;
     type?: string | null;
-  } | null;
+  }[] | null;
 }
 export interface FullContentLayout {
   __typename?: "PostInfoPostContentFullContentLayout";
