@@ -75,10 +75,12 @@ button {
 .post_content h2 {
   @apply md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans capitalize mb-8;
 }
-.post_content h3{
+
+.post_content h3 {
   @apply md:text-xl text-xs font-bold text-title font-DM_Sans capitalize mb-5;
 }
-.post_content h4{
+
+.post_content h4 {
   @apply md:text-lg text-xs font-bold text-title font-DM_Sans capitalize mb-5;
 }
 
@@ -96,6 +98,46 @@ button {
 .test_Scroll ::-webkit-scrollbar-thumb {
   background: var(--primary);
   border-radius: 5px;
+}
+
+.line_box {
+  @apply border-l-2 border-[#003D2C] md:px-8 p-5 bg-background/50;
+}
+
+.line_box h4 {
+  @apply md:text-xl text-sm font-bold text-[#003D2C] mb-5;
+}
+
+.line_box p {
+  @apply md:text-xl text-sm font-normal text-description mb-4;
+}
+
+.line_box ul {
+  @apply list-disc list-inside marker:text-[#003D2C] mb-4 flex flex-col gap-4;
+}
+
+.line_box ul li {
+  @apply md:text-xl text-sm font-normal text-description;
+}
+
+.line_box ul li strong {
+  @apply text-[#003D2C];
+}
+
+.BG_box {
+  @apply border border-[#003D2C] md:px-8 md:py-[30px] p-5 bg-background/50 mb-6 flex gap-4;
+}
+
+.BG_box span {
+  @apply md:text-lg text-sm font-bold text-[#003D2C];
+}
+
+.BG_box h4 {
+  @apply md:text-lg text-sm font-normal text-[#003D2C];
+}
+
+.BG_box p {
+  @apply md:text-lg text-sm font-normal text-description;
 }
 
 @media (min-width: 96rem) {
