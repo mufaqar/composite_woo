@@ -153,11 +153,28 @@ export type PostContentBlock =
   | FullContentLayout
   | FullImageLayout
   | GetASampleFromUsLayout
-  | ContentWithImageLayout;
+  | ContentWithImageLayout
+   | PostInfoPostContentLineBoxLayout
+     | PostInfoPostContentBgBoxLayout;
+
+  
 
 // -----------------------------
 // Content Layout: Full Content
 // -----------------------------
+export interface PostInfoPostContentLineBoxLayout {
+  __typename?: "PostInfoPostContentLineBoxLayout";
+  lineboxContent?: string | null;
+}
+
+export interface PostInfoPostContentBgBoxLayout {
+  __typename?: "PostInfoPostContentBgBoxLayout";
+  box?: {
+    content?: string | null;
+    layout?: string | null;
+    type?: string | null;
+  } | null;
+}
 export interface FullContentLayout {
   __typename?: "PostInfoPostContentFullContentLayout";
   fullContent?: string | null;

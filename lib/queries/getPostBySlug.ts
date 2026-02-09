@@ -42,7 +42,20 @@ export const GET_POST_BY_SLUG = gql`
                 mediaItemUrl
               }
             }
+          
           }
+            ... on PostInfoPostContentLineBoxLayout {
+          lineboxContent
+        }
+           ... on PostInfoPostContentBgBoxLayout {
+          
+          box {
+            content
+            layout
+            type
+          }
+        }
+            
         }
       }
     }
