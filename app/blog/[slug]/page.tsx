@@ -131,7 +131,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             );
           case "PostInfoPostContentLeftBorderBoxLayout":
             if (!block?.box?.length) return null;
-
+            const BLlayout = block.box[0]?.layout;
             return (
               <section key={i}>
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4">
@@ -142,9 +142,9 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                       dangerouslySetInnerHTML={{ __html: block.title }} />
                   )}
 
-                  <div className="grid grid-cols-1 gap-6 mb-6">
+                  <div className={`${BLlayout === "Half" ? "md:grid-cols-2" : "grid-cols-1"} grid gap-6`}>
 
-                    {block.box.map((item, i) => (
+                    {block.box.map((item: any, i: number) => (
                       <div
                         key={i}
                         className="line_box"
