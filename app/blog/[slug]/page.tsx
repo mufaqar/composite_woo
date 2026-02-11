@@ -172,9 +172,17 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                       const type = Array.isArray(item.type) ? item.type[0] : item.type;
                       return (
                         <div key={i} className="BG_box">
-                          {type === "Number" && <span>{i + 1}</span>}
-                          {type === "Warning" && <span>⚠️</span>}
-                          {type === "Mistake" && <span><IoIosClose /></span>}
+                          {type !== "None" && (
+                            <>
+                              {type === "Number" && <span>{i + 1}</span>}
+                              {type === "Warning" && <span>⚠️</span>}
+                              {type === "Mistake" && (
+                                <span>
+                                  <IoIosClose />
+                                </span>
+                              )}
+                            </>
+                          )}
                           <div
                             className="inner_item"
                             dangerouslySetInnerHTML={{

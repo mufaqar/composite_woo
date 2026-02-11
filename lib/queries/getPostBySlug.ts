@@ -44,9 +44,6 @@ export const GET_POST_BY_SLUG = gql`
             }
           
           }
-            ... on PostInfoPostContentLineBoxLayout {
-          lineboxContent
-        }
            ... on PostInfoPostContentBgBoxLayout {
           title
           box {

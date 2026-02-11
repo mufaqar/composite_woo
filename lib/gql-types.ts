@@ -62,7 +62,7 @@ export interface Post {
 
 // Featured Image Type
 export interface FeaturedImage {
-  node: {   
+  node: {
     mediaItemUrl: string;
     altText?: string;
   };
@@ -154,18 +154,14 @@ export type PostContentBlock =
   | FullImageLayout
   | GetASampleFromUsLayout
   | ContentWithImageLayout
-   | PostInfoPostContentLeftBorderBoxLayout
-     | PostInfoPostContentBgBoxLayout;
+  | PostInfoPostContentLeftBorderBoxLayout
+  | PostInfoPostContentBgBoxLayout;
 
-  
+
 
 // -----------------------------
 // Content Layout: Full Content
 // -----------------------------
-export interface PostInfoPostContentLineBoxLayout {
-  __typename?: "PostInfoPostContentLineBoxLayout";
-  lineboxContent?: string | null;
-}
 export interface PostInfoPostContentLeftBorderBoxLayout {
   __typename?: "PostInfoPostContentLeftBorderBoxLayout";
   title: string;
@@ -191,7 +187,7 @@ export interface FullContentLayout {
 
 export interface FullImageLayout {
   __typename?: "PostInfoPostContentFullWidthImageLayout";
- fullImage?: SourceImage | null;
+  fullImage?: SourceImage | null;
 }
 
 // ---------------------------------------------
@@ -257,13 +253,13 @@ export interface HomeInfoProductRange {
   title?: string;
   subTitle?: string;
   categoryInfo?:
-    | {
-        title?: string;
-        link?: string;
-        desc?: string;
-        icon?: IconType;
-      }[]
-    | null;
+  | {
+    title?: string;
+    link?: string;
+    desc?: string;
+    icon?: IconType;
+  }[]
+  | null;
 }
 
 export interface HomeInfoAdvanteges {
@@ -271,24 +267,24 @@ export interface HomeInfoAdvanteges {
   subTitle?: string;
   icon?: IconType;
   options?:
-    | {
-        title?: string;
-        description?: string;
-        icon?: IconType;
-      }[]
-    | null;
+  | {
+    title?: string;
+    description?: string;
+    icon?: IconType;
+  }[]
+  | null;
 }
 
 export interface HomeWhyChooseUs {
   title?: string;
   subTitle?: string;
   whyCards?:
-    | {
-        title?: string;
-        description?: string;
-        icon?: IconType;
-      }[]
-    | null;
+  | {
+    title?: string;
+    description?: string;
+    icon?: IconType;
+  }[]
+  | null;
 }
 
 export interface IconType {
