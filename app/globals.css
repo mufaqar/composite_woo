@@ -88,7 +88,15 @@ button {
 .post_content h4 {
   @apply md:text-lg text-xs font-bold text-title font-DM_Sans capitalize mb-5;
 }
-
+.post_content table {
+  @apply w-full border-collapse;
+}
+.post_content table tbody tr th {
+  @apply md:text-lg text-xs font-normal text-[#003D2C] md:py-4 py-2 px-1 text-left;
+}
+.post_content table tbody tr td {
+  @apply md:text-lg text-xs font-normal text-description border-t border-[#C6C6C680] md:py-4 py-2 px-1 text-left;
+}
 .test_Scroll ::-webkit-scrollbar {
   width: 2px;
   /* Width for vertical scrollbar */
