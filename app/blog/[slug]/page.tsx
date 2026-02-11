@@ -133,7 +133,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             if (!block?.box?.length) return null;
             const BLlayout = block.box[0]?.layout;
             return (
-              <section key={i}>
+              <section className="pb-16" key={i}>
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4">
 
                   {/* Optional title */}
