@@ -138,7 +138,7 @@ button {
 }
 
 .BG_box {
-  @apply border border-[#003D2C] md:px-8 md:py-[30px] p-5 bg-background/50 mb-6 flex gap-4;
+  @apply border border-[#003D2C] md:px-8 md:py-[30px] p-5 bg-background/50 flex gap-4;
 }
 
 .BG_box .type{
