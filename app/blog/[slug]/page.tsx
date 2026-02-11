@@ -163,7 +163,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             if (!block?.box?.length) return null;
             const layout = block.box[0]?.layout;
             return (
-              <section key={i} className="py-16">
+              <section key={i} className="pb-16">
                 <div className="max-w-[1130px] mx-auto md:px-0 px-4 space-y-6">
                   <div className="post_content "
                     dangerouslySetInnerHTML={{ __html: block.title }} />
