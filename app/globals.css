@@ -78,7 +78,7 @@ button {
 }
 
 .post_content h2 {
-  @apply md:text-[42px]text-[33px] leading-none font-semibold text-title font-DM_Sans capitalize mb-8;
+  @apply md:text-[42px] text-[33px] leading-none font-semibold text-title font-DM_Sans capitalize mb-8;
 }
 
 .post_content h3 {
