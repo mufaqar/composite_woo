@@ -174,10 +174,10 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                         <div key={i} className="BG_box">
                           {type !== "None" && (
                             <>
-                              {type === "Number" && <span>{i + 1}</span>}
-                              {type === "Warning" && <span>⚠️</span>}
+                              {type === "Number" && <span className="type">{i + 1}</span>}
+                              {type === "Warning" && <span className="type">⚠️</span>}
                               {type === "Mistake" && (
-                                <span>
+                                <span className="type">
                                   <IoIosClose />
                                 </span>
                               )}
