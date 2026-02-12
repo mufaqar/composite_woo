@@ -208,8 +208,8 @@ export interface ContentWithImageLayout {
   content?: string | null;
   imagePosition?: string | null;
   video_image?: "image" | "Video" | null;
-  video?: string | null;
-  image?: SourceImage | null;
+  sVideo?: string | null;
+  sImage?: SourceImage | null;
 }
 
 // -----------------------------------

@@ -102,9 +102,9 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
 
                     {block?.video_image === "image" ? (
 
-                      block?.image?.node?.mediaItemUrl && (
+                      block?.sImage?.node?.mediaItemUrl && (
                         <Image
-                          src={block.image.node.mediaItemUrl}
+                          src={block.sImage.node.mediaItemUrl}
                           alt="content image"
                           width={509}
                           height={598}
@@ -112,11 +112,11 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                         />
                       )
 
-                    ) : block?.video ? (
+                    ) : block?.sVideo ? (
 
                       <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                         <iframe
-                          src={`https://www.youtube.com/embed/${block.video}`}
+                          src={`https://www.youtube.com/embed/${block.sVideo}`}
                           title="YouTube video"
                           loading="lazy"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

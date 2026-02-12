@@ -29,13 +29,13 @@ export const GET_POST_BY_SLUG = gql`
             ... on PostInfoPostContentContentWithImageLayout {
           content
           imagePosition
-          video_image
-          image {
+          sImage {
             node {
               mediaItemUrl
             }
           }
-          video
+          sVideo
+          video_image
         }
           ... on PostInfoPostContentFullWidthImageLayout {
             fullImage {
