@@ -63,7 +63,7 @@ button {
 .post_content span {
   @apply md:text-lg text-sm font-normal text-description;
 }
-.post_content strong, .line_box strong, .BG_box strong{
+.post_content strong, .line_box strong, .BG_box strong, .post_content b, .line_box b, .BG_box b{
   @apply text-[#003D2C];
 }
 
@@ -71,10 +71,10 @@ button {
   @apply text-primary hover:text-secondary;
 }
 .post_content ol {
-  @apply flex flex-col gap-3 list-disc list-inside mb-5;
+  @apply flex flex-col gap-3 list-disc list-inside mb-5 marker:text-[#003D2C];
 }
 .post_content ul {
-  @apply flex flex-col gap-3 list-disc list-inside mb-5;
+  @apply flex flex-col gap-3 list-disc list-inside mb-5 marker:text-[#003D2C];
 }
 
 .post_content h2 {
@@ -133,7 +133,7 @@ button {
   @apply md:text-xl text-sm font-normal text-description;
 }
 
-.line_box ul li strong {
+.line_box ul li strong, .line_box ul li b  {
   @apply text-[#003D2C];
 }
 
