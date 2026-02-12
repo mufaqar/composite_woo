@@ -88,7 +88,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
             return (
               <section className="py-16" key={i}>
                 <div
-                  className={`max-w-[1130px]  mx-auto md:px-0 px-4 ${block?.imagePosition === "Right"
+                  className={`max-w-[1130px] mx-auto md:px-0 px-4 ${block?.imagePosition === "Right"
                     ? "md:flex-row"
                     : "md:flex-row-reverse"
                     } flex flex-col gap-6`}
@@ -99,15 +99,34 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                   />
 
                   <div className="md:w-2/5 w-full post_content">
-                    {block?.blockImage?.node?.mediaItemUrl && (
-                      <Image
-                        src={block.blockImage.node.mediaItemUrl}
-                        alt={block.blockImage.node.altText || "Content image"}
-                        width={493}
-                        height={626}
-                        className="h-full w-full object-cover"
-                      />
-                    )}
+
+                    {block?.video_image === "image" ? (
+
+                      block?.image?.node?.mediaItemUrl && (
+                        <Image
+                          src={block.image.node.mediaItemUrl}
+                          alt="content image"
+                          width={509}
+                          height={598}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      )
+
+                    ) : block?.video ? (
+
+                      <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${block.video}`}
+                          title="YouTube video"
+                          loading="lazy"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full"
+                        />
+                      </div>
+
+                    ) : null}
+
                   </div>
                 </div>
               </section>

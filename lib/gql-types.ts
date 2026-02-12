@@ -207,7 +207,9 @@ export interface ContentWithImageLayout {
   __typename?: "PostInfoPostContentContentWithImageLayout";
   content?: string | null;
   imagePosition?: string | null;
-  blockImage?: SourceImage | null;
+  video_image?: "image" | "Video" | null;
+  video?: string | null;
+  image?: SourceImage | null;
 }
 
 // -----------------------------------
