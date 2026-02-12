@@ -100,7 +100,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
 
                   <div className="md:w-2/5 w-full post_content">
 
-                    {block?.video_image === "image" ? (
+                    {block?.video_image === "Image" ? (
 
                       block?.sImage?.node?.mediaItemUrl && (
                         <Image
