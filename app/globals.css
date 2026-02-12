@@ -112,7 +112,9 @@ button {
   background: var(--primary);
   border-radius: 5px;
 }
-
+ul li ul{
+  @apply pl-5;
+}
 .line_box {
   @apply border-l-2 border-[#003D2C] md:px-8 p-5 bg-background/50;
 }
@@ -153,7 +155,7 @@ button {
 }
 
 .BG_box p {
-  @apply md:text-lg text-sm font-normal text-description;
+  @apply md:text-lg text-sm font-normal text-description mb-4;
 }
 .BG_box ul, .BG_box ol {
   @apply list-disc list-inside marker:text-[#003D2C] mb-4 flex flex-col gap-1;

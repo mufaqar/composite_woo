@@ -143,15 +143,15 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                   )}
 
                   <div className={`${BLlayout === "Half" ? "md:grid-cols-2" : "grid-cols-1"} grid gap-6`}>
-
                     {block.box.map((item: any, i: number) => (
-                      <div
-                        key={i}
-                        className="line_box"
-                        dangerouslySetInnerHTML={{
-                          __html: item.content || "",
-                        }}
-                      />
+                      <div key={i} className={`${item?.layout === "Full" && "md:col-span-2"}`}>
+                        <div
+                          className="line_box"
+                          dangerouslySetInnerHTML={{
+                            __html: item.content || "",
+                          }}
+                        />
+                      </div>
                     ))}
 
                   </div>
@@ -171,7 +171,7 @@ export default async function SingleBlogPage({ params }: PostPageProps) {
                     {block.box.map((item: any, i: number) => {
                       const type = Array.isArray(item.type) ? item.type[0] : item.type;
                       return (
-                        <div key={i} className="BG_box">
+                        <div key={i} className={`BG_box ${item?.layout === "Full" && "md:col-span-2"}`}>
                           {type !== "None" && (
                             <>
                               {type === "Number" && <span className="type">{i + 1}</span>}
