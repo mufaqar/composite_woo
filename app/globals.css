@@ -145,6 +145,9 @@ button {
   @apply md:text-lg text-sm font-bold text-[#003D2C];
 }
 
+.BG_box h3, .line_box h3{
+   @apply md:text-2xl text-xl font-medium text-title font-DM_Sans capitalize mb-5;
+}
 .BG_box h4 {
   @apply md:text-lg text-sm font-normal text-[#003D2C];
 }
