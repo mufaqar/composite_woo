@@ -151,7 +151,7 @@ ul li ul{
    @apply md:text-2xl text-xl font-medium text-title font-DM_Sans capitalize mb-5;
 }
 .BG_box h4 {
-  @apply md:text-lg text-sm font-normal text-[#003D2C];
+  @apply md:text-lg text-sm font-medium text-[#003D2C];
 }
 
 .BG_box p {
