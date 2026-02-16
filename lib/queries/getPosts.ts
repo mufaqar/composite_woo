@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_POSTS = gql`
-  query GetPosts($first: Int = 10) {
+  query GetPosts($first: Int = 200) {
     posts(first: $first) {
       nodes {
         id
