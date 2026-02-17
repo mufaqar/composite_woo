@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/Footer";
 import localFont from "next/font/local"
 import ClientProvider from "./ClientProvider";
+import { generateWPMetadata } from "@/lib/seo";
 
 // Define the font with multiple weights
 const satoshi = localFont({
@@ -42,10 +43,9 @@ const dm_Sans = DM_Sans({
   variable: "--font-sans", // 👈 overwrite Tailwind's font-sans variable
 });
 
-export const metadata: Metadata = {
-  title: "Composite Warehouse",
-  description: "Composite Fancy Products",
-};
+export async function generateMetadata() {
+  return generateWPMetadata("/");
+}
 
 export default function RootLayout({
   children,

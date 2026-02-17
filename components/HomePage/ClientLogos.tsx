@@ -10,7 +10,7 @@ interface Props {
 export default function ClientLogos( {data}:Props) {
   const getDelay = useAutoDelay();
 
-  console.log("ClientLogos data:", data);
+  // console.log("ClientLogos data:", data);
   return (
     <section className="py-10 bg-[#F6F6F6]">
       <div className="max-w-6xl mx-auto px-6">
