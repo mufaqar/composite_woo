@@ -6,7 +6,7 @@ import FencingSteps from "./FencingSteps";
 
 
 export default function StepsForm() {
-  const [category, setCategory] = useState<string>("cladding"); // state lifted up
+  const [category, setCategory] = useState<string>("fencing"); // state lifted up
 
     return (
         <>
