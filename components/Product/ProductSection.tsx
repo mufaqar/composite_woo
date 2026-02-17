@@ -15,13 +15,16 @@ interface Product {
 }
 
 interface ProductSectionProps {
-    data: Product[]
-    readMore?: boolean
-    categoryTitle?: string
-    categoryDescription?: string
+    data: Product[];
+    readMore?: boolean;
+    categoryContent?: {
+        heading: string;
+        content: string;
+    }[];
 }
 
-function ProductSection({ data, readMore, categoryTitle, categoryDescription }: ProductSectionProps) {
+
+function ProductSection({ data, readMore, categoryContent }: ProductSectionProps) {
     const [visibleCount, setVisibleCount] = useState(6) // show 6 products by default
     const [isExpanded, setIsExpanded] = useState(false)
 
@@ -34,23 +37,28 @@ function ProductSection({ data, readMore, categoryTitle, categoryDescription }: 
             <div className="container mx-auto px-4">
                 {/* Product Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-6">
-                    {data.slice(0, visibleCount).map((item, index) => (
-                        <React.Fragment key={item.id}>
-                            {/* Repeat section after every 3 products */}
-                            {(index + 0) % 3 === 0 && index + 1 < visibleCount && (
-                                <div className="col-span-full">
-                                    <CategoryHeader
-                                        categoryTitle={categoryTitle}
-                                        categoryDescription={categoryDescription}
-                                        readMore={readMore}
-                                        isExpanded={isExpanded}
-                                        setIsExpanded={setIsExpanded}
-                                    />
-                                </div>
-                            )}
-                            <ProductBox data={item} />
-                        </React.Fragment>
-                    ))}
+                    {data.slice(0, visibleCount).map((item, index) => {
+                        const categoryIndex = Math.floor(index / 3);
+                        const currentCategory = categoryContent?.[categoryIndex];
+
+                        return (
+                            <React.Fragment key={item.id}>
+                                {(index + 0) % 3 === 0 && currentCategory && (
+                                    <div className="col-span-full">
+                                        <CategoryHeader
+                                            categoryTitle={currentCategory.heading}
+                                            categoryDescription={currentCategory.content}
+                                            readMore={readMore}
+                                            isExpanded={isExpanded}
+                                            setIsExpanded={setIsExpanded}
+                                        />
+                                    </div>
+                                )}
+
+                                <ProductBox data={item} />
+                            </React.Fragment>
+                        );
+                    })}
                 </div>
 
                 {/* Load More Button */}
@@ -89,14 +97,14 @@ function CategoryHeader({
     if (!categoryTitle && !categoryDescription) return null
 
     return (
-        <div className="container mx-auto px-4 flex md:flex-row flex-col gap-6 items-center mt-8">
+        <div className="container mx-auto px-4 flex md:flex-row flex-col gap-0 mt-8">
             {categoryTitle && (
-                <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans">
+                <h2 className="md:text-6xl text-[33px] leading-none font-semibold text-title font-DM_Sans md:w-[40%] w-full">
                     {categoryTitle}
                 </h2>
             )}
 
-            <div>
+            <div className="md:w-[60%] w-full">
                 {categoryDescription && (
                     <div
                         className="md:text-xl text-sm font-normal text-description post_content"

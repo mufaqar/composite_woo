@@ -35,7 +35,6 @@ export default async function CategoryPage({
   const cat_sub_title = category.acf.sub_title;
   const cat_title = category.acf.title;
   const sale_offer = category.acf.cat_sales_off;
-
   const blogs = await getBlogData();
 
 
@@ -83,8 +82,7 @@ export default async function CategoryPage({
       <ProductSection
         data={mappedProducts}
         readMore
-        categoryTitle={category.name}
-        categoryDescription={category.description}
+        categoryContent={category.acf?.catcontent}
       />
       <ProBlog cat_info={category.acf.blog_info} />
       <ClientLogos data={client_logos} />
