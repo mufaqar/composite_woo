@@ -64,7 +64,12 @@ export default async function CategoryPage({
     image: p.images?.[0]?.src || "",
     ...p,
   }));
+  const excludedSlugs = [
+    "composite-deck-accessories",
+    "artificial-grass",
+  ];
 
+  const showPricingAndSteps = !excludedSlugs.includes(slug);
 
   return (
     <main>
@@ -86,10 +91,15 @@ export default async function CategoryPage({
       {/* <section className="bg-background">
         <Compare cat_info={category.acf} />
       </section> */}
-      <section className="py-16">
-        <PricingTable  />
-      </section>
-      <StepsForm />
+      {showPricingAndSteps && (
+        <>
+          {category.acf?.pricingtable && <section className="py-16">
+            <PricingTable cat_info={category.acf?.pricingtable} />
+          </section>}
+
+          <StepsForm />
+        </>
+      )}
       <Testimonials title={`${category?.name} Reviews`} reviews={reviews} />
       <CompositPanel cat_info={category.acf.standards} />
       <CompositPanel2 cat_info={category.acf.standard_two} />

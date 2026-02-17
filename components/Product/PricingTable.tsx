@@ -1,30 +1,24 @@
 "use client";
 
-import { CompareProps } from "@/lib/woocommerce-types";
+import { TableInfo, TableItem } from "@/lib/woocommerce-types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Slider from "react-slick";
 
-const SLIDES = [
-  { key: "finish", title: "Finish" },
-  { key: "Products", title: "Products" },
-  { key: "maintenance", title: "Maintenance" },
-];
 
-const PricingTable = ({ cat_info }: CompareProps) => {
+const PricingTable = ({ cat_info }: { cat_info: TableInfo }) => {
+  // console.log("cat_info", cat_info)
+
   const sliderRef = useRef<any>(null);
-  const [selected, setSelected] = useState("finish");
+  const [selected, setSelected] = useState(0);
 
-  const goToSlide = (key: string) => {
-    const index = SLIDES.findIndex((s) => s.key === key);
-    if (index !== -1) {
-      sliderRef.current?.slickGoTo(index);
-      setSelected(key);
-    }
+  const goToSlide = (index: number) => {
+    sliderRef.current?.slickGoTo(index);
+    setSelected(index);
   };
-
+  const tables = cat_info?.table ?? [];
   const settings = {
     dots: false,
     infinite: false,
@@ -32,9 +26,7 @@ const PricingTable = ({ cat_info }: CompareProps) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    afterChange: (index: number) => {
-      setSelected(SLIDES[index].key);
-    },
+    afterChange: (index: number) => setSelected(index),
     responsive: [
       {
         breakpoint: 1024,
@@ -56,30 +48,31 @@ const PricingTable = ({ cat_info }: CompareProps) => {
         {/* Select */}
         <select
           value={selected}
-          onChange={(e) => goToSlide(e.target.value)}
+          onChange={(e) => goToSlide(Number(e.target.value))}
           className="md:w-1/3 w-full px-4 py-3 text-sm font-normal border border-[#DDDDDD] rounded-full bg-white"
         >
-          {SLIDES.map((s) => (
-            <option key={s.key} value={s.key}>
-              {s.title}
+          {tables.map((item: TableItem, index: number) => (
+            <option key={index} value={index}>
+              {item.title}
             </option>
           ))}
         </select>
         {/* Click Buttons */}
         <div className="flex gap-2 flex-wrap justify-center">
-          {SLIDES.map((s) => (
+          {tables.map((item: TableItem, index: number) => (
             <button
-              key={s.key}
-              onClick={() => goToSlide(s.key)}
+              key={index}
+              onClick={() => goToSlide(index)}
               className={`px-4 py-2 rounded-full text-sm font-semibold transition
-                ${selected === s.key
+                ${selected === index
                   ? "bg-secondary text-white"
                   : "bg-white border border-[#DDDDDD]"
                 }`}
             >
-              {s.title}
+              {item.title}
             </button>
           ))}
+
         </div>
       </div>
 
@@ -109,8 +102,8 @@ const PricingTable = ({ cat_info }: CompareProps) => {
         {/* Slider */}
         <div className="md:w-2/4 w-full mx-auto relative">
           <Slider ref={sliderRef} {...settings} className="md:w-3/4 mx-auto w-full">
-            {SLIDES.map((s) => (
-              <Slide key={s.key} title={s.title} />
+            {tables.map((item: TableItem, index: number) => (
+              <Slide key={index} data={item} />
             ))}
           </Slider>
 
@@ -131,36 +124,42 @@ const PricingTable = ({ cat_info }: CompareProps) => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default PricingTable;
 
 /* ---------------- SLIDE ---------------- */
 
-const Slide = ({ title }: { title: string }) => (
+const Slide = ({ data }: { data: TableItem }) => (
   <div className="px-2">
     <div className="bg-white rounded-[20px] border border-[#E4E4E4] md:p-4 p-6">
+
       <div className="relative h-[189px] w-full rounded-[20px] overflow-hidden">
-        <Image src="/images/deck-table.png" alt="deck-table" className="object-cover w-full h-full" width={486} height={189} />
-        <h3 className="md:text-[40px] text-xl font-normal text-white mb-2 absolute left-2 bottom-2">
-          {title}
+        {data.tableimage?.url && (
+          <Image
+            src={data.tableimage.url}
+            alt={data.tableimage.title}
+            fill
+            className="object-cover"
+          />
+        )}
+        <h3 className="md:text-[40px] text-xl text-white absolute left-2 bottom-2">
+          {data.title}
         </h3>
       </div>
-      <p className="text-sm font-bold text-title my-5">Features</p>
-      <ul className="grid md:grid-cols-2 grid-cols-1 gap-4">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <li key={i} className="relative pl-6 text-sm font-normal text-title
-                 before:absolute before:left-0 before:top-0
-                 before:content-['✔'] before:text-secondary flex flex-col">
-            <strong>Finish:</strong> Grain / Thin Grooved
+      <p className="text-sm font-bold my-5">Features</p>
+      <ul className="grid md:grid-cols-2 gap-4">
+        {data.features.map((item, i) => (
+          <li key={i} className="pl-6 relative before:content-['✔'] before:absolute before:left-0 before:text-secondary">
+            <strong>{item.label}:</strong><br /> {item.value}
           </li>
         ))}
       </ul>
       <div className="mt-5">
         <Link
-          href="#"
-          className="text-base px-6 py-3 bg-secondary hover:bg-primary text-white rounded-full font-bold inline-block transition-all duration-300 ease-in-out"
+          href={`/product/${data.view_product}`}
+          className="px-6 py-3 bg-secondary text-white rounded-full font-bold inline-block"
         >
           View Product
         </Link>

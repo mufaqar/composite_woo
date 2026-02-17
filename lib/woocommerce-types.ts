@@ -280,3 +280,23 @@ export interface WooVariation {
   }>;
   images: WooImage[];
 }
+export interface TableFeature {
+  label: string;
+  value: string;
+}
+
+interface TableImage {
+  url: string;
+  title: string;
+}
+
+export interface TableItem {
+  title: string;
+  view_product: string;
+  tableimage: TableImage;
+  features: TableFeature[];
+}
+
+export interface TableInfo {
+  table: TableItem[];
+}
