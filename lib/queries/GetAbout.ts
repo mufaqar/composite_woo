@@ -4,6 +4,12 @@ export const GET_ABOUT = gql`
 query AboutPage {
   page(id: "16700", idType: DATABASE_ID) {
     title
+    slug
+    seo {
+        title
+        metaDesc
+        canonical
+    }
     aboutInfo {
       aboutUs {
         ...AboutInfoAboutUsFragment
@@ -49,6 +55,12 @@ fragment AboutInfoShopOnlineFragment on AboutInfoShopOnline {
 export type AboutPageQuery = {
   page?: {
     title?: string | null;
+    slug?: string | null;
+    seo?: {
+      title?: string | null;
+      metaDesc?: string | null;
+      canonical?: string;
+    } | null;
     aboutInfo?: {
       aboutUs?: {
         title?: string | null;
@@ -76,3 +88,37 @@ export type AboutPageQuery = {
     } | null;
   } | null;
 };
+
+// Normalized type for returning from getAboutPageData
+export interface AboutUs {
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface WhyCard {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface ShopOnline {
+  title: string;
+  subTitle: string;
+  description: string;
+  whyCards: WhyCard[];
+}
+
+export interface SEO {
+  title: string;
+  metaDesc: string;
+  canonical: string;
+}
+
+export interface AboutPageData {
+  title: string;
+  slug: string;
+  seo: SEO;
+  aboutUs: AboutUs | null;
+  shopOnline: ShopOnline | null;
+}

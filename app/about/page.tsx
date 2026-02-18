@@ -5,6 +5,16 @@ import React from "react";
 import Shop from "@/components/About/Shop";
 import Join from "@/components/About/Join";
 import { getAboutPageData } from "@/lib/api/getHomeData";
+import { generateWPMetadata } from "@/lib/seo";
+
+export async function generateMetadata() {
+  const data = await getAboutPageData();
+
+  if (!data) return generateWPMetadata('');
+
+  // Pass the slug from WP to fetch SEO dynamically
+  return generateWPMetadata(`/${data.slug}`);
+}
 
 export default async function About() {
   const aboutData = await getAboutPageData();

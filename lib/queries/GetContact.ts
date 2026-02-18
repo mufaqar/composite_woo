@@ -4,6 +4,12 @@ export const GET_Contact = gql`
 query ContactPage {
   page(id: "17858", idType: DATABASE_ID) {
     title
+    slug
+    seo {
+        title
+        metaDesc
+        canonical
+    }
     contactInfo {
       contactUs {
         ...ContactInfoContactUsFragment
@@ -45,6 +51,12 @@ fragment ContactInfoContactDetailsFragment on ContactInfoContactDetails {
 export type ContactPageQuery = {
   page?: {
     title?: string | null;
+    slug?: string | null;       // Added slug
+    seo?: {                     // Added SEO
+      title?: string | null;
+      metaDesc?: string | null;
+      canonical?: string;
+    } | null;
     contactInfo?: {
       contactUs?: {
         title?: string | null;

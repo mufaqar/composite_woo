@@ -19,7 +19,7 @@ import {
   Query_ClientLogo,
 } from "../queries/getPosts";
 import { GET_FAQ_BY_CAT } from "../queries/getFaqsbyCat";
-import { AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
+import { AboutPageData, AboutPageQuery, GET_ABOUT } from "../queries/GetAbout";
 import { GET_SAMPLE, SamplePageQuery } from "../queries/GetSamples";
 import { ContactPageQuery, GET_Contact } from "../queries/GetContact";
 import { GET_ThemeOption, ThemeOptionQuery } from "../queries/getThemeOptions";
@@ -108,41 +108,49 @@ export async function getFaqData(
   }
 }
 
-export async function getAboutPageData() {
+export async function getAboutPageData(): Promise<AboutPageData | null> {
   try {
     const { data } = await client.query<AboutPageQuery>({
       query: GET_ABOUT,
     });
 
     const page = data?.page;
-    const aboutUs = page?.aboutInfo?.aboutUs;
-    const shopOnline = page?.aboutInfo?.shopOnline;
+    if (!page) return null;
+
+    const aboutUs = page.aboutInfo?.aboutUs;
+    const shopOnline = page.aboutInfo?.shopOnline;
 
     return {
-      title: page?.title ?? "",
+      title: page.title ?? '',
+      slug: page.slug ?? 'about-us',
+      seo: {
+        title: page.seo?.title ?? '',
+        metaDesc: page.seo?.metaDesc ?? '',
+        canonical: page.seo?.canonical ?? '',
+      },
       aboutUs: aboutUs
         ? {
-            title: aboutUs.title ?? "",
-            description: aboutUs.description ?? "",
-            image: aboutUs.aboutImage?.node?.mediaItemUrl ?? "",
+            title: aboutUs.title ?? '',
+            description: aboutUs.description ?? '',
+            image: aboutUs.aboutImage?.node?.mediaItemUrl ?? '',
           }
         : null,
       shopOnline: shopOnline
         ? {
-            title: shopOnline.title ?? "",
-            subTitle: shopOnline.subTitle ?? "",
-            description: shopOnline.description ?? "",
+            title: shopOnline.title ?? '',
+            subTitle: shopOnline.subTitle ?? '',
+            description: shopOnline.description ?? '',
             whyCards:
               shopOnline.whyCards?.map((card) => ({
-                title: card?.title ?? "",
-                description: card?.description ?? "",
-                icon: card?.icon?.node?.mediaItemUrl ?? "",
+                title: card?.title ?? '',
+                description: card?.description ?? '',
+                icon: card?.icon?.node?.mediaItemUrl ?? '',
               })) ?? [],
           }
         : null,
     };
   } catch (error) {
-    console.error("Error fetching About Page:", error);
+    console.error('Error fetching About Page:', error);
     return null;
   }
 }
@@ -154,11 +162,23 @@ export async function getContactPageData() {
     });
 
     const page = data?.page;
-    const contactUs = page?.contactInfo;
 
-    return contactUs;
+    if (!page) return null;
+
+    const contactInfo = page.contactInfo ?? {};
+
+    return {
+      slug: page.slug ?? '',
+      seo: {
+        title: page.seo?.title ?? '',
+        metaDesc: page.seo?.metaDesc ?? '',
+        canonical: page.seo?.canonical ?? '',
+      },
+      contactUs: contactInfo.contactUs ?? null,
+      contactDetails: contactInfo.contactDetails ?? null,
+    };
   } catch (error) {
-    console.error("Error fetching About Page:", error);
+    console.error("Error fetching Contact Page:", error);
     return null;
   }
 }

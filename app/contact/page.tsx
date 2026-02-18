@@ -5,7 +5,17 @@ import SendMessage from '@/components/Contact/SendMessage'
 import Join from '@/components/About/Join'
 import ContactForm from '@/components/Contact/ContactForm'
 import { getContactPageData } from '@/lib/api/getHomeData'
+import { generateWPMetadata } from '@/lib/seo'
 
+
+export async function generateMetadata() {
+    const data = await getContactPageData();
+
+    if (!data) return generateWPMetadata('');
+
+    // Pass the slug from WP to fetch SEO dynamically
+    return generateWPMetadata(`/${data.slug}`);
+}
 export default async function Contact() {
 
     const data = await getContactPageData();
@@ -13,7 +23,7 @@ export default async function Contact() {
     const contactUs = data?.contactUs;
     const contactdetails = data?.contactDetails;
 
-   // console.log(data);
+    // console.log(data);
     return (
         <main>
             <Banner
@@ -24,8 +34,8 @@ export default async function Contact() {
             <SendMessage data={contactdetails} />
             <ContactForm />
             <Join />
-           
-            
+
+
         </main>
     )
 }

@@ -18,13 +18,13 @@ import {
   getHomeData,
   getInspirtionData,
 } from "@/lib/api/getHomeData";
-
 import { HomeInfoSection } from "@/lib/gql-types";
-import {
-  getAllProductReviews,
-  getFeaturedProducts,
-} from "@/lib/woocommerce-api";
+import { generateWPMetadata } from "@/lib/seo";
+import { getAllProductReviews, getFeaturedProducts, } from "@/lib/woocommerce-api";
 
+export async function generateMetadata() {
+  return generateWPMetadata("/");
+}
 export default async function Home() {
   const [
     posts,
